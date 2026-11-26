@@ -1,15 +1,26 @@
 <!doctype html>
+<html lang="es">
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
-<title>Brasas Reservas · Prueba</title>
-<link rel="icon" type="image/png" href="img/logo-brasas.png">
+<title>Brasas Reservas · Demo para restaurantes de hotel</title>
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="apple-touch-icon" href="https://algenis147.github.io/brasas-demo/img/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Reservas de Mixology Bar Brasas y los festivales en la playa de Wyndham Alltra Punta Cana. Reserva tu mesa en segundos; el cargo va a tu habitación.">
-<meta name="theme-color" content="#141210">
-<meta property="og:title" content="Brasas · Wyndham Alltra Punta Cana">
-<meta property="og:description" content="Cocina a las brasas, mixología de autor y noches frente al mar. Reserva tu mesa.">
+<meta name="description" content="Pruébalo en 3 minutos: el huésped reserva por QR, recepción la recibe al instante, el cierre de la noche cobra los no-show y tus reportes muestran el dinero recuperado.">
+<meta name="theme-color" content="#f6f1ea">
+<meta property="og:title" content="Brasas Reservas · Demo para restaurantes de hotel">
+<meta property="og:description" content="Pruébalo en 3 minutos: el huésped reserva por QR, recepción la recibe al instante, el cierre de la noche cobra los no-show y tus reportes muestran el dinero recuperado.">
+<meta property="og:url" content="https://algenis147.github.io/brasas-demo/">
+<meta property="og:site_name" content="Brasas Reservas">
+<meta property="og:locale" content="es_DO">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://algenis147.github.io/brasas-demo/img/og-demo.jpg">
+<meta property="og:image:alt" content="Brasas Reservas: demo interactiva para el restaurante de tu hotel">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://algenis147.github.io/brasas-demo/img/og-demo.jpg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <style>
 :root {
@@ -830,6 +841,71 @@ details.policy ul { margin-top: 6px; }
 .mailitem { border-top: 1px solid var(--line); padding: 12px 16px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; }
 .mailitem:first-child { border-top: 0; }
 .mailitem pre { grid-column: 1 / -1; white-space: pre-wrap; font: 12.5px/1.5 var(--f-ui); color: var(--ink-2); background: var(--surface-2); border-radius: var(--r-sm); padding: 10px 12px; margin: 0; max-height: 180px; overflow: auto; }
+/* ===== Negocio: demo, Cierre, Reportes y Correos (v29) ===== */
+.banner.demo-ok { background: var(--surface); border-color: var(--line); color: var(--ink-2); padding: 6px 8px 6px 12px; }
+.banner.demo-ok .ic { color: var(--ok); }
+.banner.demo-ok b { color: var(--ink); }
+.banner.demo-ok .btn { margin-left: auto; flex: none; }
+.banner.demo-ok .mob-only { display: none; }
+@media (max-width: 640px) { .banner.demo-ok .dsk-only { display: none; } .banner.demo-ok .mob-only { display: inline; } }
+.kpi-d { font-size: 11.5px; font-weight: 600; margin-top: 3px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.kpi-d.up { color: var(--ok); } .kpi-d.down { color: var(--bad); }
+.kpi.hero { background: color-mix(in srgb, var(--ember) 7%, var(--surface)); }
+.kpi.hero .kpi-l, .kpi.hero .kpi-v { color: var(--ember); }
+.rpt-f { flex-direction: row; align-items: center; gap: 8px; }
+.rpt-f .input { width: auto; }
+.rpt-grid .span2 { grid-column: span 2; }
+@media (max-width: 1180px) { .rpt-grid .span2 { grid-column: auto; } }
+.rb-plot { position: relative; display: flex; align-items: flex-end; gap: 4px; height: 150px; margin-top: 18px; border-bottom: 1px solid var(--line); }
+.rb-c { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; }
+.rb-b { display: block; width: 100%; max-width: 30px; border-radius: 4px 4px 1px 1px; background: var(--ember); }
+.rb-b.fest { background: var(--gold); }
+.rb-b.today, .rb-sw-today { background: repeating-linear-gradient(135deg, var(--ember) 0 4px, color-mix(in srgb, var(--ember) 45%, transparent) 4px 8px); }
+.rb-v { font-size: 10.5px; font-weight: 600; color: var(--ink-2); margin-bottom: 3px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rb-avg { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--ink-3); pointer-events: none; }
+.rb-sw-avg { width: 14px !important; height: 0 !important; border-top: 1px dashed var(--ink-3); border-radius: 0 !important; }
+.rpt-kpis .kpi-l { min-height: 2.7em; align-items: flex-start; }
+.rpt-kpis .kpi-l .ic { margin-top: 1px; }
+.rb-x { display: flex; gap: 4px; margin-top: 5px; }
+.rb-x span { flex: 1; min-width: 0; text-align: center; font-size: 10.5px; color: var(--ink-3); }
+.rfacts { display: grid; gap: 12px; }
+.rfacts div { display: grid; grid-template-columns: 58px 1fr; gap: 12px; align-items: baseline; }
+.rfacts b { font-size: 18px; font-weight: 600; letter-spacing: -.02em; text-align: right; font-variant-numeric: tabular-nums; }
+.rfacts span { font-size: 13px; color: var(--ink-2); }
+.close-tbl .c-meta { display: none; }
+.close-tbl tr.open td:first-child { box-shadow: inset 3px 0 0 var(--warn); }
+.close-tbl .c-mot { white-space: normal; min-width: 140px; max-width: 260px; }
+.exo-row td { background: var(--surface-2); white-space: normal; }
+.exo-row .input { flex: 1 1 200px; height: 32px; }
+@media (max-width: 640px) {
+  .close-tbl thead { display: none; }
+  .close-tbl, .close-tbl tbody { display: block; }
+  .close-tbl tr { display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; gap: 4px 10px; padding: 12px 14px; border-bottom: 1px solid var(--line); align-items: start; }
+  .close-tbl td { display: block; padding: 0; border: 0; white-space: normal; background: none !important; }
+  .close-tbl tr.open td:first-child { box-shadow: none; }
+  .close-tbl tr.open { box-shadow: inset 3px 0 0 var(--warn); }
+  .close-tbl .c-x { display: none; }
+  .close-tbl .c-hab { grid-row: 1 / span 3; font-size: 16px; }
+  .close-tbl .c-who { grid-column: 2; }
+  .close-tbl .c-meta { display: block; font-size: 12px; color: var(--ink-3); margin-top: 3px; }
+  .close-tbl .c-amt { grid-column: 3; grid-row: 1; }
+  .close-tbl .c-st { grid-column: 2; }
+  .close-tbl .c-mot { grid-column: 2 / 4; max-width: none; min-width: 0; font-size: 12.5px; }
+  .close-tbl .c-act { grid-column: 2 / 4; text-align: left; }
+  .close-tbl .c-act .row-actions { justify-content: flex-start; flex-wrap: wrap; }
+  .close-tbl .c-act:empty, .close-tbl .c-act:has(.row-actions:empty) { display: none; }
+  .close-tbl .exo-row { display: block; padding: 0; }
+  .close-tbl .exo-row td { padding: 10px 14px; }
+  .rpt-f { flex: 1 1 140px; }
+  .rpt-f .input { flex: 1; min-width: 0; }
+  .rb-v { display: none; }
+}
+.mail-subj { display: flex; align-items: flex-start; gap: 6px; border: 0; background: none; padding: 0; text-align: left; font: inherit; font-weight: 600; color: var(--ink); cursor: pointer; }
+.mail-subj .ic { margin-top: 3px; flex: none; transition: transform .15s; color: var(--ink-3); }
+.mailitem.open .mail-subj .ic { transform: rotate(90deg); }
+.mailitem .muted { padding-left: 18px; }
+.mail-prev { grid-column: 1 / -1; background: var(--surface-2); border-radius: var(--r-sm); padding: 14px; max-height: 420px; overflow: auto; }
+@media (max-width: 640px) { .mail-prev { padding: 8px; margin-inline: -8px; } .mailitem { grid-template-columns: minmax(0, 1fr); } .mailitem > .row-actions { justify-content: flex-start; padding-left: 18px; } }
 .role-pick { width: 100%; min-height: 32px; font-size: 12.5px; padding: 5px 30px 5px 9px; }
 .role-mobile { display: none; margin-bottom: 14px; }
 .late-pill { background: var(--warn-soft); color: var(--warn); }
@@ -1866,26 +1942,66 @@ body.bk-lock { overflow: hidden; position: fixed; left: 0; right: 0; width: 100%
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
 <style>
-/* ===== Solo demo: selector de usuario ===== */
-#demo-sw { position: fixed; z-index: 56; left: 50%; transform: translateX(-50%); bottom: calc(10px + env(safe-area-inset-bottom, 0px)); font: 600 12.5px/1.3 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-#demo-sw[data-v="portal"] { left: 16px; transform: none; align-items: flex-start; }
+/* ===== Solo demo pública: selector "Viendo como", recorrido guiado, pistas y llamado a la acción ===== */
+#demo-sw { position: fixed; z-index: 58; left: 50%; transform: translateX(-50%); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); font: 500 13px/1.35 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; display: flex; flex-direction: column; align-items: center; gap: 8px; width: max-content; max-width: calc(100vw - 24px); }
+#demo-sw[data-v="staff"] { left: auto; right: 24px; transform: none; align-items: flex-end; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+#demo-sw[data-v="portal"] { left: auto; right: max(16px, env(safe-area-inset-right, 0px)); transform: none; align-items: flex-end; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+#demo-sw[hidden] { display: none; }
 #demo-sw button { font: inherit; cursor: pointer; border: 0; }
-#demo-sw .dsw-pill { background: #8a2a12; color: #fff; border-radius: 999px; padding: 10px 16px; box-shadow: 0 6px 20px rgba(0,0,0,.35); white-space: nowrap; }
-#demo-sw .dsw-menu { background: #fff; color: #231c17; border-radius: 14px; padding: 8px; width: min(270px, calc(100vw - 32px)); box-shadow: 0 14px 40px rgba(0,0,0,.4); }
-#demo-sw .dsw-menu[hidden] { display: none; }
-#demo-sw .dsw-opt { display: block; width: 100%; text-align: left; background: none; color: inherit; padding: 9px 10px; border-radius: 9px; }
-#demo-sw .dsw-opt:hover { background: #f4ece5; }
-#demo-sw .dsw-opt small { display: block; font-weight: 400; color: #6d625a; }
-#demo-sw .dsw-opt[aria-pressed="true"] { background: #8a2a12; color: #fff; }
-#demo-sw .dsw-opt[aria-pressed="true"] small { color: #f6ddd3; }
-#demo-sw .dsw-note { font-weight: 400; font-size: 11.5px; color: #6d625a; padding: 8px 10px 2px; border-top: 1px solid #eadfd6; margin-top: 6px; }
-@media (max-width: 860px) {
-  #demo-sw:not([data-v="portal"]) { bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
+#demo-sw .dsw-pill { display: inline-flex; align-items: center; gap: 8px; background: #2a1d15; color: #fff6ec; border-radius: 999px; padding: 10px 16px 10px 12px; box-shadow: 0 10px 28px -8px rgba(0,0,0,.55); white-space: nowrap; font-weight: 600; }
+#demo-sw .dsw-pill i { font-style: normal; background: #b4501c; color: #fff; border-radius: 999px; padding: 2px 8px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+#demo-sw .dsw-pill .dsw-car { opacity: .7; font-size: 11px; }
+#demo-sw .dsw-card { background: #fffcf7; color: #201a15; border: 1px solid #e7ddcf; border-radius: 16px; padding: 10px; width: min(330px, calc(100vw - 24px)); box-shadow: 0 22px 50px -12px rgba(0,0,0,.45); }
+#demo-sw .dsw-card[hidden] { display: none; }
+#demo-sw .dsw-h { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #6f6358; padding: 6px 8px 4px; }
+#demo-sw .dsw-opt { display: grid; grid-template-columns: 1fr auto; gap: 1px 8px; width: 100%; text-align: left; background: none; color: inherit; padding: 9px 10px; border-radius: 10px; font-weight: 600; }
+#demo-sw .dsw-opt:hover { background: #f4ece2; }
+#demo-sw .dsw-opt small { grid-column: 1; display: block; font-weight: 400; font-size: 12.5px; color: #6f6358; }
+#demo-sw .dsw-opt[aria-pressed="true"] { background: #f4e6da; box-shadow: inset 3px 0 0 #b4501c; }
+#demo-sw .dsw-opt[aria-pressed="true"]::after { content: "Aquí"; grid-column: 2; grid-row: 1; font-size: 11px; color: #9a4416; font-weight: 700; }
+#demo-sw .dsw-tour { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: 6px; padding: 11px 12px; border-radius: 12px; background: #b4501c; color: #fff; text-align: left; font-weight: 600; }
+#demo-sw .dsw-tour small { display: block; font-weight: 400; opacity: .9; font-size: 12px; }
+#demo-sw .dsw-cta { display: block; margin-top: 6px; padding: 11px 12px; border-radius: 12px; background: #201a15; color: #fff6ec; text-decoration: none; font-weight: 600; text-align: center; }
+#demo-sw .dsw-note { font-size: 11.5px; color: #6f6358; padding: 8px 8px 2px; border-top: 1px solid #eee5d8; margin-top: 8px; }
+#demo-sw .dsw-step { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #9a4416; display: flex; align-items: center; gap: 8px; padding: 4px 4px 0; }
+#demo-sw .dsw-dots { display: inline-flex; gap: 4px; }
+#demo-sw .dsw-dots b { width: 16px; height: 4px; border-radius: 2px; background: #e7ddcf; }
+#demo-sw .dsw-dots b.on { background: #b4501c; }
+#demo-sw .dsw-x { margin-left: auto; background: none; color: #6f6358; font-size: 18px; line-height: 1; padding: 2px 6px; border-radius: 6px; }
+#demo-sw .dsw-t { font: 600 19px/1.2 Fraunces, Georgia, serif; margin: 6px 4px 2px; }
+#demo-sw .dsw-p { color: #554a40; font-size: 13.5px; margin: 0 4px 10px; }
+#demo-sw .dsw-acts { display: flex; gap: 8px; align-items: center; padding: 0 4px 4px; flex-wrap: wrap; }
+#demo-sw .dsw-go { background: #b4501c; color: #fff; border-radius: 10px; padding: 9px 14px; font-weight: 600; }
+#demo-sw .dsw-sec { background: none; color: #554a40; padding: 9px 8px; border-radius: 10px; font-weight: 600; }
+#demo-sw .dsw-sec:hover { background: #f4ece2; }
+#demo-sw button:focus-visible, #demo-sw a:focus-visible, .dsw-inline button:focus-visible, .dsw-hint:focus-visible { outline: 2px solid #b4501c; outline-offset: 2px; }
+.dsw-inline { margin: 0 0 16px; padding: 14px 16px; border-radius: 14px; background: #201a15; color: #fff6ec; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font: 500 13.5px/1.4 Inter, system-ui, sans-serif; }
+#bk-body > .dsw-inline { margin: 0; border-radius: 0; padding: 12px 22px; }
+.dsw-inline b { display: block; font-size: 14.5px; }
+.dsw-inline span { flex: 1 1 180px; }
+.dsw-inline button { border: 0; cursor: pointer; background: #b4501c; color: #fff; border-radius: 10px; padding: 10px 14px; font: 600 13.5px Inter, system-ui, sans-serif; }
+.dsw-hint { display: inline-flex; align-items: center; gap: 6px; margin: 10px 0 0; border: 1px dashed #b4501c; background: color-mix(in srgb, #b4501c 7%, transparent); color: inherit; border-radius: 999px; padding: 7px 12px; font: 500 12.5px Inter, system-ui, sans-serif; cursor: pointer; }
+.dsw-hint b { color: #b4501c; }
+tr.dsw-flash td, .dsw-flash { animation: dswFlash 3.2s ease-out 1; }
+@keyframes dswFlash { 0%, 30% { background: color-mix(in srgb, #b4501c 22%, transparent); } 100% { background: transparent; } }
+.content { padding-bottom: 110px; }
+@media (max-width: 900px) {
+  #demo-sw[data-v="staff"] { left: 50%; right: auto; transform: translateX(-50%); align-items: center; bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
   #demo-sw .dsw-long { display: none; }
+  .content { padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
 }
-@media print { #demo-sw { display: none; } }
+/* N-05: en el celular, mientras el botón flotante "Reservar" está oculto (arriba del todo), la píldora baja al borde para no tapar el aviso del hero */
+@supports selector(:has(a)) {
+  @media (max-width: 640px) {
+    #demo-sw[data-v="portal"] { transition: bottom .25s ease; }
+    html:not(:has(#s-fab.show)) #demo-sw[data-v="portal"] { bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+  }
+}
+@media (prefers-reduced-motion: reduce) { tr.dsw-flash td, .dsw-flash { animation: none; } }
+@media (prefers-reduced-motion: reduce) { #demo-sw[data-v="portal"] { transition: none !important; } }
+@media print { #demo-sw, .dsw-inline, .dsw-hint { display: none !important; } }
 </style>
-<div id="demo-sw" data-v="portal"><div class="dsw-menu" hidden></div><button type="button" class="dsw-pill" aria-expanded="false">Versión de prueba</button></div>
+<div id="demo-sw" data-v="portal" role="region" aria-label="Versión de prueba"><div class="dsw-card" hidden></div><button type="button" class="dsw-pill" aria-expanded="false">Versión de prueba</button></div>
 <script>
 (() => {
 'use strict';
@@ -2312,86 +2428,252 @@ function refCell(r) {
 }
 
 /* ================= Demo dataset (only when the shared database is unavailable) ================= */
-function buildDemo(today, nowMs = Date.now()) {
-  let seed = 20261104;
+// Fictitious, deterministic data: no real guests, owner or staff. size 'full' (public demo): ~100 guests with hotel stays,
+// 30 nights of history, today's service following the clock (one late arrival on purpose) and tomorrow's early bookings.
+// size 'small' (live "Cargar datos de ejemplo", IN-08): the same people but 14 nights, so it doesn't fill the shared database.
+const DEMO_CFG = { adminEmail: 'reservas@brasas-demo.com', surveyUrl: '', familySurveyUrl: '', cortesPP: 35 };
+const DEMO_STAFF = { 'demo-rec': 'Recepción · turno tarde', 'demo-may': 'Mayordomo Amaná', 'demo-ger': 'Gerencia A&B' };
+const DEMO_PEOPLE = [
+  ['us', 'Michael Thompson,Emily Carter,Jessica Miller,David Johnson,Sarah Williams,Christopher Brown,Ashley Davis,Matthew Wilson,Amanda Moore,Joshua Taylor,Jennifer Anderson,Daniel Harris,Megan Clark,Ryan Lewis,Lauren Walker,Brandon Hall,Rachel Young,Kevin Allen,Nicole King,Justin Wright,Stephanie Scott,Tyler Green,Heather Adams,Andrew Baker,Kimberly Nelson,Jason Hill,Melissa Campbell,Eric Mitchell,Amber Roberts,Brian Turner,Olivia Parker,Ethan Collins,Madison Stewart,Noah Morris,Hannah Reed,Samantha Brooks,Austin Hayes,Caroline Ward'],
+  ['ca', 'Liam Tremblay,Chloé Gagnon,Olivier Roy,Emma Côté,William Bouchard,Sophie Gauthier,Benjamin Morin,Charlotte Lavoie,Jacob Fortin,Ava MacDonald,Grace Wilson,Lucas Pelletier,Mia Bélanger,Ethan Leblanc,Félix Dubois,Zoé Lambert'],
+  ['do', 'Rosa Batista,Manuel Polanco,Yokasta Reyes,Rafael Tavárez,Carmen Peña,José Miguel Ureña,Milagros Féliz,Ramón Guzmán,Esther Cabrera,Juan Carlos Mejía,Altagracia Ventura,Francisco Brito,Mariel Lantigua,Andrés Encarnación,Wilson Peralta,Indhira Almánzar'],
+  ['ar', 'Martín Fernández,Lucía Gómez,Santiago Pereyra,Valentina Ruiz,Facundo Sosa,Camila Benítez'],
+  ['co', 'Andrés Restrepo,Daniela Ospina,Juan Pablo Cárdenas,Catalina Arango,Sebastián Muñoz,Mariana Vélez,Felipe Zuluaga'],
+  ['es', 'Pablo Navarro,Elena Ortega,Álvaro Serrano,Marta Iglesias,Carlos Domínguez'],
+  ['mx', 'Diego Hernández,Fernanda Castillo,Alejandro Ríos,Regina Salazar,Emilio Treviño,Valeria Montes'],
+  ['de', 'Lukas Müller,Anna Schmidt,Jonas Becker,Lena Fischer'],
+  ['uk', 'Oliver Bennett,Charlotte Hughes,Harry Wood,Amelia Price'],
+  ['fr', 'Julien Moreau,Camille Laurent,Hugo Lefèvre'],
+  ['br', 'Rafael Oliveira,Beatriz Souza,Thiago Almeida'],
+  ['pr', 'Gabriel Rivera,Natalia Colón'],
+  ['it', 'Marco Rossi,Giulia Bianchi'],
+];
+function buildDemo(today, nowMs = Date.now(), opts = {}) {
+  const small = (opts.size || (S.mode === 'live' ? 'small' : 'full')) === 'small';
+  const HIST = small ? 14 : 30;
+  let seed = 20261126;
   const rnd = () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const int = (a, b) => a + Math.floor(rnd() * (b - a + 1));
   const pick = a => a[Math.floor(rnd() * a.length)];
-  const D = n => { const d = new Date(today + 'T12:00:00'); d.setDate(d.getDate() + n); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
-  const cfg = mergeCfg(null);
-  const G = [
-    ['Huésped Demo', 'huesped.demo@example.com', '809-555-0105', '2501', true, 'Prefiere la barra. Old Fashioned con bourbon.', '', '1988-' + D(2).slice(5), true],
-    ['Héctor Martínez', 'hector.m@correo.com', '809-555-0104', '1520', true, 'Mesa en terraza, lejos de la música.', 'Mariscos', '', true],
-    ['María Abreu', 'maria.abreu@correo.com', '809-555-0101', '4115', false, 'Mesa junto a la ventana.', '', '', false],
-    ['Luis Pérez', 'lperez@correo.com', '829-555-0102', '4261', false, '', 'Maní — reacción severa', '', false],
-    ['Carolina Rodríguez', 'caro.rodriguez@correo.com', '809-555-0107', '2205', false, 'Vegetariana.', 'Gluten', '', true],
-    ['Javier García', 'jgarcia@correo.com', '809-555-0108', '5102', true, 'Celebra su aniversario cada noviembre.', '', '', true],
-    ['Ana Lucía Fernández', 'analucia.f@correo.com', '849-555-0111', '3310', false, '', '', '', false],
-    ['Pedro Santana', 'psantana@correo.com', '809-555-0112', '6219', false, 'Le gustan los cócteles de autor.', '', '', false],
-    ['Sofía Jiménez', 'sofi.jimenez@correo.com', '829-555-0113', '1408', false, '', 'Lactosa', '', true],
-    ['Daniel Rosario', 'drosario@correo.com', '809-555-0114', '2712', false, '', '', '1990-' + D(-1).slice(5), false],
-    ['Isabel Núñez', 'isa.nunez@correo.com', '849-555-0115', '3901', false, 'Agua sin gas al llegar.', '', '', true],
-    ['Michael Thompson', 'm.thompson@mail.com', '+1 305-555-0116', '5520', true, 'Habla inglés. Vino tinto, Malbec.', '', '', true],
-    ['Laura Gómez', 'laura.gomez@correo.com', '809-555-0117', '1123', false, '', '', '', false],
-    ['Ricardo Castillo', 'rcastillo@empresa.do', '809-555-0118', '6604', false, 'Organiza cenas de empresa.', '', '', false],
-    ['María Abreu', 'mabreu.santiago@correo.com', '829-555-0119', '2210', false, '', '', '', false],
-    ['Patricia Valdez', 'pvaldez@correo.com', '809-555-0120', '3507', false, '', '', '', true],
-    ['Jorge Almonte', 'jalmonte@correo.com', '829-555-0121', '4402', false, '', 'Frutos secos', '', false],
-    ['Emily Carter', 'emily.carter@mail.com', '+1 646-555-0122', '5811', false, '', '', '', true],
-  ];
-  const guests = G.map((x, i) => ({ id: 'BRG-' + String(i + 1).padStart(5, '0'), name: x[0], email: x[1], phone: x[2], room: x[3], vip: x[4], prefs: x[5], allergies: x[6], birthday: x[7], amana: x[8], created: D(-60 + i * 2) }));
+  const wpick = (a, w) => { let t = rnd() * w.reduce((x, y) => x + y, 0); for (let i = 0; i < a.length; i++) if ((t -= w[i]) < 0) return a[i]; return a[a.length - 1]; };
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const D = n => addDays(today, n);
+  const day0 = f => startOf(f, '12:00 AM').getTime();
+  const msAt = (f, min) => day0(f) + min * 60000;
+  const stMs = (f, s) => startOf(f, s).getTime();
+  const iso = ms => new Date(ms).toISOString();
+  const MIN = 60000, HOUR = 3600000;
+
+  /* People: fictitious names from Punta Cana's markets, emails on example domains, 555-01xx phones */
+  const PH = { us: () => `+1 ${pick(['305', '212', '617', '312', '404', '713', '646', '201'])}-555-01${int(10, 99)}`, ca: () => `+1 ${pick(['514', '416', '613', '418', '604'])}-555-01${int(10, 99)}`, pr: () => `+1 787-555-01${int(10, 99)}`, do: () => `${pick(['809', '829', '849'])}-555-01${int(10, 99)}`, ar: () => `+54 11 5555-01${int(10, 99)}`, co: () => `+57 300 555 01${int(10, 99)}`, es: () => `+34 600 555 0${int(10, 99)}`, mx: () => `+52 55 5555 01${int(10, 99)}`, de: () => `+49 151 5550 1${int(10, 99)}`, uk: () => `+44 7700 9000${int(10, 99)}`, fr: () => `+33 6 55 55 01 ${int(10, 99)}`, br: () => `+55 11 95555-01${int(10, 99)}`, it: () => `+39 333 555 01${int(10, 99)}` };
+  const EN = new Set(['us', 'ca', 'uk', 'de', 'fr', 'br', 'it']);
+  const people = [];
+  for (const [cc, list] of DEMO_PEOPLE) for (const name of list.split(',')) people.push({ cc, name });
+  shuffle(people);
+  const rooms = new Set();
+  const room = () => { let r; do r = int(1, 6) + '' + int(1, 4) + pad(int(1, 28)); while (rooms.has(r)); rooms.add(r); return r; };
+  const mailOf = (name, k) => { const w = fold(name).replace(/[^a-z ]/g, '').split(' ').filter(Boolean); const f = w[0], l = w[w.length - 1]; return [`${f}.${l}`, `${f[0]}${l}`, `${f}${l[0]}`, `${f}_${l}`][k % 4] + '@' + ['example.com', 'example.net', 'example.org'][k % 3]; };
+  people.forEach((p, i) => {
+    p.k = i; p.email = mailOf(p.name, i); p.phone = rnd() < .75 ? PH[p.cc]() : ''; p.lang = EN.has(p.cc) ? 'en' : 'es';
+    p.amana = rnd() < .3; p.vip = false; p.prefs = ''; p.allergies = ''; p.birthday = '';
+  });
+  // A "possible duplicate" that really is one person: she came three weeks ago (email) and is back; the butler booked her by phone only.
+  const dupA = people.find(p => p.name === 'Carmen Peña');
+  const dupB = { ...dupA, k: people.length, email: '', phone: '829-555-0147', amana: true };
+  people.push(dupB);
+
+  /* Stays: each guest is in the hotel 4-9 nights; 18 of them are in the hotel tonight; some came back from an earlier stay */
+  const stays = [];
+  people.forEach((p, i) => {
+    const n = wpick([4, 5, 6, 7, 8, 9], [3, 3, 3, 2, 2, 1]);
+    const ci = p === dupB ? -2 : p === dupA ? -21 : i < 18 ? -int(0, n - 1) : int(-HIST - 8, 1);
+    stays.push({ p, ci, n, room: room(), cnt: 0, last: -999 });
+    const x = p === dupA || p === dupB ? 1 : rnd();
+    if (x < .12) stays.push({ p, ci: ci - int(60, 170), n: wpick([3, 4, 5], [1, 2, 1]), room: room(), cnt: 0, last: -999, old: true });
+    else if (x < .2 && ci > -HIST + 12) stays.push({ p, ci: ci - int(14, 20) - n, n: wpick([3, 4, 5], [1, 2, 1]), room: room(), cnt: 0, last: -999, old: true });
+  });
+  /* Nights: guests in the hotel book Brasas or that night's beach festival; tonight is a busy, not saturated, service */
+  const BASE = [.7, .6, .6, .7, .7, .82, .8];   // share of guests in the hotel who book, dom..sáb
+  const W_BR = { '6:00 PM': .5, '6:30 PM': .8, '7:00 PM': 1.4, '7:30 PM': 1.6, '8:00 PM': 1.6, '8:30 PM': 1.3, '9:00 PM': .9, '9:30 PM': .6, '10:00 PM': .3 };
+  const OCAS = ['Aniversario', 'Luna de miel', 'Cumpleaños', 'Propuesta', 'Negocios', 'Celebración'];
+  const NOTAS = ['Mesa en la terraza, por favor', 'Silla alta para un niño', 'Mesa cerca de la ventana', 'Primera vez en Brasas', 'Llegamos directo de la playa'];
+  const exps = activeExps();
   const res = []; let seq = 0;
-  const sM = s => { const m = /(\d+):(\d+)\s*(AM|PM)/.exec(s); let h = +m[1]; if (m[3] === 'PM' && h !== 12) h += 12; return h * 60 + +m[2]; };
-  const mS = m => (Math.floor(m / 60) % 12 || 12) + ':' + String(m % 60).padStart(2, '0') + ' PM';
-  const slots = e => { const o = []; for (let m = sM(e.start); m <= sM(e.end); m += e.step) o.push(mS(m)); return o; };
-  const used = (e, f, s, seg) => res.filter(r => r.exp === e.id && r.fecha === f && r.horario === s && r.tipo === seg && ['pendiente','confirmada','sentada','finalizada'].includes(r.estado)).reduce((a, r) => a + r.pax, 0);
-  const price = (e, pax, tipo) => priceFor(e, pax, tipo);
-  const add = (off, g, e, slot, pax, estado, extra = {}) => {
-    const fecha = D(off); seq++;
-    const tipo = extra.tipo || (g.amana ? 'amana' : 'regular');
-    const start = new Date(fecha + 'T00:00:00').getTime() + sM(slot) * 60000;
-    const r = { codigo: 'BRA-' + fecha.slice(5).replace('-', '') + '-' + String(seq).padStart(4, '0'), fecha, exp: e.id, horario: slot, pax, hab: g.room, guestId: g.id, huesped: g.name, tipo, tarifa: price(e, pax, tipo), cortes: false, cortesPP: 0, estado, ocasion: '', notas: '', mesa: '', llegada: '', source: tipo === 'amana' ? 'mayordomo' : (rnd() < .55 ? 'huesped' : 'staff'), policyAccepted: true, createdBy: null, createdAt: new Date(Math.min(start - (2 + Math.floor(rnd() * 20)) * 3600000, nowMs - 3600000)).toISOString(), ...extra };
-    delete r.tipoForce;
-    if (['sentada','finalizada'].includes(estado) && !r.llegada) r.llegada = mS(sM(slot) - 4 + Math.floor(rnd() * 14));
-    if (estado === 'cancelada' && !r.cancelledAt) r.cancelledAt = new Date(start - (rnd() < .5 ? 2 : 9) * 3600000).toISOString();
+  const used = {};
+  const usedOf = (e, f, s, seg) => used[e.id + '|' + f + '|' + s + '|' + seg] || 0;
+  const bookable = (f, s) => stMs(f, s) - 24 * HOUR <= nowMs - 5 * MIN;
+  const add = (stay, e, fecha, slot, pax, extra = {}) => {
+    const p = stay.p, tipo = extra.tipo || (p.amana ? 'amana' : 'regular'), st = stMs(fecha, slot);
+    const source = tipo === 'amana' ? 'mayordomo' : rnd() < .58 ? 'huesped' : 'staff';
+    let lead = (.75 + 23 * Math.pow(rnd(), 1.6)) * HOUR, c = st - lead;
+    if (hotelMinutes(c) < 8 * 60) c = msAt(hotelDate(c), 8 * 60 + int(0, 90));
+    c = Math.max(c, st - 24 * HOUR + 5 * MIN); if (c > nowMs - 2 * MIN) c = Math.max(st - 24 * HOUR + 5 * MIN, nowMs - int(3, 240) * MIN);
+    seq++;
+    const r = { codigo: 'BRA-' + fecha.slice(5).replace('-', '') + '-' + pad(seq, 4), fecha, exp: e.id, horario: slot, pax, hab: stay.room, guestId: 'P' + p.k, huesped: p.name, tipo, tarifa: priceFor(e, pax, tipo), cortes: false, cortesPP: 0, estado: 'confirmada', ocasion: '', notas: '', mesa: '', llegada: '', source, policyAccepted: true, createdBy: null, createdAt: iso(c), lang: p.lang, ...extra };
+    if (pax >= 2 && rnd() < (e.id === 'brasas' ? .07 : .12)) r.ocasion = wpick(OCAS, [30, 22, 22, 5, 8, 13]);
+    if (r.ocasion === 'Negocios' && pax < 3) r.ocasion = 'Celebración';
+    if (rnd() < .07) r.notas = pick(NOTAS);
+    if (e.id === 'brasas' && tipo === 'regular' && rnd() < .08) { r.cortes = true; r.cortesPP = DEMO_CFG.cortesPP; }
+    used[e.id + '|' + fecha + '|' + slot + '|' + tipo] = usedOf(e, fecha, slot, tipo) + pax;
+    stay.cnt++; stay.last = Math.round((dObj(fecha) - dObj(today)) / 864e5);
     res.push(r); return r;
   };
-  const byName = n => guests.find(g => g.name === n);
-  for (let off = -12; off <= 0; off++) {
-    const fecha = D(off), dow = new Date(fecha + 'T12:00:00').getDay();
-    const usedGuests = new Set();
-    for (const e of cfg.experiences.filter(x => x.days.includes(dow))) {
-      const target = off === 0 ? (e.id === 'brasas' ? 9 : 5) : 5 + Math.floor(rnd() * 4);
-      for (let i = 0, tries = 0; i < target && tries < 60; tries++) {
-        const g = pick(guests); if (usedGuests.has(g.id)) continue;
-        const slot = pick(slots(e)), pax = pick([1, 2, 2, 2, 3, 4]);
-        const tipo = g.amana ? 'amana' : 'regular';
-        const cap = tipo === 'amana' ? e.amana : e.total - e.amana;
-        if (used(e, fecha, slot, tipo) + pax > cap) continue;
-        let estado;
-        if (off < 0) { const x = rnd(); estado = x < .07 ? 'no-show' : x < .13 ? 'cancelada' : 'finalizada'; }
-        else estado = sM(slot) <= sM('6:30 PM') ? 'sentada' : rnd() < .2 ? 'pendiente' : 'confirmada';
-        add(off, g, e, slot, pax, estado);
-        usedGuests.add(g.id); i++;
+  const tryBook = (stay, e, fecha, slots, opts2 = {}) => {
+    const seg = stay.p.amana ? 'amana' : 'regular', pax = opts2.pax || wpick([1, 2, 3, 4, 5, 6], [6, 55, 12, 18, 5, 4]);
+    for (let k = 0; k < 4; k++) {
+      const slot = opts2.slot || (e.id === 'brasas' ? wpick(slots, slots.map(s => W_BR[s] || .5)) : pick(slots));
+      if (usedOf(e, fecha, slot, seg) + pax <= capOf(e, slot, fecha)[seg]) return add(stay, e, fecha, slot, pax);
+      if (opts2.slot) return null;
+    }
+    return null;
+  };
+  const minOff = Math.min(...stays.map(s => s.ci));
+  for (let off = minOff; off <= 1; off++) {
+    const fecha = D(off), dow = dObj(fecha).getDay();
+    const open = exps.filter(e => expDayOpen(e, fecha)).map(e => ({ e, slots: slotsOf(e).filter(s => !slotClosed(e, fecha, s) && !blockFor(e.id, fecha, s) && (off < 1 || bookable(fecha, s))) })).filter(x => x.slots.length);
+    if (!open.length) continue;
+    const brasas = open.find(x => x.e.id === 'brasas'), fest = open.find(x => x.e.id !== 'brasas');
+    const inHouse = shuffle(stays.filter(s => off >= s.ci && off < s.ci + s.n));
+    const frac = off < 1 ? 1 : open.reduce((a, x) => a + x.slots.length, 0) / Math.max(1, open.reduce((a, x) => a + slotsOf(x.e).length, 0));
+    let target = off === 0 ? 17 : Math.round(inHouse.length * BASE[dow] * (off === 1 ? .45 * frac : 1) * (.88 + rnd() * .24));
+    for (const s of inHouse) {
+      if (target <= 0) break;
+      if (s.cnt >= 4 || (s.last === off - 1 && rnd() < .35)) continue;
+      const x = fest && (!brasas || rnd() < .42) ? fest : brasas || fest;
+      if (tryBook(s, x.e, fecha, x.slots)) target--;
+    }
+  }
+
+  /* Today: a full peak slot with one party on the waiting list (if that slot is still ahead) */
+  const T = D(0), todayStays = () => stays.filter(s => !s.old && s.ci <= 0 && 0 < s.ci + s.n);
+  const br = exps.find(e => e.id === 'brasas');
+  if (br && expDayOpen(br, T)) {
+    const peak = ['8:00 PM', '8:30 PM', '9:00 PM'].find(s => slotsOf(br).includes(s) && !slotClosed(br, T, s) && stMs(T, s) > nowMs + 45 * MIN);
+    if (peak) {
+      const free = () => todayStays().filter(s => !s.p.amana && !res.some(r => r.fecha === T && r.guestId === 'P' + s.p.k));
+      for (const s of free()) { const left = capOf(br, peak, T).regular - usedOf(br, T, peak, 'regular'); if (left <= 1) break; tryBook(s, br, T, [peak], { slot: peak, pax: Math.min(left, wpick([2, 3, 4], [3, 1, 2])) }); }
+      const w = free()[0];
+      if (w && capOf(br, peak, T).regular - usedOf(br, T, peak, 'regular') < 2) { const r = add(w, br, T, peak, 2); r.estado = 'espera'; r.notas = 'Si se libera, cualquier hora entre 8:00 y 9:30 PM'; used[br.id + '|' + T + '|' + peak + '|regular'] -= 2; }
+    }
+  }
+
+  /* States: the past is closed; today follows the clock; tomorrow is only what the 24 h window allows */
+  seed = 20261127;   // own random stream: the history must not change with the time the demo is opened
+  const acc = { pn: .5, pl: .3, pc: .6, fn: .2, fl: .1, fc: .4 };
+  const MESAS = { brasas: [...Array.from({ length: 16 }, (_, i) => 'M' + (i + 1)), 'Barra 1', 'Barra 2', 'Barra 3', 'Terraza 1', 'Terraza 2', 'Terraza 3', 'Terraza 4'], playa: Array.from({ length: 14 }, (_, i) => 'Playa ' + (i + 1)) };
+  const byDay = {}; for (const r of res) (byDay[r.fecha] = byDay[r.fecha] || []).push(r);
+  const lateSlot = br && expDayOpen(br, T) ? slotsOf(br).find(s => { const d = (nowMs - stMs(T, s)) / MIN; return d > 10 && d <= 40; }) : null;
+  for (const [fecha, rs] of Object.entries(byDay)) {
+    const off = Math.round((dObj(fecha) - dObj(today)) / 864e5);
+    const pool = { brasas: shuffle(MESAS.brasas.slice()), playa: shuffle(MESAS.playa.slice()) };
+    let late = null;
+    if (off === 0 && lateSlot) late = rs.filter(r => r.exp === 'brasas' && r.horario === lateSlot && r.estado !== 'espera').sort((a, b) => (a.tipo === 'amana') - (b.tipo === 'amana'))[0] || null;
+    for (const r of rs) {
+      if (r.estado === 'espera') continue;
+      const st = stMs(fecha, r.horario), d = (nowMs - st) / MIN, x = rnd();
+      if (off < 0) { const k = r.tarifa ? 'p' : 'f'; acc[k + 'n'] += r.tarifa ? .065 : .025; acc[k + 'l'] += .03; acc[k + 'c'] += .04;   // steady rates night after night (error diffusion), not luck
+        r.estado = 'finalizada'; for (const [q, st] of [['n', 'no-show'], ['l', 'cancelada-tarde'], ['c', 'cancelada']]) if (acc[k + q] >= 1) { acc[k + q] -= 1; r.estado = st; break; } }
+      else if (off === 0) r.estado = r === late ? 'confirmada' : d > 100 ? (x < .06 ? 'no-show' : 'finalizada') : d > 70 ? (x < .5 ? 'finalizada' : 'sentada') : d > 10 ? (d > 40 && x < .05 ? 'no-show' : 'sentada') : d >= 0 ? (x < .55 ? 'sentada' : 'confirmada') : (r.source !== 'huesped' && d < -60 && x < .25 ? 'pendiente' : 'confirmada');
+      else r.estado = r.source !== 'huesped' && x < .2 ? 'pendiente' : 'confirmada';
+      if (off === 0 && d < -30 && r.estado === 'confirmada' && rnd() < .04) r.estado = 'cancelada';
+      const created = new Date(r.createdAt).getTime();
+      if (r.estado === 'cancelada-tarde') { r.estado = 'cancelada'; r.cancelledAt = iso(Math.max(created + 10 * MIN, st - int(60, 200) * MIN)); }
+      else if (r.estado === 'cancelada') r.cancelledAt = iso(Math.min(nowMs - 5 * MIN, Math.max(created + 20 * MIN, st - int(5, 20) * HOUR)));
+      if (r.cancelledAt) r.cancelledAt = iso(Math.min(nowMs - MIN, Math.max(created + 5 * MIN, new Date(r.cancelledAt).getTime())));
+      if (r.estado === 'sentada' || r.estado === 'finalizada') {
+        const arr = Math.min(st + int(-4, 9) * MIN, nowMs - MIN);
+        r.llegada = minStr(Math.round((arr - day0(fecha)) / MIN)); r.mesa = (r.exp === 'brasas' ? pool.brasas : pool.playa).shift() || '';
+        r._arr = arr;
       }
     }
   }
-  const t = (dOff, h, m) => new Date(Math.min(new Date(D(dOff) + 'T00:00:00').getTime() + (h * 60 + m) * 60000, nowMs - (h * 60 + m) * 1000)).toISOString();
-  const todays = res.filter(r => r.fecha === D(0));
-  const firstOf = id => todays.find(r => r.guestId === id);
-  const noteRes = todays.find(r => r.exp === 'langosta') || todays[0];
-  const notes = [
-    { cat: 'alergia', text: 'Alergia severa al maní. Cocina debe confirmar cada plato y evitar contaminación cruzada en la barra.', guestId: byName('Luis Pérez').id, pinned: true, at: t(-10, 19, 20) },
-    { cat: 'incidente', text: 'Esperó 25 minutos por la mesa y se quejó con el gerente. Ofrecer cóctel de cortesía en su próxima visita.', guestId: byName('Carolina Rodríguez').id, at: t(-5, 21, 5) },
-    { cat: 'celebracion', text: 'Cumpleaños esta semana. Preparar postre con vela y foto con el equipo si lo desea.', guestId: byName('Huésped Demo').id, at: t(-1, 17, 40) },
-    { cat: 'preferencia', text: 'Prefiere el Malbec a 16 °C. No le gusta la mesa cerca de la cocina.', guestId: byName('Michael Thompson').id, at: t(-8, 20, 15) },
-    noteRes ? { cat: 'alerta', text: 'Mesa frente al mar solicitada por el mayordomo. Confirmar al llegar.', resId: noteRes.codigo, guestId: noteRes.guestId, at: t(0, 15, 10) } : null,
-    { cat: 'general', text: 'Festival de Langosta hoy en la playa: montaje listo a las 6:30 PM. Brasas opera normal.', fecha: D(0), pinned: true, at: t(0, 16, 30) },
-    { cat: 'incidente', text: 'Faltan dos meseros en el turno. Priorizar Amaná y avisar tiempos de espera.', fecha: D(0), at: t(0, 16, 45) },
-  ].filter(Boolean).map((n, i) => ({ id: 'n' + String(i + 1).padStart(3, '0'), guestId: null, resId: null, pinned: false, resolved: false, by: null, ...n, fecha: n.fecha || n.at.slice(0, 10) }));
-  const mail = todays.slice(0, 3).map((r, i) => ({ id: 'm' + String(i + 1).padStart(3, '0'), kind: 'admin', to: '(correo administrativo sin configurar)', subject: `Nueva reserva ${r.codigo} · ${r.huesped}`, body: `Reserva ${r.codigo}\n${r.huesped} · Hab. ${r.hab}\n${r.horario} · ${r.pax} pax`, resId: r.codigo, status: 'pendiente', at: t(0, 12 + i, 0), by: null }));
-  void firstOf;
-  return { guests, res, notes, mail, counters: { guest: guests.length, res: seq } };
+  // two no-shows the manager excused (with a reason), so the audit trail and the close show it
+  res.filter(r => r.estado === 'no-show' && r.tarifa > 0 && r.fecha <= D(-3) && r.fecha >= D(-12)).slice(0, 2).forEach((r, i) => {
+    r.cargoExonerado = true; r.exoneradoMotivo = ['Vuelo de llegada retrasado; avisó a recepción', 'Emergencia médica; autorizado por gerencia'][i]; r.exoneradoBy = 'demo-ger'; r._exo = stMs(r.fecha, r.horario) + int(60, 100) * MIN;
+  });
+
+  /* Profile details on people who dine tonight first, so Servicio shows them (alergias, VIP, cumpleaños) */
+  const tonightK = [...new Set(res.filter(r => r.fecha === D(0) && r.estado !== 'cancelada').map(r => +r.guestId.slice(1)))];
+  const others = people.filter(p => !tonightK.includes(p.k));
+  const who = (i, j) => i < tonightK.length ? people.find(p => p.k === tonightK[i]) : others[j % others.length];
+  ['Maní (reacción severa)', 'Mariscos', 'Gluten (celíaca)'].forEach((a, i) => { const p = who(i * 4 + 1, 0); if (p) p.allergies = a; });
+  ['Lactosa', 'Frutos secos', 'Crustáceos', 'Vegana', 'Sin cerdo', 'Mariscos', 'Lactosa', 'Gluten'].forEach((a, i) => { const p = others[(i * 11 + 4) % others.length]; if (p && !p.allergies) p.allergies = a; });
+  const PREF = ['Mesa en la terraza, lejos de la música.', 'Agua sin gas al llegar.', 'Vino tinto: Malbec.', 'Prefiere la barra para el aperitivo.', 'Mesa tranquila para cenas de trabajo.', 'Viaja con niños pequeños: silla alta.', 'Cóctel sin alcohol de bienvenida.'];
+  PREF.forEach((t, i) => { const p = i < 2 ? who(i * 5 + 3, i) : others[(i * 17 + 9) % others.length]; if (!p) return; p.prefs = t; if (i < 5) p.vip = true; });
+  { const p = who(7, 3); if (p) p.birthday = '1986-' + D(1).slice(5); const q = others[(23 * 7) % others.length]; if (q && q !== p) q.birthday = '1979-' + D(40).slice(5); }
+
+  /* History of each reservation (who created or changed it), like the live app writes it */
+  for (const r of res) {
+    const e = expById(r.exp), st = stMs(r.fecha, r.horario), created = new Date(r.createdAt).getTime();
+    const roleOf = r.source === 'huesped' ? 'huesped' : r.source === 'mayordomo' ? 'mayordomo' : 'host';
+    const first = r.estado === 'espera' ? 'espera' : r.estado === 'pendiente' ? 'pendiente' : 'confirmada';
+    const h = [{ at: r.createdAt, by: null, rol: roleOf, txt: `Reserva creada para ${r.huesped} · ${fmtDate(r.fecha)} ${r.horario} · ${r.pax} pax · ${e.nombre} · ${ESTADOS[first].l}` }];
+    const step = (ms, rol, txt) => h.push({ at: iso(Math.min(ms, nowMs - MIN)), by: rol === 'admin' ? 'demo-ger' : null, rol, txt });
+    if (r._arr) step(r._arr, 'host', `Estado: Confirmada → En mesa · llegada ${r.llegada}${r.mesa ? ' · mesa ' + r.mesa : ''}`);
+    if (r.estado === 'finalizada') step(Math.max(r._arr + 60 * MIN, st + int(85, 130) * MIN), 'host', 'Estado: En mesa → Finalizada');
+    if (r.estado === 'no-show') step(st + int(15, 35) * MIN, 'host', `Estado: Confirmada → No-show${r.tarifa ? ' · cargo ' + money(r.tarifa) : ''}`);
+    if (r.estado === 'cancelada') { const fee = isLateCancel(r) ? r.tarifa : 0; step(new Date(r.cancelledAt).getTime(), r.tipo === 'amana' ? 'mayordomo' : rnd() < .5 ? 'huesped' : 'host', `Estado: ${ESTADOS[first].l} → Cancelada${fee ? ' · cargo ' + money(fee) : ''}`); }
+    if (r._exo) step(r._exo, 'admin', 'Cargo exonerado: ' + r.exoneradoMotivo);
+    void created;
+    r.hist = h.sort((a, b) => a.at.localeCompare(b.at));
+    const l = r.hist[r.hist.length - 1]; r.updatedAt = l.at; r.updatedBy = l.by; r.updatedRol = l.rol;
+    delete r._arr; delete r._exo;
+  }
+
+  /* Guests: only people who booked; ids in order of their first booking */
+  const firstAt = {}; for (const r of res) if (!firstAt[r.guestId] || r.createdAt < firstAt[r.guestId]) firstAt[r.guestId] = r.createdAt;
+  const lastRoom = {}; for (const r of res.slice().sort((a, b) => a.fecha.localeCompare(b.fecha))) lastRoom[r.guestId] = r.hab;
+  const ids = {}, guests = [];
+  people.filter(p => firstAt['P' + p.k]).sort((a, b) => firstAt['P' + a.k].localeCompare(firstAt['P' + b.k])).forEach((p, i) => {
+    const id = 'BRG-' + pad(i + 1, 5); ids['P' + p.k] = id;
+    guests.push({ id, name: p.name, email: p.email, phone: p.phone, room: lastRoom['P' + p.k], vip: p.vip, prefs: p.prefs, allergies: p.allergies, birthday: p.birthday, amana: p.amana, created: hotelDate(new Date(firstAt['P' + p.k]).getTime()), createdBy: null });
+  });
+  for (const r of res) r.guestId = ids[r.guestId];
+  const gOf = r => guests.find(g => g.id === r.guestId);
+
+  /* Bitácora: few notes, each one useful tonight */
+  const todays = res.filter(r => r.fecha === T && r.estado !== 'cancelada').sort((a, b) => slotMin(a.horario) - slotMin(b.horario));
+  const tAt = (f, min, i) => { const ms = msAt(f, min); return ms <= nowMs - 5 * MIN ? ms : msAt(D(-1), 20 * 60 + 30 + i * 9); };
+  const notes = [];
+  const note = (n, ms) => notes.push({ id: 'n' + pad(notes.length + 1, 3), guestId: null, resId: null, pinned: false, resolved: false, by: null, ...n, at: iso(ms), fecha: n.fecha || hotelDate(ms) });
+  const mani = guests.find(g => /Maní/.test(g.allergies));
+  if (mani) note({ cat: 'alergia', text: 'Alergia severa al maní. Cocina confirma cada plato y evita contaminación cruzada en la barra.', guestId: mani.id, pinned: true, by: 'demo-rec' }, Math.min(new Date(res.filter(r => r.guestId === mani.id).map(r => r.createdAt).sort()[0]).getTime() + 25 * MIN, nowMs - 30 * MIN));
+  const cel = todays.find(r => r.ocasion === 'Aniversario' || r.ocasion === 'Luna de miel') || todays.find(r => r.pax === 2);
+  if (cel) { if (!cel.ocasion) cel.ocasion = 'Aniversario'; note({ cat: 'celebracion', text: `${cel.ocasion}: postre con vela y foto con el equipo si lo desean.`, guestId: cel.guestId, resId: cel.codigo, by: cel.tipo === 'amana' ? 'demo-may' : 'demo-rec' }, tAt(T, 11 * 60 + 5, 0)); }
+  const am = todays.find(r => r.tipo === 'amana' && r !== cel);
+  if (am) note({ cat: 'alerta', text: 'Mesa en la terraza solicitada por el mayordomo. Confirmar al llegar.', guestId: am.guestId, resId: am.codigo, by: 'demo-may' }, tAt(T, 15 * 60 + 10, 1));
+  const vip = guests.find(g => g.vip && g.prefs);
+  if (vip) note({ cat: 'preferencia', text: 'Prefiere el Malbec a 16 °C y una mesa lejos de la cocina.', guestId: vip.id, by: 'demo-rec' }, Math.min(msAt(vip.created, 20 * 60 + 15), nowMs - 6 * HOUR));
+  const waited = res.find(r => r.fecha === D(-4) && r.estado === 'finalizada' && r.horario === '8:00 PM') || res.find(r => r.fecha === D(-4) && r.estado === 'finalizada');
+  if (waited) note({ cat: 'incidente', text: 'Esperó 20 min por su mesa en hora pico. Se le ofreció un cóctel de cortesía; se fue contento.', guestId: waited.guestId, resId: waited.codigo, resolved: true, by: 'demo-ger' }, stMs(waited.fecha, waited.horario) + 50 * MIN);
+  const fest = exps.find(e => e.id !== 'brasas' && expDayOpen(e, T));
+  if (msAt(T, 9 * 60) <= nowMs) note({ cat: 'general', text: fest ? `${fest.nombre} hoy: montaje listo a las 5:30 PM. Brasas opera normal.` : 'Cóctel de temporada: mamajuana ahumada. Ofrecerlo en la bienvenida de cada mesa.', fecha: T, pinned: true, by: 'demo-ger' }, Math.min(msAt(T, 16 * 60 + 30), nowMs - 20 * MIN));
+  if (msAt(T, 15 * 60) <= nowMs) note({ cat: 'incidente', text: 'Un mesero menos en el turno: la terraza abre a las 7:00 PM. Avisar tiempos de espera.', fecha: T, by: 'demo-ger' }, Math.min(msAt(T, 16 * 60 + 45), nowMs - 12 * MIN));
+
+  /* Correos: a handful, in the guest's language; the newest still to send */
+  const mail = [];
+  const mailFor = (r, status) => {
+    const g = gOf(r), at = new Date(r.createdAt).getTime() + 2 * MIN;
+    const sentAt = status === 'enviado' ? iso(Math.min(at + int(20, 90) * MIN, nowMs - MIN)) : null;
+    if (g?.email) mail.push({ id: 'm' + pad(mail.length + 1, 3), ...guestMail('confirmacion', r, g.email), status, at: iso(at), by: null, sentAt });
+    mail.push({ id: 'm' + pad(mail.length + 1, 3), kind: 'admin', to: DEMO_CFG.adminEmail, resId: r.codigo, status, at: iso(at), by: null, sentAt, subject: `Nueva reserva ${r.codigo} · ${r.huesped} · ${r.horario}`, body: `${resSummary(r)}\nHuésped: ${r.huesped} (${r.guestId})\nEmail: ${g?.email || '—'} · Tel: ${g?.phone || '—'}\nAlergias: ${g?.allergies || '—'}\nOrigen: ${r.source === 'huesped' ? 'Portal del huésped (QR)' : r.source === 'mayordomo' ? 'Mayordomo Amaná' : 'Personal'}\nPolítica aceptada: sí` });
+  };
+  const qr = (f, n) => res.filter(r => r.fecha === f && r.source === 'huesped' && r.estado !== 'cancelada' && r.estado !== 'espera').sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, n);
+  const fresh = [...qr(D(1), 2), ...qr(T, 2)].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 2);
+  const enFirst = fresh.find(r => r.lang === 'en') || qr(T, 6).find(r => r.lang === 'en');
+  const esFirst = fresh.find(r => r.lang === 'es') || qr(T, 6).find(r => r.lang === 'es');
+  [enFirst, esFirst].filter(Boolean).forEach(r => mailFor(r, 'pendiente'));
+  qr(D(-1), 1).forEach(r => mailFor(r, 'enviado'));
+  const canc = res.filter(r => r.estado === 'cancelada' && r.fecha >= D(-1) && r.cancelledAt <= iso(nowMs)).sort((a, b) => b.cancelledAt.localeCompare(a.cancelledAt))[0];
+  if (canc) { const c = chargeOf(canc); mail.push({ id: 'm' + pad(mail.length + 1, 3), kind: 'cancelacion', to: DEMO_CFG.adminEmail, resId: canc.codigo, status: 'enviado', at: canc.cancelledAt, by: null, sentAt: iso(Math.min(new Date(canc.cancelledAt).getTime() + 30 * MIN, nowMs - MIN)), subject: `Cancelación ${canc.codigo} · Hab. ${canc.hab}`, body: `${resSummary(canc)}\nCancelada: ${new Date(canc.cancelledAt).toLocaleString('es-DO')}\nCargo: ${c.amount ? money(c.amount) + ' (' + c.motivo + ')' : 'sin cargo'}` }); }
+
+  /* Certified closes for every past night except last night (so both states can be seen) */
+  const cierres = [];
+  for (const f of Object.keys(byDay).sort()) if (f <= D(-2)) cierres.push(cierreDoc(f, closeData(f, res), 'demo-ger', msAt(addDays(f, 1), int(15, 80))));
+
+  return { guests, res, notes, mail, cierres, counters: { guest: guests.length, res: seq } };
 }
+const demoBanner = () => `<div class="banner demo-ok">${ic('check', 'sm')}<span><b>Demo interactiva.<\/b> <span class="dsk-only">Todo lo que hagas aquí es de prueba y no afecta al restaurante real.<\/span><span class="mob-only">Prueba lo que quieras: no afecta a nadie.<\/span><\/span><button class="btn btn-ghost btn-sm" data-act="demo-reset">${ic('undo', 'xs')}Reiniciar demo<\/button><\/div>`;
 
 /* ================= Store ================= */
 function canWriteOrWarn() { if (!S.canWrite) { toast(S.ui.view === 'portal' ? tt('Las reservas en línea no están disponibles ahora. Llama al restaurante.', 'Online booking is not available right now. Please call the restaurant.') : 'Tu acceso es de solo lectura', true); return false; } return true; }
@@ -2871,7 +3153,6 @@ function paint() {
   paintOffline();
   syncLogo();
   hydrateNames();
-  demoSw();
   if (!portal) document.documentElement.lang = 'es';   // IN-23: al volver del portal en EN, el personal vuelve a "es" (el portal lo pone en paintSite)
   syncDialogs(focusBefore);
   toastAnchor();
@@ -2919,13 +3200,13 @@ async function hashPin(pin) {
 }
 const roleAllowed = r => r !== 'admin' || S.mode !== 'live' || S.isAdmin;
 const roleOptions = () => Object.entries(ROLES).map(([k, l]) => `<option value="${k}"${roleAllowed(k) ? '' : ' disabled'}>${l}${roleAllowed(k) ? '' : ' (sin permiso)'}<\/option>`).join('');
-function setRole(r) {
+function setRole(r, opts = {}) {
   if (!ROLES[r] || !roleAllowed(r)) return;
   S.role = r; try { localStorage.setItem(ROLE_KEY, r); } catch {}
   S.ui.drawer = null; S.ui.modal = null; S.ui.nr = null; S.ui.login = { err: '' };
   if (!canSee(S.ui.view)) S.ui.view = r === 'mayordomo' ? 'amana' : 'servicio';
   try { history.replaceState(null, '', '#' + S.ui.view); } catch {}
-  if (roleUnlocked(r)) toast('Ahora estás como ' + ROLES[r]);
+  if (roleUnlocked(r) && !opts.silent) toast('Ahora estás como ' + ROLES[r]);
   render();
 }
 /* Light by default (owner's decision). Night only when the person chooses it; saved in brasas-theme. The device setting is ignored. */
@@ -3000,7 +3281,7 @@ function topHtml() {
 }
 function banners() {
   let h = '';
-  if (S.mode === 'demo') h += `<div class="banner demo">${ic('alert', 'sm')}<span><b>Modo demostración.<\/b> No hay conexión con la base de datos compartida; los cambios se pierden al recargar.<\/span><\/div>`;
+  if (S.mode === 'demo') h += demoBanner();
   if (S.mode === 'live' && !S.canWrite) h += `<div class="banner ro">${ic('shield', 'sm')}<span>Tienes acceso de <b>solo lectura<\/b>.<\/span><\/div>`;
   if (S.mode === 'live' && S.error) h += `<div class="banner err">${ic('alert', 'sm')}<span>Se perdió la conexión con los datos compartidos. Recarga la página.<\/span><\/div>`;
   else if (S.mode === 'live' && S.stale) h += `<div class="banner demo">${ic('clock', 'sm')}<span>Aún no se confirma la conexión. Lo que ves puede no estar al día.<\/span><\/div>`;
@@ -3323,7 +3604,7 @@ function vBitacora() {
   const urgentOpen = all.filter(n => !n.resolved && URGENT.includes(n.cat)).length;
   const chip = (k, l) => `<button class="chip" data-act="bf" data-v="${k}" aria-pressed="${f.cat === k}">${l}<span class="n">${all.filter(n => !k || n.cat === k).length}<\/span><\/button>`;
   return `<div class="layout bit-layout"><div class="stack">
-      <div class="toolbar chip-row" style="margin:0"><div class="chips">${chip('', 'Todas')}${Object.entries(CATS).filter(([k]) => all.some(n => n.cat === k)).map(([k, c]) => chip(k, c.l)).join('')}<\/div><label class="check" style="margin-left:auto;flex:none"><input type="checkbox" data-act="bf-open" ${f.abiertas ? 'checked' : ''}>Urgentes abiertas (${urgentOpen})<\/label><\/div>
+      <div class="toolbar" style="margin:0"><div class="chips scroll">${chip('', 'Todas')}${Object.entries(CATS).filter(([k]) => all.some(n => n.cat === k)).map(([k, c]) => chip(k, c.l)).join('')}<\/div><label class="check" style="margin-left:auto;flex:none"><input type="checkbox" data-act="bf-open" ${f.abiertas ? 'checked' : ''}>Urgentes abiertas (${urgentOpen})<\/label><\/div>
       <div class="card"><div class="card-b" data-scroll="feed">${days.length ? days.map(d => `<div class="section-t" style="margin-top:6px">${d.k === 'Fijadas' ? ic('pin', 'xs') + 'Fijadas' : esc(dayLabel(d.k))}<span class="n">· ${d.ns.length}<\/span><\/div><div class="notes" style="margin-bottom:14px">${d.ns.map(n => noteHtml(n, true)).join('')}<\/div>`).join('') : `<div class="empty">${ic('note')}<b>Sin notas<\/b><\/div>`}<\/div><\/div>
     <\/div><div class="stack">
       ${S.canWrite ? `<div class="card"><div class="card-h"><span class="card-t">Nueva nota interna<\/span><\/div><div class="card-b"><div class="field" style="margin-bottom:10px"><label class="label" for="bn-guest">Huésped <span class="opt">(opcional)<\/span><\/label><input class="input" id="bn-guest" list="bn-guests" placeholder="Escribe un nombre o ID" autocomplete="off"><datalist id="bn-guests">${[...S.guests.values()].map(g => `<option value="${esc(g.name + ' · ' + g.id)}">`).join('')}<\/datalist><\/div>${composer('bit', { fecha: TODAY, linkInput: 'bn-guest' }, '¿Qué debe saber el equipo?')}<\/div><\/div>` : ''}
@@ -3345,82 +3626,198 @@ function noteHtml(n, withLinks = false) {
 }
 
 /* ================= View: Cierre de la noche ================= */
-function closeData(d) {
-  const rs = resOn(d).sort((a, b) => a.exp.localeCompare(b.exp) || sortByTime(a, b));
+function closeData(d, list = allRes()) {
+  const rs = resOn(d, list).sort((a, b) => a.exp.localeCompare(b.exp) || sortByTime(a, b));
   const lines = rs.map(r => ({ r, c: chargeOf(r) }));
   const charged = lines.filter(x => x.c.amount > 0);
   const pending = lines.filter(x => ['pendiente','confirmada','sentada'].includes(x.r.estado));
   const total = charged.reduce((a, x) => a + x.c.amount, 0);
   const by = k => charged.filter(x => x.c.kind === k).reduce((a, x) => a + x.c.amount, 0);
+  const exo = lines.filter(x => x.r.cargoExonerado).map(x => ({ ...x, was: chargeOf({ ...x.r, cargoExonerado: false }).amount }));
   const byExp = activeExps().concat(allExps().filter(e => e.activo === false)).map(e => ({ e, total: charged.filter(x => x.r.exp === e.id).reduce((a, x) => a + x.c.amount, 0), pax: lines.filter(x => x.r.exp === e.id && (x.r.estado === 'sentada' || x.r.estado === 'finalizada')).reduce((a, x) => a + x.r.pax, 0) })).filter(x => x.total || x.pax);
-  return { rs, lines, charged, pending, total, consumo: by('consumo'), noshow: by('noshow'), tardia: by('tardia'), byExp };
+  return { rs, lines, charged, pending, total, consumo: by('consumo'), noshow: by('noshow'), tardia: by('tardia'), exo, byExp };
 }
+const cierreDoc = (d, cd, by, at = Date.now()) => ({ fecha: d, total: cd.total, consumo: cd.consumo, noshow: cd.noshow, tardia: cd.tardia, count: cd.charged.length, lines: cd.charged.map(({ r, c }) => ({ codigo: r.codigo, hab: r.hab, huesped: r.huesped, exp: r.exp, monto: c.amount, motivo: c.motivo })), by, at: new Date(at).toISOString() });
+function closeMotivo(r, c) {
+  if (r.estado === 'espera') return 'Lista de espera · sin cargo';
+  if (c.kind === 'exonerado') return 'Exonerado' + (r.exoneradoMotivo ? ': ' + r.exoneradoMotivo : '');
+  if ((c.kind === 'noshow' || c.kind === 'tardia') && !c.amount) return (c.kind === 'noshow' ? 'No-show' : 'Cancelación tardía') + ' · sin cargo' + (r.tipo === 'amana' ? ' (Amaná)' : '');
+  if (c.kind === 'pend') return 'Por servir' + (c.projected ? ` · ${money(c.projected)} estimado` : '');
+  return c.motivo;
+}
+const canExonerate = () => S.canWrite && S.role === 'admin' && (S.isAdmin || S.mode !== 'live');
 function vCierre() {
   const d = S.ui.date, cd = closeData(d), cert = S.cierres.get(d);
   const changed = cert && Math.abs((+cert.total || 0) - cd.total) > 0.001;
   const canCert = S.canWrite && !cd.pending.length && cd.rs.length;
+  const onlyOpen = !!S.ui.cierreOpen && cd.pending.length > 0;
+  const rec = cd.noshow + cd.tardia, nRec = cd.charged.filter(x => x.c.kind === 'noshow' || x.c.kind === 'tardia').length;
+  const exoAmt = cd.exo.reduce((a, x) => a + x.was, 0);
   const certBox = cert ? `<div class="certbox ${changed ? 'warn' : 'ok'}">${ic(changed ? 'alert' : 'check')}<div class="grow"><b>${changed ? 'Hubo cambios después de certificar' : 'Noche certificada'}<\/b><br>Certificado ${relTime(cert.at)} por ${authorHtml(cert.by)} · total certificado <b>${money(cert.total)}<\/b>${changed ? ` · total actual <b>${money(cd.total)}<\/b>` : ''}<\/div>${changed && canCert ? `<button class="btn btn-primary btn-sm" data-act="certify">${ic('check', 'xs')}Volver a certificar<\/button>` : ''}<\/div>`
-    : `<div class="certbox ${cd.pending.length ? 'warn' : ''}">${ic(cd.pending.length ? 'clock' : 'receipt')}<div class="grow">${cd.pending.length ? `<b>${plural(cd.pending.length, 'reserva sigue abierta', 'reservas siguen abiertas')}.<\/b> Marca llegada/finalizada o no-show antes de certificar.` : cd.rs.length ? '<b>Lista para certificar.<\/b> Revisa los cargos y certifica los ingresos de la noche.' : 'No hay reservas este día.'}<\/div>${S.canWrite ? `<button class="btn btn-primary btn-sm" data-act="certify"${canCert ? '' : ' disabled'}>${ic('check', 'xs')}Certificar ingresos<\/button>` : ''}<\/div>`;
-  return `<div class="kpis">
+    : `<div class="certbox ${cd.pending.length ? 'warn' : ''}">${ic(cd.pending.length ? 'clock' : 'receipt')}<div class="grow">${cd.pending.length ? `<b>${plural(cd.pending.length, 'reserva sigue abierta', 'reservas siguen abiertas')}.<\/b> Ciérralas aquí mismo: llegada, finalizar o no-show.` : cd.rs.length ? '<b>Lista para certificar.<\/b> Revisa los cargos y certifica los ingresos de la noche.' : 'No hubo reservas este día.'}<\/div>${cd.pending.length ? `<button class="btn btn-ghost btn-sm" data-act="cierre-open" aria-pressed="${onlyOpen}">${onlyOpen ? 'Ver todas' : 'Ver solo las abiertas'}<\/button>` : ''}${S.canWrite ? `<button class="btn btn-primary btn-sm" data-act="certify"${canCert ? '' : ' disabled'}>${ic('check', 'xs')}Certificar ingresos<\/button>` : ''}<\/div>`;
+  const kpis = `<div class="kpis">
       <div class="kpi"><div class="kpi-l">${ic('dollar', 'xs')}Total a cargar<\/div><div class="kpi-v">${money(cd.total)}<\/div><div class="kpi-s">${plural(cd.charged.length, 'cargo', 'cargos')} a habitación<\/div><\/div>
       <div class="kpi"><div class="kpi-l">Consumo<\/div><div class="kpi-v">${money(cd.consumo)}<\/div><div class="kpi-s">huéspedes atendidos<\/div><\/div>
-      <div class="kpi ${cd.noshow ? 'bad' : ''}"><div class="kpi-l">No-show (100%)<\/div><div class="kpi-v">${money(cd.noshow)}<\/div><div class="kpi-s">no se presentaron<\/div><\/div>
-      <div class="kpi ${cd.tardia ? 'warn' : ''}"><div class="kpi-l">Cancelación tardía<\/div><div class="kpi-v">${money(cd.tardia)}<\/div><div class="kpi-s">menos de ${S.cfg.cancelHours} h<\/div><\/div>
-      <div class="kpi"><div class="kpi-l">Pendientes<\/div><div class="kpi-v">${cd.pending.length}<\/div><div class="kpi-s">sin cerrar<\/div><\/div>
-      <div class="kpi"><div class="kpi-l">Reservas<\/div><div class="kpi-v">${cd.rs.length}<\/div><div class="kpi-s">${cd.rs.filter(r => r.tipo === 'amana').length} Amaná<\/div><\/div>
-    <\/div>
-    ${certBox}
-    <div class="toolbar" style="margin-top:14px"><span class="card-sub">${cd.byExp.map(x => `${esc(expShort(x.e))}: <b>${money(x.total)}<\/b> · ${x.pax} atendidos`).join(' &nbsp;·&nbsp; ') || 'Sin ingresos'}<\/span><span style="margin-left:auto"><\/span><button class="btn btn-ghost btn-sm" data-act="print-close">${ic('print', 'xs')}Imprimir reporte<\/button><\/div>
-    <div class="card"><div class="tbl-wrap"><table><thead><tr><th>Hab.<\/th><th>Huésped<\/th><th>Experiencia<\/th><th>Hora<\/th><th>Tipo<\/th><th class="r">Pax<\/th><th>Estado<\/th><th>Motivo<\/th><th class="r">Cargo<\/th>${S.isAdmin || S.mode === 'demo' ? '<th><\/th>' : ''}<\/tr><\/thead><tbody>
-      ${cd.lines.map(({ r, c }) => `<tr class="click" data-act="open-res" data-id="${esc(r.codigo)}" tabindex="0"><td><b>${esc(r.hab)}<\/b><\/td><td>${esc(r.huesped)}<br><span class="gid">${esc(r.codigo)}<\/span><\/td><td>${esc(expShort(expById(r.exp)))}<\/td><td>${r.horario}<\/td><td>${tipoTag(r.tipo)}<\/td><td class="r">${r.pax}<\/td><td>${estadoPill(r.estado)}<\/td><td class="muted">${esc(c.motivo)}${c.kind === 'pend' && c.projected ? ` (${money(c.projected)})` : ''}<\/td><td class="r"><span class="money${c.amount ? '' : ' zero'}">${money(c.amount)}<\/span><\/td>${S.isAdmin || S.mode === 'demo' ? `<td class="r">${(c.amount > 0 || r.cargoExonerado) && S.role === 'admin' ? `<button class="btn btn-quiet btn-sm" data-act="exonerate" data-id="${esc(r.codigo)}">${r.cargoExonerado ? 'Quitar exoneración' : 'Exonerar'}<\/button>` : ''}<\/td>` : ''}<\/tr>`).join('')}
-    <\/tbody><\/table><\/div>${cd.lines.length ? '' : `<div class="empty">${ic('receipt')}<b>Sin reservas este día<\/b><\/div>`}<\/div>`;
+      <div class="kpi ${rec ? 'ok' : ''}"><div class="kpi-l">Recuperado por política<\/div><div class="kpi-v">${money(rec)}<\/div><div class="kpi-s">${rec ? `no-show ${money(cd.noshow)} · tardía ${money(cd.tardia)}` : 'nada que recuperar'}<\/div><\/div>
+      <div class="kpi"><div class="kpi-l">Exonerado<\/div><div class="kpi-v">${money(exoAmt)}<\/div><div class="kpi-s">${cd.exo.length ? plural(cd.exo.length, 'cargo con motivo', 'cargos con motivo') : 'ningún cargo'}<\/div><\/div>
+      <div class="kpi ${cd.pending.length ? 'warn' : ''}"><div class="kpi-l">Por cerrar<\/div><div class="kpi-v">${cd.pending.length}<\/div><div class="kpi-s">${cd.pending.length ? 'reservas abiertas' : 'todo cerrado'}<\/div><\/div>
+      <div class="kpi"><div class="kpi-l">Reservas<\/div><div class="kpi-v">${cd.rs.length}<\/div><div class="kpi-s">${cd.rs.filter(r => r.tipo === 'amana').length} Amaná · ${cd.rs.filter(r => r.tipo !== 'amana').length} regulares<\/div><\/div>
+    <\/div>`;
+  const exoCol = canExonerate();
+  const rows = (onlyOpen ? cd.pending : cd.lines).map(({ r, c }) => {
+    const active = ['pendiente','confirmada','sentada'].includes(r.estado);
+    const acts = (active ? quickActs(r) : '') + (exoCol && !active && (c.amount > 0 || r.cargoExonerado) && S.ui.confirm !== 'exo:' + r.codigo ? `<button class="btn btn-quiet btn-sm" data-act="exonerate" data-id="${esc(r.codigo)}">${r.cargoExonerado ? 'Quitar exoneración' : 'Exonerar'}<\/button>` : '');
+    const ask = S.ui.confirm === 'exo:' + r.codigo ? `<tr class="exo-row"><td colspan="10"><div class="confirm-box">${ic('alert', 'sm')}<span>Exonerar <b>${money(c.amount)}<\/b> de la habitación ${esc(r.hab)}. El motivo queda en el historial y en el cierre.<\/span><input class="input" id="exo-${esc(r.codigo)}" placeholder="Motivo (obligatorio)" maxlength="140" autocomplete="off" aria-label="Motivo de la exoneración"><button class="btn btn-quiet btn-sm" data-act="cancel-confirm">Cancelar<\/button><button class="btn btn-primary btn-sm" data-act="exo-ok" data-id="${esc(r.codigo)}">Exonerar<\/button><\/div><\/td><\/tr>` : '';
+    return `<tr class="click${active ? ' open' : ''}" data-act="open-res" data-id="${esc(r.codigo)}" tabindex="0"><td class="c-hab"><b>${esc(r.hab)}<\/b><\/td><td class="c-who">${esc(r.huesped)}<br><span class="gid">${esc(r.codigo)}<\/span><span class="c-meta">${esc(expShort(expById(r.exp)))} · ${r.horario} · ${r.pax} pax<\/span><\/td><td class="c-x">${esc(expShort(expById(r.exp)))}<\/td><td class="c-x">${r.horario}<\/td><td class="c-x">${tipoTag(r.tipo)}<\/td><td class="r c-x">${r.pax}<\/td><td class="c-st">${estadoPill(r.estado)}<\/td><td class="c-mot muted">${esc(closeMotivo(r, c))}<\/td><td class="r c-amt"><span class="money${c.amount ? '' : ' zero'}">${money(c.amount)}<\/span><\/td><td class="r c-act"><div class="row-actions">${acts}<\/div><\/td><\/tr>${ask}`;
+  }).join('');
+  return kpis + certBox + `
+    <div class="toolbar" style="margin-top:14px"><span class="card-sub">${cd.byExp.map(x => `${esc(expShort(x.e))}: <b>${money(x.total)}<\/b> · ${x.pax} atendidos`).join(' &nbsp;·&nbsp; ') || 'Sin ingresos'}<\/span><span style="margin-left:auto"><\/span>${cd.charged.length ? `<button class="btn btn-ghost btn-sm" data-act="close-pms" title="CSV con habitación, monto, concepto y referencia para cargar en el PMS">${ic('download', 'xs')}Cargos para front desk<\/button>` : ''}<button class="btn btn-ghost btn-sm" data-act="print-close">${ic('print', 'xs')}Imprimir<\/button><\/div>
+    <div class="card"><div class="tbl-wrap"><table class="close-tbl"><thead><tr><th>Hab.<\/th><th>Huésped<\/th><th>Experiencia<\/th><th>Hora<\/th><th>Tipo<\/th><th class="r">Pax<\/th><th>Estado<\/th><th>Motivo<\/th><th class="r">Cargo<\/th><th><span class="sr">Acciones<\/span><\/th><\/tr><\/thead><tbody>${rows}<\/tbody><\/table><\/div>${cd.lines.length ? '' : `<div class="empty">${ic('receipt')}<b>No hubo servicio este día<\/b><p>Elige otro día con las flechas de arriba.<\/p><\/div>`}<\/div>`;
+}
+/* Night summary for the manager (NG-16): one text per certified night, kept inside cierres/<fecha>.resumen */
+function nightSummary(d, who, at = new Date().toISOString()) {
+  const cd = closeData(d), nx = addDays(d, 1);
+  const served = cd.rs.filter(r => r.estado === 'sentada' || r.estado === 'finalizada'), pax = served.reduce((a, r) => a + (+r.pax || 0), 0);
+  const nsL = cd.lines.filter(x => x.r.estado === 'no-show'), lateL = cd.lines.filter(x => x.c.kind === 'tardia');
+  const tom = resOn(nx).filter(r => COUNTS.includes(r.estado)).sort(sortByTime);
+  const cel = tom.filter(r => r.ocasion || birthdayNear(guestOf(r), nx)), alg = tom.filter(r => guestOf(r)?.allergies);
+  const inc = [...S.notes.values()].filter(n => !n.resolved && (n.cat === 'incidente' || n.cat === 'alerta') && String(n.fecha || '') <= d && String(n.fecha || '') >= addDays(d, -2)).sort(noteSort).slice(0, 4);
+  const L = [`Resumen de la noche · ${fmtLong(d)}`, `Certificado por ${who} · ${fmtStamp(at)}`, '',
+    `Total a cargar: ${money(cd.total)} (${plural(cd.charged.length, 'cargo', 'cargos')})`, `Consumo: ${money(cd.consumo)}`, `Recuperado por política: ${money(cd.noshow + cd.tardia)} (${plural(nsL.length, 'no-show', 'no-show')} · ${plural(lateL.length, 'tardía', 'tardías')})`, `Atendidos: ${plural(pax, 'persona', 'personas')} · ${plural(served.length, 'mesa', 'mesas')}`];
+  const list = (t, xs) => { if (xs.length) L.push('', t + ':', ...xs.map(x => '• ' + x)); };
+  list('No-show', nsL.map(({ r, c }) => `Hab. ${r.hab} · ${r.huesped} · ${r.horario} · ${c.amount ? money(c.amount) : closeMotivo(r, c)}`));
+  list('Cancelaciones tardías', lateL.map(({ r, c }) => `Hab. ${r.hab} · ${r.huesped} · ${money(c.amount)}`));
+  list('Exoneraciones', cd.exo.map(({ r, was }) => `Hab. ${r.hab} · ${r.huesped} · ${money(was)} · ${r.exoneradoMotivo || 'sin motivo'}`));
+  list('Pendiente en la bitácora', inc.map(n => n.text.length > 90 ? n.text.slice(0, 87) + '…' : n.text));
+  L.push('', `Mañana · ${fmtDate(nx)}: ${plural(tom.length, 'reserva', 'reservas')} · ${plural(tom.reduce((a, r) => a + (+r.pax || 0), 0), 'persona', 'personas')}`);
+  list('Celebraciones de mañana', cel.slice(0, 6).map(r => `${r.ocasion || 'Cumpleaños'} · Hab. ${r.hab} · ${r.horario}`));
+  list('Alergias de mañana', alg.slice(0, 6).map(r => `${guestOf(r).allergies} · Hab. ${r.hab} · ${r.horario}`));
+  L.push('', 'Brasas Reservas');
+  return { to: S.cfg.adminEmail || '(correo administrativo sin configurar)', subject: `Resumen de la noche · ${fmtDate(d)} · ${money(cd.total)}`, body: L.join('\n'), status: 'pendiente', at };
 }
 
 /* ================= View: Reportes ================= */
-function vReportes() {
-  const { from, to } = S.ui.rpt;
+function rptRange() { let { from, to } = S.ui.rpt; if (from > to) [from, to] = [to, from]; return { from, to, n: Math.round((dObj(to) - dObj(from)) / 864e5) + 1 }; }
+function seatsOffered(from, to) {
+  let n = 0; const now = Date.now();
+  for (let d = from; d <= to && d <= TODAY; d = addDays(d, 1)) for (const e of expsOn(d)) for (const s of slotsOf(e)) { if (slotClosed(e, d, s) || blockFor(e.id, d, s) || startOf(d, s).getTime() > now) continue; n += capOf(e, s, d).total; }
+  return n;
+}
+function rptStats(from, to) {
   const rng = allRes().filter(r => r.fecha >= from && r.fecha <= to);
-  const charged = rng.map(r => ({ r, c: chargeOf(r) })).filter(x => x.c.amount > 0);
-  const ingresos = charged.reduce((a, x) => a + x.c.amount, 0);
+  const lines = rng.map(r => ({ r, c: chargeOf(r) })), charged = lines.filter(x => x.c.amount > 0);
+  const sum = (xs, k) => xs.filter(x => !k || x.c.kind === k).reduce((a, x) => a + x.c.amount, 0);
   const served = rng.filter(r => r.estado === 'sentada' || r.estado === 'finalizada');
-  const done = rng.filter(r => r.estado !== 'espera');
+  const paxOf = rs => rs.reduce((a, r) => a + (+r.pax || 0), 0);
+  const booked = rng.filter(r => r.estado !== 'espera' && r.estado !== 'cancelada');
   const ns = rng.filter(r => r.estado === 'no-show').length;
+  const paxR = paxOf(served.filter(r => r.tipo !== 'amana')), paxA = paxOf(served.filter(r => r.tipo === 'amana'));
+  const consR = charged.filter(x => x.c.kind === 'consumo' && x.r.tipo !== 'amana').reduce((a, x) => a + x.c.amount, 0);
+  const rec = charged.filter(x => x.c.kind === 'noshow' || x.c.kind === 'tardia');
+  return { rng, lines, charged, served, ingresos: sum(charged), consumo: sum(charged, 'consumo'), noshow: sum(charged, 'noshow'), tardia: sum(charged, 'tardia'), rec: sum(rec), recN: rec.length, pax: paxR + paxA, paxR, paxA, reservas: rng.filter(r => r.estado !== 'espera').length, qr: rng.filter(r => r.estado !== 'espera' && r.source === 'huesped').length, ns, nsPct: booked.length ? ns / booked.length * 100 : 0, ticket: paxR ? consR / paxR : 0, exo: lines.filter(x => x.r.cargoExonerado) };
+}
+/* Compare only with a previous period that really has data (most of its nights), never against an empty month */
+const prevComparable = (P, n) => new Set(P.rng.map(r => r.fecha)).size >= Math.ceil(n * .6);
+function deltaHtml(cur, prev, { pts = false, lowerBetter = false } = {}) {
+  if (!prev && !pts) return '';
+  const v = pts ? cur - prev : (cur - prev) / prev * 100;
+  if (!isFinite(v)) return '';
+  const r = Math.round(v), good = lowerBetter ? r < 0 : r > 0;
+  return `<div class="kpi-d ${r === 0 ? '' : good ? 'up' : 'down'}" title="Contra el período anterior del mismo largo">${r > 0 ? '▲' : r < 0 ? '▼' : '='} ${Math.abs(r)}${pts ? ' pts' : ' %'}<\/div>`;
+}
+const moneyK = n => n >= 1000 ? '$' + (Math.round(n / 100) / 10).toString().replace(/\.0$/, '') + 'k' : '$' + Math.round(n);
+function vReportes() {
+  const { from, to, n } = rptRange(), pf = addDays(from, -n), pt = addDays(from, -1);
+  const R = rptStats(from, to), P = rptStats(pf, pt), hasPrev = prevComparable(P, n);
+  const dl = hasPrev ? (a, b, o) => deltaHtml(a, b, o) : () => '';
   const days = []; for (let d = from; d <= to; d = addDays(d, 1)) days.push(d);
-  const perDay = days.map(d => charged.filter(x => x.r.fecha === d).reduce((a, x) => a + x.c.amount, 0)); const maxDay = Math.max(1, ...perDay);
-  const perExp = allExps().map(e => ({ e, v: charged.filter(x => x.r.exp === e.id).reduce((a, x) => a + x.c.amount, 0) })).filter(x => x.v); const maxExp = Math.max(1, ...perExp.map(x => x.v));
-  const kinds = [['consumo', 'Consumo', 'var(--ok)'], ['noshow', 'No-show', 'var(--bad)'], ['tardia', 'Cancelación tardía', 'var(--warn)']].map(([k, l, c]) => ({ l, c, v: charged.filter(x => x.c.kind === k).reduce((a, x) => a + x.c.amount, 0) }));
-  const br = expById('brasas'); const slots = slotsOf(br); const slotPax = slots.map(s => served.filter(r => r.exp === 'brasas' && r.horario === s).reduce((a, r) => a + r.pax, 0)); const maxSlot = Math.max(1, ...slotPax);
-  const paxA = served.filter(r => r.tipo === 'amana').reduce((a, r) => a + r.pax, 0), paxR = served.filter(r => r.tipo !== 'amana').reduce((a, r) => a + r.pax, 0);
-  const portal = done.filter(r => r.source === 'huesped').length;
+  const certN = days.filter(d => S.cierres.has(d)).length, pastN = days.filter(d => d < TODAY).length;
+  const perDay = days.map(d => R.charged.filter(x => x.r.fecha === d).reduce((a, x) => a + x.c.amount, 0)), maxDay = Math.max(1, ...perDay);
+  const lived = days.filter(d => d <= TODAY).length, avg = lived ? perDay.slice(0, lived).reduce((a, v) => a + v, 0) / lived : 0;
+  const festDay = d => expsOn(d).some(e => e.id !== 'brasas') && R.rng.some(r => r.fecha === d && r.exp !== 'brasas');
+  const showV = days.length <= 16;
+  const bars = `<div class="rb"><div class="rb-plot">${days.map((d, i) => `<div class="rb-c" title="${fmtDate(d)}: ${money(perDay[i])}${d === TODAY ? ' (en curso)' : ''}">${showV && perDay[i] ? `<span class="rb-v">${moneyK(perDay[i])}<\/span>` : ''}<span class="rb-b${d === TODAY ? ' today' : festDay(d) ? ' fest' : ''}" style="height:${Math.max(perDay[i] ? 2 : 0, perDay[i] / maxDay * 100)}%"><\/span><\/div>`).join('')}${avg ? `<i class="rb-avg" style="bottom:${avg / maxDay * 100}%"><\/i>` : ''}<\/div><div class="rb-x">${days.map((d, i) => `<span>${days.length <= 16 || i % 3 === 0 ? d.slice(8) : ''}<\/span>`).join('')}<\/div>
+    <div class="legend-inline" style="margin-top:10px"><span><i style="background:var(--ember)"><\/i>Brasas<\/span><span><i style="background:var(--gold)"><\/i>Día de festival en la playa<\/span>${days.includes(TODAY) ? '<span><i class="rb-sw-today"><\/i>Hoy, en curso<\/span>' : ''}${avg ? '<span><i class="rb-sw-avg"><\/i>Promedio<\/span>' : ''}<\/div><\/div>`;
+  const perExp = allExps().map(e => ({ e, v: R.charged.filter(x => x.r.exp === e.id).reduce((a, x) => a + x.c.amount, 0) })).filter(x => x.v), maxExp = Math.max(1, ...perExp.map(x => x.v));
+  const kinds = [['Consumo', R.consumo, 'var(--ember)'], ['No-show', R.noshow, 'var(--bad)'], ['Cancelación tardía', R.tardia, 'var(--warn)']];
   const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
-  return `<div class="toolbar"><div class="field" style="flex-direction:row;align-items:center;gap:8px"><label class="label" for="rpt-from">Desde<\/label><input type="date" class="input" style="width:auto" id="rpt-from" data-bind="rpt.from" value="${from}" max="${to}"><\/div><div class="field" style="flex-direction:row;align-items:center;gap:8px"><label class="label" for="rpt-to">Hasta<\/label><input type="date" class="input" style="width:auto" id="rpt-to" data-bind="rpt.to" value="${to}" min="${from}"><\/div><div class="chips"><button class="chip" data-act="rpt" data-n="7">7 días<\/button><button class="chip" data-act="rpt" data-n="14">14 días<\/button><button class="chip" data-act="rpt" data-n="30">30 días<\/button><\/div><span style="margin-left:auto"><\/span><button class="btn btn-ghost" data-act="csv-sales">${ic('download', 'sm')}Reporte de ventas CSV<\/button><\/div>
-  <div class="kpis">
-    <div class="kpi"><div class="kpi-l">Ingresos<\/div><div class="kpi-v">${money(ingresos)}<\/div><div class="kpi-s">${money(days.length ? ingresos / days.length : 0)} por noche<\/div><\/div>
-    <div class="kpi"><div class="kpi-l">Atendidos<\/div><div class="kpi-v">${paxA + paxR}<\/div><div class="kpi-s">${paxR} regulares · ${paxA} Amaná<\/div><\/div>
-    <div class="kpi"><div class="kpi-l">Reservas<\/div><div class="kpi-v">${done.length}<\/div><div class="kpi-s">${pct(portal, done.length)}% por el portal (QR)<\/div><\/div>
-    <div class="kpi ${pct(ns, done.length) > 8 ? 'bad' : ''}"><div class="kpi-l">No-show<\/div><div class="kpi-v">${pct(ns, done.length)}%<\/div><div class="kpi-s">${ns} reservas<\/div><\/div>
-    <div class="kpi"><div class="kpi-l">Ticket por persona<\/div><div class="kpi-v">${money(paxR ? kinds[0].v / paxR : 0)}<\/div><div class="kpi-s">consumo / regulares<\/div><\/div>
-    <div class="kpi"><div class="kpi-l">Noches certificadas<\/div><div class="kpi-v">${days.filter(d => S.cierres.has(d)).length}<small> / ${days.length}<\/small><\/div><div class="kpi-s">cierres del período<\/div><\/div>
+  const exoAmt = R.exo.reduce((a, x) => a + chargeOf({ ...x.r, cargoExonerado: false }).amount, 0);
+  const br = expById('brasas'), slots = br ? slotsOf(br) : [];
+  const slotOcc = slots.map(s => { let cap = 0; for (const d of days) if (d <= TODAY && expDayOpen(br, d) && !slotClosed(br, d, s) && !blockFor(br.id, d, s) && startOf(d, s).getTime() <= Date.now()) cap += capOf(br, s, d).total; const pax = R.served.filter(r => r.exp === 'brasas' && r.horario === s).reduce((a, r) => a + r.pax, 0); return { s, cap, pax, p: cap ? pax / cap * 100 : 0 }; });
+  const peak = slotOcc.reduce((a, x) => x.p > a.p ? x : a, { p: -1 }), capAll = slotOcc.reduce((a, x) => a + x.cap, 0), paxAll = slotOcc.reduce((a, x) => a + x.pax, 0), maxOcc = Math.max(1, ...slotOcc.map(x => x.p));
+  const book = R.rng.filter(r => r.estado !== 'espera');
+  const SRC = [['huesped', 'QR del huésped'], ['staff', 'Recepción'], ['mayordomo', 'Mayordomo']].map(([k, l]) => ({ l, v: book.filter(r => (r.source || 'staff') === k).length }));
+  const leads = book.filter(r => r.createdAt).map(r => (startOf(r.fecha, r.horario) - new Date(r.createdAt)) / 3600000).filter(h => h >= 0 && h < 24 * 40);
+  const lead = leads.length ? leads.reduce((a, h) => a + h, 0) / leads.length : 0;
+  const visits = {}; for (const r of R.served) visits[r.guestId] = (visits[r.guestId] || 0) + 1;
+  const uniq = Object.keys(visits).length, rep = Object.values(visits).filter(v => v >= 2).length;
+  const oc = {}; for (const r of R.served) if (r.ocasion) oc[r.ocasion] = (oc[r.ocasion] || 0) + 1;
+  const algN = R.served.filter(r => guestOf(r)?.allergies).length;
+  const chip = k => `<button class="chip" data-act="rpt" data-n="${k}" aria-pressed="${from === addDays(TODAY, -(k - 1)) && to === TODAY}">${k} días<\/button>`;
+  const card = (t, sub, body, cls = '') => `<div class="card${cls}"><div class="card-h"><span class="card-t">${t}<\/span>${sub ? `<span class="card-sub">${sub}<\/span>` : ''}<\/div><div class="card-b">${body}<\/div><\/div>`;
+  return `<div class="toolbar"><div class="field rpt-f"><label class="label" for="rpt-from">Desde<\/label><input type="date" class="input" id="rpt-from" data-bind="rpt.from" value="${from}" max="${to}"><\/div><div class="field rpt-f"><label class="label" for="rpt-to">Hasta<\/label><input type="date" class="input" id="rpt-to" data-bind="rpt.to" value="${to}" min="${from}"><\/div><div class="chips">${chip(7)}${chip(14)}${chip(30)}<\/div><span style="margin-left:auto"><\/span>
+      <button class="btn btn-ghost btn-sm" data-act="xls-report" title="Excel con hojas de resumen, ventas, reservas y huéspedes">${ic('download', 'xs')}Excel<\/button><button class="btn btn-ghost btn-sm" data-act="print-report" title="Imprimir o guardar como PDF">${ic('print', 'xs')}PDF<\/button><button class="btn btn-quiet btn-sm" data-act="csv-sales" title="Ventas en CSV">CSV<\/button><\/div>
+  <div class="kpis rpt-kpis">
+    <div class="kpi hero"><div class="kpi-l">${ic('shield', 'xs')}Recuperado por política<\/div><div class="kpi-v">${money(R.rec)}<\/div><div class="kpi-s">${R.recN ? plural(R.recN, 'no-show o tardía cobrada', 'no-show y tardías cobrados') : 'nada que recuperar'}<\/div>${dl(R.rec, P.rec)}<\/div>
+    <div class="kpi"><div class="kpi-l">${ic('dollar', 'xs')}Ingresos<\/div><div class="kpi-v">${money(R.ingresos)}<\/div><div class="kpi-s">${pastN ? `${certN}/${pastN} noches certificadas` : 'cargos a habitación'}<\/div>${dl(R.ingresos, P.ingresos)}<\/div>
+    <div class="kpi"><div class="kpi-l">${ic('users', 'xs')}Atendidos<\/div><div class="kpi-v">${R.pax}<\/div><div class="kpi-s">${R.paxR} regulares · ${R.paxA} Amaná<\/div>${dl(R.pax, P.pax)}<\/div>
+    <div class="kpi"><div class="kpi-l">${ic('cal', 'xs')}Reservas<\/div><div class="kpi-v">${R.reservas}<\/div><div class="kpi-s">${pct(R.qr, R.reservas)} % por el QR<\/div>${dl(R.reservas, P.reservas)}<\/div>
+    <div class="kpi ${R.nsPct > 8 ? 'bad' : ''}"><div class="kpi-l">${ic('ban', 'xs')}No-show<\/div><div class="kpi-v">${Math.round(R.nsPct * 10) / 10} %<\/div><div class="kpi-s">${plural(R.ns, 'reserva', 'reservas')}<\/div>${dl(R.nsPct, P.nsPct, { pts: true, lowerBetter: true })}<\/div>
+    <div class="kpi"><div class="kpi-l">Consumo por comensal<\/div><div class="kpi-v">${money(R.ticket)}<\/div><div class="kpi-s" title="Consumo de huéspedes regulares ÷ comensales regulares atendidos">huéspedes regulares<\/div>${dl(R.ticket, P.ticket)}<\/div>
   <\/div>
-  <div class="rgrid">
-    <div class="card"><div class="card-h"><span class="card-t">Ingresos por día<\/span><\/div><div class="card-b"><div class="bars">${days.map((d, i) => `<div class="bar-c" title="${fmtDate(d)}: ${money(perDay[i])}"><span class="bar-v">${days.length <= 16 && perDay[i] ? Math.round(perDay[i]) : ''}<\/span><span class="bar" style="height:${perDay[i] / maxDay * 130}px"><\/span><span class="bar-l">${days.length <= 16 || i % 3 === 0 ? d.slice(8) : ''}<\/span><\/div>`).join('')}<\/div><\/div><\/div>
-    <div class="card"><div class="card-h"><span class="card-t">Ingresos por experiencia<\/span><\/div><div class="card-b"><div class="hbars">${perExp.length ? perExp.map(x => `<div class="hb"><span class="hb-l">${esc(expShort(x.e))}<\/span><span class="hb-t"><span class="hb-f" style="display:block;width:${x.v / maxExp * 100}%"><\/span><\/span><span class="hb-v">${money(x.v)}<\/span><\/div>`).join('') : '<p class="hint">Sin ingresos en el período.<\/p>'}<\/div>
-      <div class="split" style="margin-top:16px">${kinds.map(k => `<i style="width:${pct(k.v, ingresos)}%;background:${k.c}"><\/i>`).join('')}<\/div><div class="legend">${kinds.map(k => `<div><i style="background:${k.c}"><\/i>${k.l}<b>${money(k.v)}<\/b><\/div>`).join('')}<\/div><\/div><\/div>
-    <div class="card"><div class="card-h"><span class="card-t">Personas atendidas por horario<\/span><span class="card-sub">Brasas<\/span><\/div><div class="card-b"><div class="hbars">${slots.map((s, i) => `<div class="hb"><span class="hb-l">${s}<\/span><span class="hb-t"><span class="hb-f" style="display:block;width:${slotPax[i] / maxSlot * 100}%"><\/span><\/span><span class="hb-v">${slotPax[i]}<\/span><\/div>`).join('')}<\/div><\/div><\/div>
+  <div class="rgrid rpt-grid">
+    ${card('Ingresos por día', `promedio ${money(Math.round(avg))} por noche`, bars, ' span2')}
+    ${card('De dónde viene el dinero', '', `<div class="hbars">${perExp.length ? perExp.map(x => `<div class="hb"><span class="hb-l">${esc(expShort(x.e))}<\/span><span class="hb-t"><span class="hb-f" style="display:block;width:${x.v / maxExp * 100}%;background:${x.e.id === 'brasas' ? 'var(--ember)' : 'var(--gold)'}"><\/span><\/span><span class="hb-v">${moneyK(x.v)}<\/span><\/div>`).join('') : '<p class="hint">Sin ingresos en el período.<\/p>'}<\/div>
+      <div class="split" style="margin-top:16px">${kinds.map(([, v, c]) => `<i style="width:${pct(v, R.ingresos)}%;background:${c}"><\/i>`).join('')}<\/div><div class="legend">${kinds.map(([l, v, c]) => `<div><i style="background:${c}"><\/i>${l}<b>${money(v)}<\/b><\/div>`).join('')}${R.exo.length ? `<div class="muted"><i style="background:var(--line-2)"><\/i>Exonerado con motivo (${R.exo.length})<b>${money(exoAmt)}<\/b><\/div>` : ''}<\/div>`)}
+    ${br ? card('Ocupación por horario', `Brasas · ${pct(paxAll, capAll)} % del cupo`, `<div class="hbars">${slotOcc.map(x => `<div class="hb"><span class="hb-l">${x.s}<\/span><span class="hb-t"><span class="hb-f" style="display:block;width:${x.p / maxOcc * 100}%;background:${x === peak ? 'var(--ember)' : 'color-mix(in srgb, var(--ember) 45%, var(--surface-2))'}"><\/span><\/span><span class="hb-v" title="${x.pax} de ${x.cap} lugares">${Math.round(x.p)} %<\/span><\/div>`).join('')}<\/div>${peak.p > 0 ? `<p class="hint" style="margin-top:12px">Hora pico: <b>${peak.s}<\/b> (${Math.round(peak.p)} % del cupo). Cupo = lugares que se ofrecieron por horario.<\/p>` : ''}`) : ''}
+    ${card('Origen de las reservas', book.length ? `anticipación promedio ${lead >= 1 ? Math.round(lead) + ' h' : Math.round(lead * 60) + ' min'}` : '', `<div class="hbars">${SRC.map(x => `<div class="hb"><span class="hb-l">${x.l}<\/span><span class="hb-t"><span class="hb-f" style="display:block;width:${pct(x.v, book.length)}%;background:var(--ember)"><\/span><\/span><span class="hb-v">${pct(x.v, book.length)} %<\/span><\/div>`).join('')}<\/div>`, ' src')}
+    ${card('Huéspedes', '', `<div class="rfacts"><div><b>${uniq}<\/b><span>huéspedes atendidos<\/span><\/div><div><b>${pct(rep, uniq)} %<\/b><span>volvieron a reservar en el período<\/span><\/div><div><b>${Object.values(oc).reduce((a, v) => a + v, 0)}<\/b><span>celebraciones atendidas${Object.keys(oc).length ? ': ' + Object.entries(oc).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${esc(k.toLowerCase())} ${v}`).join(' · ') : ''}<\/span><\/div><div><b>${algN}<\/b><span>mesas con alergia o dieta, avisadas a cocina<\/span><\/div><\/div>`)}
   <\/div>`;
 }
 
 /* ================= View: Correos ================= */
+const MAIL_KL = { confirmacion: 'Confirmación al huésped', admin: 'Aviso al restaurante', encuesta: 'Encuesta de experiencia', cancelacion: 'Cancelación', modificacion: 'Cambio de reserva', 'espera-confirmada': 'Confirmada desde lista de espera', resumen: 'Resumen de la noche' };
+function mailList() {
+  const out = [...S.mail.values()];
+  for (const c of S.cierres.values()) if (c.resumen) out.push({ ...c.resumen, id: 'resumen:' + c.fecha, kind: 'resumen', fecha: c.fecha, resId: null, at: c.resumen.at || c.at, status: c.resumen.status || 'pendiente' });
+  return out.sort((a, b) => String(b.at).localeCompare(String(a.at)));
+}
+const mailById = id => S.mail.get(id) || mailList().find(m => m.id === id);
+/* Branded HTML version of any outbox text (NG-11): built on the fly, inline styles so it pastes into Outlook or Gmail */
+function mailHtml(m, logo = logoSrc()) {
+  const r = m.resId ? S.res.get(m.resId) : null, en = m.lang === 'en';
+  const C = { ink: '#201a15', ink2: '#554a40', ink3: '#6f6358', line: '#e7ddcf', soft: '#f9f4ec', ember: '#b4501c' };
+  const code = r && ['confirmacion', 'modificacion', 'espera-confirmada'].includes(m.kind) ? `<div style="text-align:center;background:${C.soft};border-radius:8px;padding:14px 12px;margin:0 0 18px"><div style="font-size:11px;letter-spacing:.16em;color:${C.ink3}">${en ? 'BOOKING CODE' : 'CÓDIGO DE RESERVA'}<\/div><div style="font-size:24px;font-weight:700;letter-spacing:.05em;color:${C.ember};margin-top:2px">${esc(r.codigo)}<\/div><\/div>` : '';
+  const blocks = String(m.body || '').split(/\n\s*\n/).map(b => b.split('\n').filter(l => l.trim()));
+  const kv = l => /^[^:•]{2,34}: \S/.test(l);
+  const body = blocks.map(ls => {
+    if (!ls.length) return '';
+    if (ls.every(kv)) return `<table role="presentation" style="width:100%;border-collapse:collapse;margin:4px 0 14px;font-size:14px">${ls.filter(l => !(code && /^(Código|Code): /.test(l))).map(l => { const i = l.indexOf(': '); return `<tr><td style="padding:7px 0;border-bottom:1px solid ${C.line};color:${C.ink3};width:38%;vertical-align:top">${esc(l.slice(0, i))}<\/td><td style="padding:7px 0;border-bottom:1px solid ${C.line};color:${C.ink};font-weight:600">${esc(l.slice(i + 2))}<\/td><\/tr>`; }).join('')}<\/table>`;
+    let h = '', ul = [];
+    const flush = () => { if (ul.length) { h += `<ul style="margin:0 0 14px;padding-left:18px;color:${C.ink2};font-size:13px;line-height:1.55">${ul.map(x => `<li>${esc(x)}<\/li>`).join('')}<\/ul>`; ul = []; } };
+    for (const l of ls) {
+      if (/^[•\-] /.test(l)) { ul.push(l.slice(2)); continue; }
+      flush();
+      if (/:$/.test(l)) h += `<p style="margin:6px 0 6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${C.ink3}">${esc(l.slice(0, -1))}<\/p>`;
+      else h += `<p style="margin:0 0 12px;font-size:14px;line-height:1.55;color:${C.ink}">${esc(l)}<\/p>`;
+    }
+    flush(); return h;
+  }).join('');
+  return `<div style="max-width:560px;margin:0 auto;background:#fffcf7;border:1px solid ${C.line};border-radius:10px;overflow:hidden;font-family:Inter,'Segoe UI',Arial,sans-serif;color:${C.ink}">
+    <div style="padding:20px 24px 14px;text-align:center;border-bottom:1px solid ${C.line}">${logo ? `<img src="${esc(logo)}" alt="Brasas" style="height:42px;max-width:180px;object-fit:contain">` : `<div style="font:600 24px Georgia,serif;color:${C.ember}">Brasas<\/div>`}<div style="font-size:11px;letter-spacing:.2em;color:${C.ink3};margin-top:6px">MIXOLOGY BAR<\/div><\/div>
+    <div style="padding:22px 24px 8px"><p style="margin:0 0 16px;font-size:18px;font-weight:700;color:${C.ink}">${esc(String(m.subject || '').split(' · ')[0])}<\/p>${code}${body}<\/div>
+    <div style="padding:12px 24px;background:${C.soft};font-size:11.5px;color:${C.ink3};text-align:center">Mixology Bar Brasas · Wyndham Alltra Punta Cana${r ? ` · ${en ? `${S.cfg.toleranceMin}-min grace period` : `tolerancia de ${S.cfg.toleranceMin} min`}` : ''}<\/div><\/div>`;
+}
 function vCorreos() {
-  const f = S.ui.mf, all = [...S.mail.values()].sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  const f = S.ui.mf, all = mailList(), view = S.ui.mailView || 'html';
   const list = all.filter(m => f === 'todos' || m.status === f);
-  const KL = { confirmacion: 'Confirmación al huésped', admin: 'Aviso administrativo', encuesta: 'Encuesta de experiencia', cancelacion: 'Cancelación' };
   const chip = (k, l) => `<button class="chip" data-act="mf" data-v="${k}" aria-pressed="${f === k}">${l}<span class="n">${k === 'todos' ? all.length : all.filter(m => m.status === k).length}<\/span><\/button>`;
-  return `<div class="callout info" style="margin-bottom:14px">${ic('mail')}<div><b>Bandeja de salida.<\/b> Cada reserva genera la confirmación para el huésped (con la política de cancelación) y un aviso al correo administrativo${S.cfg.adminEmail ? ` (<b>${esc(S.cfg.adminEmail)}<\/b>)` : ' (configúralo en Configuración)'}. Al finalizar una mesa se genera la encuesta. El envío automático requiere conectar un servicio de correo; mientras tanto, copia y envía desde aquí.<\/div><\/div>
-    <div class="toolbar"><div class="chips">${chip('pendiente', 'Por enviar')}${chip('enviado', 'Enviados')}${chip('todos', 'Todos')}<\/div><\/div>
-    <div class="card">${list.length ? list.map(m => `<div class="mailitem"><div style="min-width:0"><div class="who-name">${esc(m.subject)}<\/div><div class="muted" style="font-size:12px">${esc(KL[m.kind] || m.kind)} · para <b>${esc(m.to)}<\/b> · ${relTime(m.at)}${m.resId ? ` · <button class="note-link" style="margin:0" data-act="open-res" data-id="${esc(m.resId)}">${esc(m.resId)}<\/button>` : ''}<\/div><\/div>
+  const seg = (k, l) => `<button class="chip" data-act="mail-view" data-v="${k}" aria-pressed="${view === k}">${l}<\/button>`;
+  return `<div class="callout info" style="margin-bottom:14px">${ic('mail')}<div><b>Bandeja de salida.<\/b> Confirmaciones al huésped en su idioma, avisos al restaurante${S.cfg.adminEmail ? ` (<b>${esc(S.cfg.adminEmail)}<\/b>)` : ' (configura el correo en Configuración)'} y el resumen de cada noche certificada. Mientras no se conecte un servicio de correo, copia y envía desde aquí.<\/div><\/div>
+    <div class="toolbar"><div class="chips">${chip('pendiente', 'Por enviar')}${chip('enviado', 'Enviados')}${chip('todos', 'Todos')}<\/div><div class="chips" style="margin-left:auto" role="group" aria-label="Formato">${seg('html', 'Vista previa')}${seg('text', 'Texto')}<\/div><\/div>
+    <div class="card">${list.length ? list.map((m, i) => { const open = S.ui.mailOpen ? S.ui.mailOpen === m.id : i === 0; return `<div class="mailitem${open ? ' open' : ''}"><div style="min-width:0"><button class="mail-subj" data-act="mail-open" data-id="${esc(m.id)}" aria-expanded="${open}">${ic('chev', 'xs')}<span>${esc(m.subject)}<\/span><\/button><div class="muted" style="font-size:12px">${esc(MAIL_KL[m.kind] || m.kind)} · para <b>${esc(m.to)}<\/b> · ${relTime(m.at)}${m.resId ? ` · <button class="note-link" style="margin:0" data-act="open-res" data-id="${esc(m.resId)}">${esc(m.resId)}<\/button>` : ''}${m.fecha && m.kind === 'resumen' ? ` · <button class="note-link" style="margin:0" data-act="mail-cierre" data-v="${esc(m.fecha)}">Ver cierre<\/button>` : ''}<\/div><\/div>
       <div class="row-actions" style="align-items:flex-start"><button class="btn btn-ghost btn-sm" data-act="mail-copy" data-id="${esc(m.id)}">${ic('copy', 'xs')}Copiar<\/button>${S.canWrite ? `<button class="btn btn-sm ${m.status === 'enviado' ? 'btn-quiet' : 'btn-ok'}" data-act="mail-sent" data-id="${esc(m.id)}">${ic(m.status === 'enviado' ? 'undo' : 'check', 'xs')}${m.status === 'enviado' ? 'Marcar pendiente' : 'Marcar enviado'}<\/button>` : ''}<\/div>
-      <pre>${esc(m.body)}<\/pre><\/div>`).join('') : `<div class="empty">${ic('mail')}<b>No hay correos en esta lista<\/b><\/div>`}<\/div>`;
+      ${!open ? '' : view === 'html' ? `<div class="mail-prev">${mailHtml(m)}<\/div>` : `<pre>${esc(m.body)}<\/pre>`}<\/div>`; }).join('') : `<div class="empty">${ic('mail')}<b>No hay correos en esta lista<\/b><\/div>`}<\/div>`;
 }
 
 /* ================= View: Configuración ================= */
@@ -4083,7 +4480,7 @@ function drawerRes(id) {
       ${expsOn(r.fecha).length > 1 || r.exp !== 'brasas' ? `<div class="fact"><div class="fact-l">Experiencia<\/div><div class="fact-v">${esc(expShort(e))}<\/div><\/div>` : ''}
       <div class="fact"><div class="fact-l">Cargo<\/div><div class="fact-v">${cargo}${r.cortes ? `<div class="muted" style="font-size:12px;font-weight:500">+ cortes premium ${+r.cortesPP ? money(cortesOf(r)) : '(por confirmar)'}<\/div>` : ''}<\/div><\/div>
       ${r.llegada ? `<div class="fact"><div class="fact-l">Llegada<\/div><div class="fact-v">${esc(r.llegada)}<\/div><\/div>` : ''}
-      <div class="fact span-2"><div class="fact-l"><label for="mesa-${esc(r.codigo)}">Mesa / zona<\/label><\/div><div class="fact-v">${w ? `<div class="mesa-edit"><input class="input" id="mesa-${esc(r.codigo)}" data-fresh value="${esc(r.mesa || '')}" placeholder="Ej. 12 o Terraza" maxlength="12"><button class="btn btn-ghost btn-sm" data-act="mesa" data-id="${esc(r.codigo)}">Guardar<\/button><\/div>` : esc(r.mesa || '—')}<\/div><\/div>
+      <div class="fact span-2"><div class="fact-l">${op ? `<label for="mesa-${esc(r.codigo)}">Mesa / zona<\/label>` : 'Mesa / zona'}<\/div><div class="fact-v">${op ? `<div class="mesa-edit"><input class="input" id="mesa-${esc(r.codigo)}" data-fresh value="${esc(r.mesa || '')}" placeholder="Ej. 12 o Terraza" maxlength="12"><button class="btn btn-ghost btn-sm" data-act="mesa" data-id="${esc(r.codigo)}">Guardar<\/button><\/div>` : esc(r.mesa || '—')}<\/div><\/div>
     <\/div>
     ${r.notas ? `<div><div class="section-t">Solicitud del huésped<\/div><p style="font-size:13.5px;white-space:pre-wrap">${esc(r.notas)}<\/p><\/div>` : ''}
     ${g ? `<div><div class="section-t">Huésped<\/div>${guestMini(g)}<\/div>` : ''}
@@ -4100,7 +4497,7 @@ function drawerGuest(id) {
   <div class="dr-b" data-scroll="dr">
     <div class="stats"><div class="stat"><b>${st.visits}<\/b><span>Visitas<\/span><\/div><div class="stat"><b>${st.pax}<\/b><span>Personas<\/span><\/div><div class="stat"><b style="${st.noShows ? 'color:var(--bad)' : ''}">${st.noShows}<\/b><span>No-shows<\/span><\/div><div class="stat"><b>${money(st.spent)}<\/b><span>Cargos<\/span><\/div><\/div>
     ${st.next ? `<div class="callout ok">${ic('cal')}<div><b>Próxima reserva:<\/b> ${fmtDate(st.next.fecha)} a las ${st.next.horario} · ${st.next.pax} pax · <button class="note-link" style="margin:0" data-act="open-res" data-id="${esc(st.next.codigo)}">${esc(st.next.codigo)}<\/button><\/div><\/div>` : ''}
-    ${dupes.length ? `<div><div class="callout warn">${ic('users')}<div><b>Posible duplicado.<\/b> Hay ${plural(dupes.length, 'otro perfil', 'otros perfiles')} con el mismo nombre. Si es la misma persona, únelos: sus reservas y notas pasan a este perfil.<\/div><\/div><div class="gpick" style="margin-top:8px">${dupes.map(d => { const ds = guestStats(d); return `<div><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span class="avatar" style="width:28px;height:28px;font-size:11px">${esc(initials(d.name))}<\/span><div style="min-width:0;flex:1"><div class="who-name">${esc(d.name)} <span class="gid">${esc(d.id)}<\/span><\/div><div class="muted" style="font-size:12px">${esc([d.email, d.phone].filter(Boolean).join(' · ') || 'sin contacto')} · ${plural(ds.rs.length, 'reserva', 'reservas')}<\/div><\/div><button class="btn btn-quiet btn-sm" data-act="open-guest" data-id="${esc(d.id)}">Ver<\/button>${S.canWrite ? `<button class="btn btn-ghost btn-sm" data-act="ask-confirm" data-c="merge:${esc(d.id)}">Unir a este perfil<\/button>` : ''}<\/div>${S.ui.confirm === 'merge:' + d.id ? `<div class="confirm-box" style="margin-top:10px">${ic('alert', 'sm')}<span>Se moverán ${plural(ds.rs.length, 'reserva', 'reservas')} y sus notas de <b>${esc(d.id)}<\/b> a <b>${esc(g.id)}<\/b>. No se puede deshacer.<\/span><button class="btn btn-quiet btn-sm" data-act="cancel-confirm">Cancelar<\/button><button class="btn btn-danger btn-sm" data-act="merge" data-keep="${esc(g.id)}" data-drop="${esc(d.id)}">Sí, unir<\/button><\/div>` : ''}<\/div>`; }).join('')}<\/div><\/div>` : ''}
+    ${dupes.length ? `<div><div class="callout warn">${ic('users')}<div><b>Posible duplicado.<\/b> Hay ${plural(dupes.length, 'otro perfil', 'otros perfiles')} con el mismo nombre. Si es la misma persona, únelos: sus reservas y notas pasan a este perfil.<\/div><\/div><div class="gpick" style="margin-top:8px">${dupes.map(d => { const ds = guestStats(d); return `<div><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span class="avatar" style="width:28px;height:28px;font-size:11px">${esc(initials(d.name))}<\/span><div style="min-width:0;flex:1"><div class="who-name">${esc(d.name)} <span class="gid">${esc(d.id)}<\/span><\/div><div class="muted" style="font-size:12px">${esc([d.email, d.phone].filter(Boolean).join(' · ') || 'sin contacto')} · ${plural(ds.rs.length, 'reserva', 'reservas')}<\/div><\/div><button class="btn btn-quiet btn-sm" data-act="open-guest" data-id="${esc(d.id)}">Ver<\/button>${S.canWrite ? `<button class="btn btn-ghost btn-sm" data-act="ask-confirm" data-c="merge:${esc(d.id)}">Unir a este perfil<\/button>` : ''}<\/div>${S.ui.confirm === 'merge:' + d.id ? `<div class="confirm-box" style="margin-top:10px">${ic('alert', 'sm')}<span>Se moverán ${plural(ds.rs.length, 'reserva', 'reservas')} y sus notas de <b>${esc(d.id)}<\/b> a <b>${esc(g.id)}<\/b>. No se puede deshacer.${(c => c.length ? `<b style="display:block;margin-top:6px;color:var(--bad)">Ojo: los dos perfiles tienen reservas activas el mismo día (${c.slice(0, 3).map(f => esc(fmtDate(f))).join(', ')}${c.length > 3 ? '…' : ''}). Tras unir quedarán dos reservas esa noche: revisa cuál se mantiene.<\/b>` : '')(sameDayClash(g.id, d.id))}<\/span><button class="btn btn-quiet btn-sm" data-act="cancel-confirm">Cancelar<\/button><button class="btn btn-danger btn-sm" data-act="merge" data-keep="${esc(g.id)}" data-drop="${esc(d.id)}">Sí, unir<\/button><\/div>` : ''}<\/div>`; }).join('')}<\/div><\/div>` : ''}
     ${callouts(g, null)}
     <div><div class="section-t">Contacto<\/div><div class="facts">
       <div class="fact"><div class="fact-l">Email<\/div><div class="fact-v">${esc(g.email || '—')}${(g.altEmails || []).map(x => `<div class="muted" style="font-size:12px;font-weight:500">también ${esc(x)}<\/div>`).join('')}<\/div><\/div>
@@ -4166,7 +4563,7 @@ function drawerNew() {
         ${taken ? `<div class="callout bad">${ic('lock')}<div>La habitación <b>${esc(nr.hab)}<\/b> ya tiene una reserva ese día (${esc(taken.huesped)} · ${esc(expShort(expById(taken.exp)))} · ${taken.horario}). Solo se permite una por habitación por día.<\/div><\/div>` : ''}
         ${exps.length > 1 ? `<div class="exgrid">${exps.map(x => `<button class="excard" data-act="nr-exp" data-v="${x.id}" aria-pressed="${e && e.id === x.id}"><span class="t">${esc(x.nombre)}<\/span><span class="p">${seg === 'amana' && x.appliesTo === 'regulares' ? 'Sin cargo para Amaná' : esc(priceLabel(x))}<\/span><span class="when">${ic('clock', 'xs')}${horasLabel(x)}<\/span><\/button>`).join('')}<\/div>` : ''}
       <\/div><\/div>
-    <div><div class="section-t">${ed ? 'Horario' : '3 · Horario'} <span class="n">· espacios ${seg === 'amana' ? 'Amaná' : 'regulares'}<\/span><\/div>${slotGrid}
+    <div><div class="section-t">${ed ? 'Horario' : '3 · Horario'} <span class="n">· espacios ${seg === 'amana' ? 'Amaná' : 'regulares'}<\/span><\/div>${ed && nr.slotBad && nr.horario ? `<div class="callout warn" role="status" style="margin-bottom:10px">${ic('alert')}<div>${esc(nr.slotBad)}<\/div><\/div>` : ''}${slotGrid}
       ${ed ? '' : `<label class="check" style="margin-top:10px"><input type="checkbox" data-act="nr-espera" ${nr.espera ? 'checked' : ''}>Lista de espera si está lleno<\/label>`}<\/div>
     <div><div class="section-t">${ed ? 'Detalles' : '4 · Detalles'}<\/div><div class="grid-2">
       <div class="field"><label class="label" for="nr-oc">Ocasión<\/label><select class="select" id="nr-oc" data-bind="nr.ocasion"><option value="">Ninguna<\/option>${OCASIONES.map(o => `<option${nr.ocasion === o ? ' selected' : ''}>${o}<\/option>`).join('')}<\/select><\/div>
@@ -4196,6 +4593,7 @@ async function saveNR() {
   if (!nr.hab.trim()) return err('Indica la habitación.', 'hab');
   if (!(nr.pax >= 1)) return err('Indica cuántas personas vienen.');
   if (!nr.horario) return err('Elige un horario.', 'slot');
+  if (ed && nr.slotBad) return err(nr.slotBad, 'slot');
   if (!canWriteOrWarn()) return;
   const e = expById(nr.exp); const seg = nr.tipo === 'amana' ? 'amana' : 'regular';
   if (ed) {
@@ -4387,7 +4785,7 @@ function modalSeat(md) {
 function modalConfirm(md) {
   const r = S.res.get(md.id); if (!r) return '';
   const g = guestOf(r);
-  return `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mc-t" style="width:min(520px,100%)"><div class="modal-h"><h3 id="mc-t">${md.fresh ? 'Reserva creada · confirmación' : 'Confirmación para el huésped'}<\/h3><button class="btn btn-quiet btn-icon x" data-act="close" aria-label="Cerrar">${ic('x')}<\/button><\/div>
+  return `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mc-t" style="width:min(520px,100%)"><div class="modal-h"><h3 id="mc-t">${md.fresh ? (r.estado === 'espera' ? 'Agregada a lista de espera' : 'Reserva creada · confirmación') : 'Confirmación para el huésped'}<\/h3><button class="btn btn-quiet btn-icon x" data-act="close" aria-label="Cerrar">${ic('x')}<\/button><\/div>
     <div class="modal-b">${voucherHtml(r)}
       <div class="dr-s">${g?.email ? `${ic('mail', 'xs')} Enviar a ${esc(g.email)}` : 'Este huésped no tiene email registrado.'}${S.cfg.adminEmail ? ` · copia a ${esc(S.cfg.adminEmail)}` : ''}<\/div>
       <p class="hint">Descarga la imagen o el PDF y envíalo al huésped por correo o WhatsApp.<\/p><\/div>
@@ -4488,33 +4886,52 @@ function errL(ex) {
   return tt('No pudimos completar tu reserva. Revisa tu conexión e inténtalo de nuevo.', 'We couldn’t complete your booking. Please check your connection and try again.');
 }
 /* Mi reserva / Mis visitas: verificación con habitación y límite de intentos (decisión 3, QH-02, QH-04) */
-const GP_MAX_TRIES = 5, GP_LOCK_MS = 60000, GP_LOCK_KEY = 'brasas-gp-lock';
-function gpLockLeft() {
-  let t = S.gp.lockUntil || 0; try { t = Math.max(t, +localStorage.getItem(GP_LOCK_KEY) || 0); } catch {}
-  return t > Date.now() ? Math.ceil((t - Date.now()) / 1000) : 0;
+const GP_MAX_TRIES = 5, GP_LOCK_MS = 60000, GP_TRIES_KEY = 'brasas-gp-tries', GP_TRIES_TTL = 600000;
+// N-02: contador por formulario ('look' = Mi reserva, 'hist' = Mis visitas), guardado en localStorage para que recargar no lo reinicie.
+// Solo protege la interfaz (en live los datos llegan igual al navegador). Sin localStorage, queda en memoria.
+function gpTries() {
+  let o = null; try { o = JSON.parse(localStorage.getItem(GP_TRIES_KEY) || 'null'); } catch {}
+  if (!o || typeof o !== 'object') o = S.gp.tries || {};
+  const now = Date.now();
+  for (const k of ['look', 'hist']) { const v = o[k]; o[k] = v && typeof v === 'object' && now - (+v.t || 0) < GP_TRIES_TTL ? { n: +v.n || 0, t: +v.t || 0, until: +v.until || 0 } : { n: 0, t: 0, until: 0 }; }
+  return S.gp.tries = o;
 }
-function gpFail() {
-  S.gp.fails = (S.gp.fails || 0) + 1;
-  if (S.gp.fails >= GP_MAX_TRIES) { S.gp.fails = 0; S.gp.lockUntil = Date.now() + GP_LOCK_MS; try { localStorage.setItem(GP_LOCK_KEY, String(S.gp.lockUntil)); } catch {} setTimeout(render, GP_LOCK_MS + 200); }
+function gpTriesSave(o) { S.gp.tries = o; try { localStorage.setItem(GP_TRIES_KEY, JSON.stringify(o)); } catch {} }
+function gpLockLeft(k) { const u = gpTries()[k].until; return u > Date.now() ? Math.ceil((u - Date.now()) / 1000) : 0; }
+let gpLockTimer = 0;
+function gpLockTick() {   // cuenta atrás visible; al terminar repinta para reactivar el botón
+  if (gpLockTimer) return;
+  gpLockTimer = setInterval(() => {
+    const left = Math.max(gpLockLeft('look'), gpLockLeft('hist'));
+    document.querySelectorAll('[data-gp-left]').forEach(el => { el.textContent = gpLockLeft(el.dataset.gpLeft); });
+    if (!left) { clearInterval(gpLockTimer); gpLockTimer = 0; render(); }
+  }, 1000);
 }
-const gpLockMsg = s => tt(`Demasiados intentos. Espera ${s} s y vuelve a intentarlo.`, `Too many attempts. Please wait ${s} s and try again.`);
+function gpFail(k) {
+  const o = gpTries(), v = o[k];
+  v.n++; v.t = Date.now();
+  if (v.n >= GP_MAX_TRIES) { v.n = 0; v.until = Date.now() + GP_LOCK_MS; gpLockTick(); }
+  gpTriesSave(o);
+}
+function gpOk(k) { const o = gpTries(); o[k] = { n: 0, t: 0, until: 0 }; gpTriesSave(o); }
+const gpLockMsg = (s, k) => { gpLockTick(); const n = `<span data-gp-left="${k}">${s}<\/span>`; return tt(`Demasiados intentos. Espera ${n} s y vuelve a intentarlo.`, `Too many attempts. Please wait ${n} s and try again.`); };
 const normCode = v => { const s = String(v || '').toUpperCase().replace(/\s+/g, ''); const m = /^BRA-?(\d{4})-?(\d{4})$/.exec(s); return m ? `BRA-${m[1]}-${m[2]}` : s; };
 const phoneHit = (a, b) => a.length >= 7 && b.length >= 7 && (a.endsWith(b) || b.endsWith(a));
 function gpLookSubmit() {
   const L = S.gp.look; L.confirm = false; L.msg = null; L.edit = null; L.tried = true; L.id = null;
-  if (gpLockLeft()) return render();
+  if (gpLockLeft('look')) return render();
   const code = normCode(L.code), r = S.res.get(code), room = normRoom(L.room);
-  if (r && room && normRoom(r.hab) === room) { L.id = code; L.code = code; S.gp.fails = 0; } else gpFail();
+  if (r && room && normRoom(r.hab) === room) { L.id = code; L.code = code; gpOk('look'); } else gpFail('look');
   render();
 }
 function gpHistSubmit() {
   const H = S.gp.hist; H.tried = true; H.id = null;
-  if (gpLockLeft()) return render();
+  if (gpLockLeft('hist')) return render();
   const q = String(H.q || '').trim(), e = /@/.test(q) ? normEmail(q) : '', p = e ? '' : normPhone(q), room = normRoom(H.room);
   const hit = g => (e && (normEmail(g.email) === e || (g.altEmails || []).some(x => normEmail(x) === e))) || (p && (phoneHit(normPhone(g.phone), p) || (g.altPhones || []).some(x => phoneHit(normPhone(x), p))));
   const since = addDays(TODAY, -30);
   const g = room ? [...S.guests.values()].filter(hit).find(g => allRes().some(r => r.guestId === g.id && normRoom(r.hab) === room && r.fecha >= since)) : null;
-  if (g) { H.id = g.id; S.gp.fails = 0; } else gpFail();
+  if (g) { H.id = g.id; gpOk('hist'); } else gpFail('hist');
   render();
 }
 const MENU_EN = { restaurante: ['Restaurant menu', 'Starters, wood-fired mains, sides and desserts.'], vinos: ['Wine list', 'Sparkling, white, rosé and red. Taxes and service included.'], mixologia: ['Cocktail menu', 'Signature and classic cocktails from the bar.'], cortes: ['Premium cuts', 'Select cuts from the grill.'], familyclub: ['Family Club', 'To share as a family: boards, snacks and fresh options.'] };
@@ -4550,9 +4967,9 @@ function opensAt(e) {
 }
 const hhmm = dt => minStr(dt.getHours() * 60 + dt.getMinutes());
 // "el sábado 28 a las 6:00 PM" / "Saturday, Nov 28 at 6:00 PM"
-const atL = dt => { const iso = isoOf(dt), t = hhmm(dt); if (iso === TODAY) return tt(`hoy a las ${t}`, `today at ${t}`); if (iso === addDays(TODAY, 1)) return tt(`mañana a las ${t}`, `tomorrow at ${t}`); return tt(`el ${DIAS_L[dt.getDay()].toLowerCase()} ${dt.getDate()} a las ${t}`, `${DIAS_EN[dt.getDay()]}, ${MES_EN[dt.getMonth()]} ${dt.getDate()} at ${t}`); };
+const atL = dt => { const iso = isoOf(dt), t = hhmm(dt); if (iso === TODAY) return tt(`hoy a las ${t}`, `today at ${t}`); if (iso === addDays(TODAY, 1)) return tt(`mañana a las ${t}`, `tomorrow at ${t}`); return tt(`el ${DIAS_L[dt.getDay()].toLowerCase()} ${dt.getDate()}${dt.getMonth() !== dObj(TODAY).getMonth() ? ' de ' + MESES_L[dt.getMonth()].toLowerCase() : ''} a las ${t}`, `${DIAS_EN[dt.getDay()]}, ${MES_EN[dt.getMonth()]} ${dt.getDate()} at ${t}`); };
 // "sáb 28 · 6:00 PM"
-const atS = dt => { const iso = isoOf(dt), t = hhmm(dt); return iso === TODAY ? tt(`hoy · ${t}`, `today · ${t}`) : `${wdS(iso)} ${dt.getDate()} · ${t}`; };
+const atS = dt => { const iso = isoOf(dt), t = hhmm(dt); return iso === TODAY ? tt(`hoy · ${t}`, `today · ${t}`) : `${wdS(iso)} ${dt.getDate()}${dt.getMonth() !== dObj(TODAY).getMonth() ? ' ' + monS(iso) : ''} · ${t}`; };   // N-04: con el mes si cae en otro
 function gpLive() {
   for (const dt of bookableDates('huesped')) {
     const f = expsOn(dt).filter(x => expOpenOn(x, dt, 'huesped')).map(e => expSpots(e, dt).first).filter(Boolean).sort((a, b) => slotMin(a) - slotMin(b))[0];
@@ -4907,7 +5324,7 @@ function gpBar(step, e, d, pax, ok, label, act) {
   const bump = S.gp.lastTotal !== undefined && S.gp.lastTotal !== total; S.gp.lastTotal = total;
   const bits = step === 0 ? [d.fecha ? esc(dayL(d.fecha)) : ''] : [esc(xShort(e)), esc(dayL(d.fecha)), esc(d.horario || ''), pers(pax)];
   return `<div class="tk-bar">${step > 0 ? `<button class="tk-back" data-act="gp-back" aria-label="${tt('Paso anterior', 'Previous step')}">${ic('left', 'sm')}<\/button>` : ''}
-    <div class="tk-sum"><span class="tk-line">${step === 3 && !d.policy ? tt('Acepta la política', 'Accept the policy') : bits.filter(Boolean).join(' · ') || tt('Elige tu experiencia', 'Choose your experience')}<\/span><b class="tk-total${bump ? ' bump' : ''}">${step === 0 ? tt('Elige una experiencia', 'Choose an experience') : priced ? money(total) + `<small> ${tt('a tu habitación', 'to your room')}<\/small>` : tt('Precio por confirmar', 'Price to be confirmed')}<\/b><\/div>
+    <div class="tk-sum"><span class="tk-line">${step === 3 && !d.policy ? tt('Acepta la política', 'Accept the policy') : bits.filter(Boolean).join(' · ') || tt('Elige tu experiencia', 'Choose your experience')}<\/span><b class="tk-total${bump ? ' bump' : ''}">${step === 0 ? (d.exp && expById(d.exp) ? esc(xShort(expById(d.exp))) : tt('Elige una experiencia', 'Choose an experience')) : priced ? money(total) + `<small> ${tt('a tu habitación', 'to your room')}<\/small>` : tt('Precio por confirmar', 'Price to be confirmed')}<\/b><\/div>
     <button class="btn btn-primary tk-go" data-act="${act}"${ok ? '' : ' disabled'}>${label}${act === 'gp-next' ? ic('chev', 'xs') : ''}<\/button><\/div>`;
 }
 function gpIcs(id) {
@@ -5040,7 +5457,7 @@ const firstName = n => esc(String(n || '').trim().split(/\s+/)[0] || '');
 function gpLookup() {
   const L = S.gp.look, r0 = L.id ? S.res.get(L.id) : null;
   const r = r0 && normRoom(r0.hab) === normRoom(L.room) ? r0 : null;
-  const lock = gpLockLeft();
+  const lock = gpLockLeft('look');
   const open = r && ['pendiente', 'confirmada', 'espera'].includes(r.estado);
   const canCancel = open && startOf(r.fecha, r.horario) > Date.now();
   const late = r && (startOf(r.fecha, r.horario) - Date.now()) < S.cfg.cancelHours * 3600000;
@@ -5052,7 +5469,7 @@ function gpLookup() {
       <button class="btn btn-primary gp-form-go" type="submit"${lock ? ' disabled' : ''}>${tt('Buscar', 'Find')}<\/button><\/form>`;
   const msg = L.msg ? `<div class="callout ${L.msg.ok ? 'ok' : 'bad'}" role="status">${ic(L.msg.ok ? 'check' : 'alert')}<div>${esc(L.msg.t)}<\/div><\/div>` : '';
   if (!r) return `<div class="gp-lead"><h2 class="gp-h">${tt('Tu reserva', 'Your booking')}<\/h2><p>${tt('Escribe el código que recibiste y tu número de habitación.', 'Enter the code you received and your room number.')}<\/p><\/div>${form}
-    ${lock ? `<div class="callout warn" role="alert">${ic('hour')}<div>${gpLockMsg(lock)}<\/div><\/div>` : L.tried ? `<div class="callout bad" role="alert">${ic('alert')}<div>${tt('No encontramos una reserva con ese código y esa habitación.', 'We couldn’t find a booking with that code and room.')}<\/div><\/div>` : ''}${msg}`;
+    ${lock ? `<div class="callout warn" role="alert">${ic('hour')}<div>${gpLockMsg(lock, 'look')}<\/div><\/div>` : L.tried ? `<div class="callout bad" role="alert">${ic('alert')}<div>${tt('No encontramos una reserva con ese código y esa habitación.', 'We couldn’t find a booking with that code and room.')}<\/div><\/div>` : ''}${msg}`;
   const why = !canCancel && ['pendiente', 'confirmada'].includes(r.estado) ? `<p class="gp-note">${tt('Esta reserva ya no se puede cancelar en línea. Habla con el restaurante.', 'This booking can no longer be cancelled online. Please speak with the restaurant.')}<\/p>` : '';
   const confirm = `<div class="confirm-box gp-confirm"><span>${late && t ? tt(`Faltan menos de ${S.cfg.cancelHours} horas: <b>se cargará el 100 % (${money(t)})<\/b> a tu habitación.`, `Less than ${S.cfg.cancelHours} hours to go: <b>100% (${money(t)}) will be charged<\/b> to your room.`) : tt('Puedes cancelar <b>sin cargo<\/b>.', 'You can cancel <b>free of charge<\/b>.')}<\/span><button class="btn btn-ghost" data-act="gp-cancel-no">${tt('Mantener mi reserva', 'Keep my booking')}<\/button><button class="btn btn-danger" data-act="gp-cancel-yes">${tt('Sí, cancelar', 'Yes, cancel')}<\/button><\/div>`;
   return `<div class="gp-lead"><h2 class="gp-h">${tt(`Hola, ${firstName(r.huesped)}`, `Hello, ${firstName(r.huesped)}`)}<\/h2><p>${tt('Esta es tu reserva.', 'Here is your booking.')}<\/p><\/div>
@@ -5063,16 +5480,16 @@ function gpLookup() {
     <button class="s-link gp-other" data-act="gp-look-reset">${tt('Buscar otra reserva', 'Find another booking')}<\/button>`;
 }
 function gpHistory() {
-  const H = S.gp.hist, g = H.id ? S.guests.get(H.id) : null, lock = gpLockLeft();
+  const H = S.gp.hist, g = H.id ? S.guests.get(H.id) : null, lock = gpLockLeft('hist');
   const head = `<div class="gp-lead"><h2 class="gp-h">${tt('Tus visitas', 'Your visits')}<\/h2><p>${tt('Escribe el email o teléfono con el que reservaste y tu habitación.', 'Enter the email or phone you booked with and your room number.')}<\/p><\/div>`;
   if (!g) return head + `<form class="gp-form" data-act-submit="gp-hist" novalidate>
       <div class="field"><label class="label" for="gp-contact">${tt('Email o teléfono', 'Email or phone')}<\/label><input class="input" id="gp-contact" data-bind="gphist.q" value="${esc(H.q || '')}" autocomplete="email" maxlength="120"><\/div>
       <div class="field"><label class="label" for="gp-hroom">${tt('Habitación', 'Room')}<\/label><input class="input" id="gp-hroom" data-bind="gphist.room" value="${esc(H.room || '')}" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="${tt('Ej. 1234', 'e.g. 1234')}"><\/div>
       <button class="btn btn-primary gp-form-go" type="submit"${lock ? ' disabled' : ''}>${tt('Ver', 'View')}<\/button><\/form>
-    ${lock ? `<div class="callout warn" role="alert">${ic('hour')}<div>${gpLockMsg(lock)}<\/div><\/div>` : H.tried ? `<div class="callout bad" role="alert">${ic('alert')}<div>${tt('No encontramos visitas con esos datos.', 'We couldn’t find visits with those details.')}<\/div><\/div>` : ''}`;
+    ${lock ? `<div class="callout warn" role="alert">${ic('hour')}<div>${gpLockMsg(lock, 'hist')}<\/div><\/div>` : H.tried ? `<div class="callout bad" role="alert">${ic('alert')}<div>${tt('No encontramos visitas con esos datos.', 'We couldn’t find visits with those details.')}<\/div><\/div>` : ''}`;
   const st = guestStats(g), rs = st.rs.slice(0, 8);
   const since = st.first ? (S.lang === 'en' ? `${MES_EN[dObj(st.first).getMonth()]} ${st.first.slice(0, 4)}` : `${MES[dObj(st.first).getMonth()]} ${st.first.slice(0, 4)}`) : '';
-  return `<div class="gp-lead"><h2 class="gp-h">${tt(`Hola, ${firstName(g.name)}`, `Hello, ${firstName(g.name)}`)}<\/h2><p>${st.visits ? tt(`${st.visits === 1 ? 'Una visita' : st.visits + ' visitas'}${since ? ' · nos visitas desde ' + since : ''}`, `${st.visits === 1 ? 'One visit' : st.visits + ' visits'}${since ? ' · dining with us since ' + since : ''}`) : tt('Tu primera noche con nosotros está por llegar.', 'Your first night with us is coming up.')}<\/p><\/div>
+  return `<div class="gp-lead"><h2 class="gp-h">${tt(`Hola, ${firstName(g.name)}`, `Hello, ${firstName(g.name)}`)}<\/h2><p>${st.visits ? tt(`${st.visits === 1 ? 'Una visita' : st.visits + ' visitas'}${since ? ' · nos visitas desde ' + since : ''}`, `${st.visits === 1 ? 'One visit' : st.visits + ' visits'}${since ? ' · dining with us since ' + since : ''}`) : st.next ? tt('Tu primera noche con nosotros está por llegar.', 'Your first night with us is coming up.') : tt('Aún no tienes visitas con nosotros.', 'No visits with us yet.')}<\/p><\/div>
     ${st.next ? `<div class="gp-next">${ic('cal', 'sm')}<div><span>${tt('Tu próxima reserva', 'Your next booking')}<\/span><b>${esc(longD(st.next.fecha))} · ${esc(st.next.horario)}<\/b><\/div><button class="btn btn-ghost btn-sm" data-act="gp-manage" data-room="${esc(st.next.hab)}">${tt('Gestionar', 'Manage')}<\/button><\/div>` : ''}
     ${rs.length ? `<ul class="gp-visits">${rs.map(r => `<li><div><b>${esc(fmtD(r.fecha))} · ${esc(r.horario)}<\/b><span>${esc(xShort(expById(r.exp)))} · ${pers(+r.pax || 0)}<\/span><\/div>${estadoL(r.estado)}<\/li>`).join('')}<\/ul>` : ''}`;
 }
@@ -5153,13 +5570,15 @@ async function gpCancel() {
 }
 
 /* ================= Printing & exports ================= */
-const PRINT_CSS = 'body{font:12px/1.45 -apple-system,Segoe UI,Inter,Arial,sans-serif;color:#111;margin:24px}h1{font-size:20px;margin:0}h2{font-size:14px;margin:18px 0 6px;border-bottom:2px solid #111;padding-bottom:4px}.sub{color:#555;margin:2px 0 14px}table{width:100%;border-collapse:collapse;margin-bottom:8px}th,td{border:1px solid #bbb;padding:5px 7px;text-align:left;vertical-align:top}th{background:#eee;font-size:11px;text-transform:uppercase}td.r,th.r{text-align:right}.tot td{font-weight:700;background:#f6f6f6}.sign{display:flex;gap:40px;margin-top:40px}.sign div{flex:1;border-top:1px solid #111;padding-top:4px}@media print{body{margin:10mm}h2{break-after:avoid}tr{break-inside:avoid}}';
+const PRINT_CSS = '*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font:12px/1.45 -apple-system,Segoe UI,Inter,Arial,sans-serif;color:#111;margin:24px}h1{font-size:20px;margin:0}h2{font-size:14px;margin:18px 0 6px;border-bottom:2px solid #111;padding-bottom:4px}.sub{color:#555;margin:2px 0 14px}table{width:100%;border-collapse:collapse;margin-bottom:8px}th,td{border:1px solid #bbb;padding:5px 7px;text-align:left;vertical-align:top}th{background:#eee;font-size:11px;text-transform:uppercase}td.r,th.r{text-align:right}.tot td{font-weight:700;background:#f6f6f6}.up{color:#237049}.down{color:#b1342b}.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 6px}.tile{border:1px solid #bbb;border-radius:6px;padding:8px 10px}.tile.hero{border-color:#b4501c;background:#fbf3ec}.tile>span{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:#555}.tile b{display:block;font-size:18px;margin-top:2px}.tile i{font-style:normal;font-size:11px;color:#555}.hb{display:inline-block;height:9px;background:#b4501c;border-radius:2px;vertical-align:middle}.sign{display:flex;gap:40px;margin-top:40px}.sign div{flex:1;border-top:1px solid #111;padding-top:4px}@media print{body{margin:10mm}h2{break-after:avoid}tr,.tile{break-inside:avoid}}';
 async function printDoc(title, body, filename) {
+  // IN-28: open the window inside the click (Safari blocks pop-ups opened after an await)
+  const w = S.dl ? null : window.open('', '_blank');
+  if (!S.dl && !w) { toast('El navegador bloqueó la ventana de impresión. Permite ventanas emergentes.', true); return; }
+  if (w) try { w.document.write('<!doctype html><meta charset="utf-8"><title>Preparando…<\/title><p style="font:14px system-ui;padding:24px;color:#555">Preparando el documento…<\/p>'); } catch {}
   await loadLogo(); const fav = await faviconData();
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${esc(title)}<\/title>${fav ? `<link rel="icon" type="image/png" href="${fav}">` : ''}<style>${PRINT_CSS}<\/style><\/head><body>${logoData ? `<img src="${logoData}" alt="Brasas" style="height:56px;display:block;margin-bottom:10px">` : ''}${body}<p class="sub" style="margin-top:20px">Generado ${new Date().toLocaleString('es-DO')} · Mixology Bar Brasas<\/p><\/body><\/html>`;
   if (S.dl) { try { await S.dl.save({ filename, data: html }); toast('Archivo listo: ábrelo y usa Imprimir'); } catch (e) { if (e.code !== 'declined') toast('No se pudo generar el archivo', true); } return; }
-  const w = window.open('', '_blank');
-  if (!w) { toast('El navegador bloqueó la ventana de impresión. Permite ventanas emergentes.', true); return; }
   w.document.open(); w.document.write(html); w.document.close(); setTimeout(() => { try { w.focus(); w.print(); } catch {} }, 350);
 }
 function printSheet() {
@@ -5168,31 +5587,89 @@ function printSheet() {
   for (const e of expsOn(d)) {
     const rs = list.filter(r => r.exp === e.id); if (!rs.length) continue;
     body += `<h2>${esc(e.nombre)}<\/h2><table><thead><tr><th>Horario<\/th><th class="r">Reservas<\/th><th class="r">Personas<\/th><th class="r">Amaná<\/th><th class="r">Regulares<\/th><th>Habitaciones<\/th><\/tr><\/thead><tbody>${slotsOf(e).map(s => { const x = rs.filter(r => r.horario === s && r.estado !== 'espera'); if (!x.length) return ''; return `<tr><td>${s}<\/td><td class="r">${x.length}<\/td><td class="r">${x.reduce((a, r) => a + r.pax, 0)}<\/td><td class="r">${x.filter(r => r.tipo === 'amana').reduce((a, r) => a + r.pax, 0)}<\/td><td class="r">${x.filter(r => r.tipo !== 'amana').reduce((a, r) => a + r.pax, 0)}<\/td><td>${x.map(r => `${esc(r.hab)} (${r.pax})`).join(', ')}<\/td><\/tr>`; }).join('')}<\/tbody><\/table>
-      <table><thead><tr><th>Hora<\/th><th>Hab.<\/th><th>Huésped<\/th><th class="r">Pax<\/th><th>Tipo<\/th><th>Estado<\/th><th>Alergias / ocasión / solicitud<\/th><th>Mesa<\/th><\/tr><\/thead><tbody>${rs.sort(sortByTime).map(r => { const g = guestOf(r); return `<tr><td>${r.horario}<\/td><td><b>${esc(r.hab)}<\/b><\/td><td>${esc(r.huesped)}<\/td><td class="r">${r.pax}<\/td><td>${r.tipo === 'amana' ? 'Amaná' : 'Regular'}<\/td><td>${ESTADOS[r.estado]?.l || r.estado}<\/td><td>${[g?.allergies ? 'ALERGIA: ' + esc(g.allergies) : '', r.ocasion ? esc(r.ocasion) : '', r.cortes ? 'Cortes premium' : '', esc(r.notas || '')].filter(Boolean).join(' · ')}<\/td><td>${esc(r.mesa || '')}<\/td><\/tr>`; }).join('')}<\/tbody><\/table>`;
+      <table><thead><tr><th>Hora<\/th><th>Hab.<\/th><th>Huésped<\/th><th class="r">Pax<\/th><th>Tipo<\/th><th>Estado<\/th><th>Alergias / ocasión / solicitud<\/th><th>Mesa<\/th><\/tr><\/thead><tbody>${rs.sort(sortByTime).map(r => { const g = guestOf(r); return `<tr><td>${r.horario}<\/td><td><b>${esc(r.hab)}<\/b><\/td><td>${esc(r.huesped)}<\/td><td class="r">${r.pax}<\/td><td>${r.tipo === 'amana' ? 'Amaná' : 'Regular'}<\/td><td>${ESTADOS[r.estado]?.l || esc(r.estado)}<\/td><td>${[g?.allergies ? 'ALERGIA: ' + esc(g.allergies) : '', r.ocasion ? esc(r.ocasion) : '', r.cortes ? 'Cortes premium' : '', esc(r.notas || '')].filter(Boolean).join(' · ')}<\/td><td>${esc(r.mesa || '')}<\/td><\/tr>`; }).join('')}<\/tbody><\/table>`;
   }
   printDoc('Hoja de servicio ' + d, body, `hoja-servicio-${d}.html`);
 }
 function printClose() {
   const d = S.ui.date, cd = closeData(d), cert = S.cierres.get(d);
   const body = `<h1>Cierre de la noche · ${esc(fmtLong(d))}<\/h1><p class="sub">${cert ? `Certificado el ${new Date(cert.at).toLocaleString('es-DO')} · total certificado ${money(cert.total)}` : 'Sin certificar'}<\/p>
-    <table><tbody><tr><td>Consumo<\/td><td class="r">${money(cd.consumo)}<\/td><\/tr><tr><td>No-show (100%)<\/td><td class="r">${money(cd.noshow)}<\/td><\/tr><tr><td>Cancelación tardía (100%)<\/td><td class="r">${money(cd.tardia)}<\/td><\/tr><tr class="tot"><td>Total a cargar a habitaciones<\/td><td class="r">${money(cd.total)}<\/td><\/tr><\/tbody><\/table>
+    <table><tbody><tr><td>Consumo<\/td><td class="r">${money(cd.consumo)}<\/td><\/tr><tr><td>No-show (100%)<\/td><td class="r">${money(cd.noshow)}<\/td><\/tr><tr><td>Cancelación tardía (100%)<\/td><td class="r">${money(cd.tardia)}<\/td><\/tr><tr class="tot"><td>Total a cargar a habitaciones<\/td><td class="r">${money(cd.total)}<\/td><\/tr>${cd.exo.length ? `<tr><td>Exonerado con motivo (${cd.exo.length})<\/td><td class="r">${money(cd.exo.reduce((a, x) => a + x.was, 0))}<\/td><\/tr>` : ''}<\/tbody><\/table>
     <h2>Cargos por habitación<\/h2><table><thead><tr><th>Hab.<\/th><th>Huésped<\/th><th>Código<\/th><th>Experiencia<\/th><th>Tipo<\/th><th class="r">Pax<\/th><th>Motivo<\/th><th class="r">Cargo<\/th><\/tr><\/thead><tbody>${cd.charged.map(({ r, c }) => `<tr><td><b>${esc(r.hab)}<\/b><\/td><td>${esc(r.huesped)}<\/td><td>${esc(r.codigo)}<\/td><td>${esc(expShort(expById(r.exp)))}<\/td><td>${r.tipo === 'amana' ? 'Amaná' : 'Regular'}<\/td><td class="r">${r.pax}<\/td><td>${esc(c.motivo)}<\/td><td class="r">${money(c.amount)}<\/td><\/tr>`).join('')}<tr class="tot"><td colspan="7">Total<\/td><td class="r">${money(cd.total)}<\/td><\/tr><\/tbody><\/table>
-    <h2>Sin cargo<\/h2><table><thead><tr><th>Hab.<\/th><th>Huésped<\/th><th>Tipo<\/th><th>Estado<\/th><th>Motivo<\/th><\/tr><\/thead><tbody>${cd.lines.filter(x => !x.c.amount).map(({ r, c }) => `<tr><td>${esc(r.hab)}<\/td><td>${esc(r.huesped)}<\/td><td>${r.tipo === 'amana' ? 'Amaná' : 'Regular'}<\/td><td>${ESTADOS[r.estado]?.l || r.estado}<\/td><td>${esc(c.motivo)}<\/td><\/tr>`).join('')}<\/tbody><\/table>
+    <h2>Sin cargo<\/h2><table><thead><tr><th>Hab.<\/th><th>Huésped<\/th><th>Tipo<\/th><th>Estado<\/th><th>Motivo<\/th><\/tr><\/thead><tbody>${cd.lines.filter(x => !x.c.amount).map(({ r, c }) => `<tr><td>${esc(r.hab)}<\/td><td>${esc(r.huesped)}<\/td><td>${r.tipo === 'amana' ? 'Amaná' : 'Regular'}<\/td><td>${ESTADOS[r.estado]?.l || esc(r.estado)}<\/td><td>${esc(closeMotivo(r, c))}<\/td><\/tr>`).join('')}<\/tbody><\/table>
     <div class="sign"><div>Preparado por<\/div><div>Certificado por (gerencia)<\/div><div>Recibido por (front desk)<\/div><\/div>`;
   printDoc('Cierre ' + d, body, `cierre-${d}.html`);
+}
+/* Manager report (DP-16, NG-13, NG-14): the same numbers as the screen, as tiles and tables */
+function reportData() {
+  const { from, to, n } = rptRange(), R = rptStats(from, to), P = rptStats(addDays(from, -n), addDays(from, -1));
+  const days = []; for (let d = from; d <= to; d = addDays(d, 1)) days.push(d);
+  const day = d => { const x = R.rng.filter(r => r.fecha === d), ch = R.charged.filter(c => c.r.fecha === d); return { d, res: x.filter(r => r.estado !== 'espera').length, pax: x.filter(r => r.estado === 'sentada' || r.estado === 'finalizada').reduce((a, r) => a + r.pax, 0), ing: ch.reduce((a, c) => a + c.c.amount, 0), rec: ch.filter(c => c.c.kind === 'noshow' || c.c.kind === 'tardia').reduce((a, c) => a + c.c.amount, 0), cert: S.cierres.has(d) }; };
+  const kpis = [['Recuperado por política', R.rec, P.rec, 'm'], ['Ingresos', R.ingresos, P.ingresos, 'm'], ['Atendidos (personas)', R.pax, P.pax, 'n'], ['Reservas', R.reservas, P.reservas, 'n'], ['No-show (%)', Math.round(R.nsPct * 10) / 10, Math.round(P.nsPct * 10) / 10, 'p'], ['Consumo por comensal regular', Math.round(R.ticket * 100) / 100, Math.round(P.ticket * 100) / 100, 'm']];
+  return { from, to, n, R, P, hasPrev: prevComparable(P, n), days: days.map(day), kpis };
+}
+function printReport() {
+  const X = reportData(), fmt = (v, t) => t === 'm' ? money(v) : t === 'p' ? v + ' %' : String(v);
+  const dv = (a, b, t) => { if (!X.hasPrev || (!b && t !== 'p')) return '—'; const v = t === 'p' ? a - b : (a - b) / b * 100, r = Math.round(v), good = t === 'p' ? r < 0 : r > 0; return `<span class="${r === 0 ? '' : good ? 'up' : 'down'}">${r > 0 ? '▲' : r < 0 ? '▼' : '='} ${Math.abs(r)}${t === 'p' ? ' pts' : ' %'}<\/span>`; };
+  const maxIng = Math.max(1, ...X.days.map(d => d.ing));
+  const perExp = allExps().map(e => ({ e, v: X.R.charged.filter(x => x.r.exp === e.id).reduce((a, x) => a + x.c.amount, 0) })).filter(x => x.v);
+  const body = `<h1>Reporte de gerencia · Brasas<\/h1><p class="sub">${esc(fmtLong(X.from))} – ${esc(fmtLong(X.to))} · ${plural(X.n, 'noche', 'noches')}${X.hasPrev ? ` · comparado con las ${X.n} noches anteriores` : ''}<\/p>
+    <div class="tiles">${X.kpis.map(([l, v, p, t], i) => `<div class="tile${i ? '' : ' hero'}"><span>${esc(l)}<\/span><b>${fmt(v, t)}<\/b><i>${dv(v, p, t)} vs. período anterior<\/i><\/div>`).join('')}<\/div>
+    <h2>Por noche<\/h2><table><thead><tr><th>Fecha<\/th><th class="r">Reservas<\/th><th class="r">Personas<\/th><th class="r">Ingresos<\/th><th style="width:28%"><\/th><th class="r">Recuperado<\/th><th>Cierre<\/th><\/tr><\/thead><tbody>${X.days.map(d => `<tr><td>${esc(fmtDate(d.d))}<\/td><td class="r">${d.res}<\/td><td class="r">${d.pax}<\/td><td class="r">${money(d.ing)}<\/td><td><span class="hb" style="width:${d.ing / maxIng * 100}%"><\/span><\/td><td class="r">${d.rec ? money(d.rec) : '—'}<\/td><td>${d.cert ? 'Certificado' : d.d < TODAY ? 'Pendiente' : 'En curso'}<\/td><\/tr>`).join('')}<tr class="tot"><td>Total<\/td><td class="r">${X.days.reduce((a, d) => a + d.res, 0)}<\/td><td class="r">${X.days.reduce((a, d) => a + d.pax, 0)}<\/td><td class="r">${money(X.R.ingresos)}<\/td><td><\/td><td class="r">${money(X.R.rec)}<\/td><td><\/td><\/tr><\/tbody><\/table>
+    <h2>Ingresos por experiencia y concepto<\/h2><table><tbody>${perExp.map(x => `<tr><td>${esc(x.e.nombre)}<\/td><td class="r">${money(x.v)}<\/td><\/tr>`).join('')}<tr><td>Consumo<\/td><td class="r">${money(X.R.consumo)}<\/td><\/tr><tr><td>No-show (100 %)<\/td><td class="r">${money(X.R.noshow)}<\/td><\/tr><tr><td>Cancelación tardía (100 %)<\/td><td class="r">${money(X.R.tardia)}<\/td><\/tr><tr class="tot"><td>Total<\/td><td class="r">${money(X.R.ingresos)}<\/td><\/tr><\/tbody><\/table>`;
+  printDoc(`Reporte Brasas ${X.from} a ${X.to}`, body, `reporte-brasas-${X.from}-a-${X.to}.html`);
+}
+/* Excel without libraries (NG-14): SpreadsheetML 2003 opens in Excel with several sheets, bold headers and money format */
+function xlsWorkbook(sheets) {
+  const x = v => String(v ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '');
+  const cell = (v, st) => v === null || v === undefined || v === '' ? `<Cell${st ? ` ss:StyleID="${st}"` : ''}/>` : typeof v === 'number' && isFinite(v) ? `<Cell${st ? ` ss:StyleID="${st}"` : ''}><Data ss:Type="Number">${v}<\/Data><\/Cell>` : `<Cell${st && st !== 'm' && st !== 'p' ? ` ss:StyleID="${st}"` : ''}><Data ss:Type="String">${x(v)}<\/Data><\/Cell>`;
+  const ws = s => `<Worksheet ss:Name="${x(s.name).slice(0, 31)}"><Table>${s.cols.map(c => `<Column ss:Width="${c.w || 90}"/>`).join('')}${s.title ? `<Row ss:Height="22"><Cell ss:StyleID="t"><Data ss:Type="String">${x(s.title)}<\/Data><\/Cell><\/Row><Row/>` : ''}<Row>${s.cols.map(c => cell(c.t, 'h')).join('')}<\/Row>${s.rows.map(r => `<Row>${r.map((v, i) => cell(v, (r.st && r.st[i]) || s.cols[i]?.s)).join('')}<\/Row>`).join('')}<\/Table><WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"><FreezePanes/><FrozenNoSplit/><SplitHorizontal>${s.title ? 3 : 1}<\/SplitHorizontal><TopRowBottomPane>${s.title ? 3 : 1}<\/TopRowBottomPane><ActivePane>2<\/ActivePane><\/WorksheetOptions><\/Worksheet>`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<?mso-application progid="Excel.Sheet"?>\n<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles><Style ss:ID="Default" ss:Name="Normal"><Font ss:FontName="Calibri" ss:Size="11"/><\/Style><Style ss:ID="h"><Font ss:FontName="Calibri" ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#B4501C" ss:Pattern="Solid"/><\/Style><Style ss:ID="t"><Font ss:FontName="Calibri" ss:Bold="1" ss:Size="14"/><\/Style><Style ss:ID="b"><Font ss:FontName="Calibri" ss:Bold="1"/><\/Style><Style ss:ID="m"><NumberFormat ss:Format="&quot;$&quot;#,##0.00"/><\/Style><Style ss:ID="bm"><Font ss:FontName="Calibri" ss:Bold="1"/><NumberFormat ss:Format="&quot;$&quot;#,##0.00"/><\/Style><Style ss:ID="p"><NumberFormat ss:Format="0.0&quot; %&quot;"/><\/Style><\/Styles>${sheets.map(ws).join('')}<\/Workbook>`;
+}
+async function saveFile(filename, data, type, okMsg = 'Archivo exportado') {
+  if (S.dl) { try { await S.dl.save({ filename, data }); toast(okMsg); } catch (e) { if (e.code !== 'declined') toast('No se pudo exportar el archivo', true); } return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], { type })); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); toast(okMsg);
+}
+const srcL = s => s === 'huesped' ? 'Portal QR' : s === 'mayordomo' ? 'Mayordomo Amaná' : 'Recepción';
+function exportExcel() {
+  const X = reportData(), R = X.R;
+  const resumen = { name: 'Resumen', title: `Brasas · ${X.from} a ${X.to} (${X.n} noches)`, cols: [{ t: 'Indicador', w: 210 }, { t: 'Período', w: 100 }, { t: 'Período anterior', w: 110 }, { t: 'Variación', w: 80 }],
+    rows: X.kpis.map(([l, v, p, t]) => { const row = [l, v, X.hasPrev ? p : '', X.hasPrev && (p || t === 'p') ? (t === 'p' ? `${Math.round((v - p) * 10) / 10} pts` : `${Math.round((v - p) / p * 100)} %`) : '']; row.st = [t === 'm' ? 'b' : 'b', t === 'm' ? 'm' : t === 'p' ? 'p' : '', t === 'm' ? 'm' : t === 'p' ? 'p' : '', '']; return row; }) };
+  const porDia = { name: 'Por noche', cols: [{ t: 'Fecha', w: 85 }, { t: 'Reservas', w: 70 }, { t: 'Personas', w: 70 }, { t: 'Ingresos', w: 90, s: 'm' }, { t: 'Recuperado por política', w: 150, s: 'm' }, { t: 'Cierre', w: 90 }], rows: X.days.map(d => [d.d, d.res, d.pax, d.ing, d.rec, d.cert ? 'Certificado' : d.d < TODAY ? 'Pendiente' : 'En curso']) };
+  const ventas = { name: 'Ventas', cols: [{ t: 'Fecha', w: 85 }, { t: 'Código', w: 105 }, { t: 'Habitación', w: 70 }, { t: 'Huésped', w: 150 }, { t: 'Experiencia', w: 160 }, { t: 'Tipo', w: 65 }, { t: 'Pax', w: 40 }, { t: 'Estado', w: 80 }, { t: 'Concepto', w: 170 }, { t: 'Cargo', w: 75, s: 'm' }, { t: 'Certificado', w: 75 }],
+    rows: R.charged.slice().sort((a, b) => a.r.fecha.localeCompare(b.r.fecha) || sortByTime(a.r, b.r)).map(({ r, c }) => [r.fecha, r.codigo, r.hab, r.huesped, expById(r.exp).nombre, r.tipo === 'amana' ? 'Amaná' : 'Regular', r.pax, ESTADOS[r.estado]?.l || r.estado, c.motivo, c.amount, S.cierres.has(r.fecha) ? 'Sí' : 'No']) };
+  ventas.rows.push(Object.assign(['Total', '', '', '', '', '', '', '', '', R.ingresos, ''], { st: ['b', '', '', '', '', '', '', '', '', 'bm', ''] }));
+  const reservas = { name: 'Reservas', cols: [{ t: 'Código', w: 105 }, { t: 'Fecha', w: 85 }, { t: 'Hora', w: 65 }, { t: 'Experiencia', w: 160 }, { t: 'Tipo', w: 65 }, { t: 'Habitación', w: 70 }, { t: 'Huésped', w: 150 }, { t: 'Pax', w: 40 }, { t: 'Estado', w: 80 }, { t: 'Origen', w: 110 }, { t: 'Ocasión', w: 90 }, { t: 'Tarifa', w: 70, s: 'm' }, { t: 'Cargo', w: 70, s: 'm' }, { t: 'Concepto', w: 170 }],
+    rows: R.lines.slice().sort((a, b) => a.r.fecha.localeCompare(b.r.fecha) || sortByTime(a.r, b.r)).map(({ r, c }) => [r.codigo, r.fecha, r.horario, expById(r.exp).nombre, r.tipo === 'amana' ? 'Amaná' : 'Regular', r.hab, r.huesped, r.pax, ESTADOS[r.estado]?.l || r.estado, srcL(r.source), r.ocasion || '', tarifaOf(r), c.amount, closeMotivo(r, c)]) };
+  const gs = {}; for (const { r, c } of R.lines) { const g = gs[r.guestId] = gs[r.guestId] || { r, n: 0, v: 0, ch: 0 }; g.n++; if (r.estado === 'sentada' || r.estado === 'finalizada') g.v++; g.ch += c.amount; }
+  const huespedes = { name: 'Huéspedes', cols: [{ t: 'ID', w: 85 }, { t: 'Nombre', w: 150 }, { t: 'Email', w: 190 }, { t: 'Teléfono', w: 120 }, { t: 'Reservas', w: 65 }, { t: 'Visitas', w: 55 }, { t: 'Cargos', w: 75, s: 'm' }, { t: 'Alergias', w: 150 }, { t: 'VIP', w: 40 }, { t: 'Amaná', w: 50 }],
+    rows: Object.entries(gs).sort((a, b) => b[1].v - a[1].v || b[1].ch - a[1].ch).map(([id, x]) => { const g = S.guests.get(id); return [id, g?.name || x.r.huesped, g?.email || '', g?.phone || '', x.n, x.v, x.ch, g?.allergies || '', g?.vip ? 'Sí' : '', g?.amana ? 'Sí' : '']; }) };
+  saveFile(`brasas-reporte-${X.from}-a-${X.to}.xls`, xlsWorkbook([resumen, porDia, ventas, reservas, huespedes]), 'application/vnd.ms-excel', 'Excel exportado');
 }
 async function saveCsv(filename, cols, rows) {
   // Guest-typed text starting with = + - @ would run as a formula in Excel/Sheets; the leading ' keeps it as text.
   const q = v => { let s = String(v ?? ''); if (/^[=+\-@\t\r]/.test(s) && !/^-?\d+(\.\d+)?$/.test(s)) s = "'" + s; return /[",\n;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
-  const data = '\uFEFF' + [cols.join(',')].concat(rows.map(r => r.map(q).join(','))).join('\r\n');
-  if (S.dl) { try { await S.dl.save({ filename, data }); toast('Archivo exportado'); } catch (e) { if (e.code !== 'declined') toast('No se pudo exportar el archivo', true); } return; }
-  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], { type: 'text/csv' })); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); toast('Archivo exportado');
+  return saveFile(filename, '﻿' + [cols.join(',')].concat(rows.map(r => r.map(q).join(','))).join('\r\n'), 'text/csv');
 }
-function exportCsv() { saveCsv(`brasas-reservas-${S.ui.rf.scope === 'dia' ? S.ui.date : TODAY}.csv`, ['Código','Fecha','Hora','Experiencia','Tipo','Habitación','Huésped','ID huésped','Email','Teléfono','Pax','Estado','Tarifa','Cargo','Motivo','Ocasión','Alergias','Solicitud','Origen'], filteredRes().map(r => { const g = guestOf(r), c = chargeOf(r); return [r.codigo, r.fecha, r.horario, expById(r.exp).nombre, r.tipo === 'amana' ? 'Amaná' : 'Regular', r.hab, r.huesped, r.guestId, g?.email, g?.phone, r.pax, ESTADOS[r.estado]?.l, tarifaOf(r), c.amount, c.motivo, r.ocasion, g?.allergies, r.notas, r.source]; })); }
-function exportSales() { const { from, to } = S.ui.rpt; saveCsv(`brasas-ventas-${from}-a-${to}.csv`, ['Fecha','Código','Habitación','Huésped','Experiencia','Tipo','Pax','Estado','Motivo','Cargo','Certificado'], allRes().filter(r => r.fecha >= from && r.fecha <= to).map(r => ({ r, c: chargeOf(r) })).filter(x => x.c.amount > 0).sort((a, b) => a.r.fecha.localeCompare(b.r.fecha)).map(({ r, c }) => [r.fecha, r.codigo, r.hab, r.huesped, expById(r.exp).nombre, r.tipo === 'amana' ? 'Amaná' : 'Regular', r.pax, ESTADOS[r.estado]?.l, c.motivo, c.amount, S.cierres.has(r.fecha) ? 'Sí' : 'No'])); }
+function exportCsv() { saveCsv(`brasas-reservas-${S.ui.rf.scope === 'dia' ? S.ui.date : TODAY}.csv`, ['Código','Fecha','Hora','Experiencia','Tipo','Habitación','Huésped','ID huésped','Email','Teléfono','Pax','Estado','Tarifa','Cargo','Motivo','Ocasión','Alergias','Solicitud','Origen'], filteredRes().map(r => { const g = guestOf(r), c = chargeOf(r); return [r.codigo, r.fecha, r.horario, expById(r.exp).nombre, r.tipo === 'amana' ? 'Amaná' : 'Regular', r.hab, r.huesped, r.guestId, g?.email, g?.phone, r.pax, ESTADOS[r.estado]?.l, tarifaOf(r), c.amount, closeMotivo(r, c), r.ocasion, g?.allergies, r.notas, srcL(r.source)]; })); }
+function exportSales() { const { from, to } = rptRange(); saveCsv(`brasas-ventas-${from}-a-${to}.csv`, ['Fecha','Código','Habitación','Huésped','Experiencia','Tipo','Pax','Estado','Motivo','Cargo','Certificado'], allRes().filter(r => r.fecha >= from && r.fecha <= to).map(r => ({ r, c: chargeOf(r) })).filter(x => x.c.amount > 0).sort((a, b) => a.r.fecha.localeCompare(b.r.fecha)).map(({ r, c }) => [r.fecha, r.codigo, r.hab, r.huesped, expById(r.exp).nombre, r.tipo === 'amana' ? 'Amaná' : 'Regular', r.pax, ESTADOS[r.estado]?.l, c.motivo, c.amount, S.cierres.has(r.fecha) ? 'Sí' : 'No'])); }
+/* Front desk / PMS charges of the night (NG-15): one row per room charge, ready to post */
+function exportPms() {
+  const d = S.ui.date, cd = closeData(d), cert = S.cierres.has(d), KIND = { consumo: 'Consumo', noshow: 'No-show', tardia: 'Cancelación tardía' };
+  if (!cd.charged.length) return toast('No hay cargos este día', true);
+  saveCsv(`cargos-front-desk-${d}.csv`, ['Fecha','Habitación','Huésped','Monto','Código de transacción','Descripción','Referencia','Certificado'], cd.charged.map(({ r, c }) => [d, r.hab, r.huesped, c.amount, S.cfg.pmsCode || '', `${expShort(expById(r.exp))} · ${r.cortes && c.kind === 'consumo' ? 'Consumo + cortes premium' : KIND[c.kind] || c.motivo} · ${r.codigo}`, r.codigo, cert ? 'Sí' : 'No']));
+  if (!cert) toast('Ojo: esta noche aún no está certificada', true);
+}
 async function copyText(t) {
   try { await navigator.clipboard.writeText(t); toast('Texto copiado'); }
   catch { const ta = document.createElement('textarea'); ta.value = t; ta.style.cssText = 'position:fixed;left:-9999px'; document.body.appendChild(ta); ta.select(); let ok = false; try { ok = document.execCommand('copy'); } catch {} ta.remove(); toast(ok ? 'Texto copiado' : 'Selecciona y copia el texto manualmente', !ok); }
+}
+async function copyMail(m) {
+  const text = `Para: ${m.to}\nAsunto: ${m.subject}\n\n${m.body}`;
+  if ((S.ui.mailView || 'html') === 'html' && window.ClipboardItem && navigator.clipboard?.write) {
+    try { await loadLogo(); const html = mailHtml(m, logoData || ''); await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([text], { type: 'text/plain' }) })]); toast('Correo copiado con formato: pégalo en tu correo'); return; } catch {}
+  }
+  copyText(text);
 }
 
 /* ================= Actions ================= */
@@ -5281,8 +5758,8 @@ async function mergeGuests(keepId, dropId) {
 async function certify() {
   const d = S.ui.date, cd = closeData(d);
   if (cd.pending.length) return toast('Hay reservas abiertas. Ciérralas antes de certificar.', true);
-  const doc = { fecha: d, total: cd.total, consumo: cd.consumo, noshow: cd.noshow, tardia: cd.tardia, count: cd.charged.length, lines: cd.charged.map(({ r, c }) => ({ codigo: r.codigo, hab: r.hab, huesped: r.huesped, exp: r.exp, monto: c.amount, motivo: c.motivo })), by: S.me, at: new Date().toISOString() };
-  await run(() => put('cierres', d, doc), `Noche certificada · ${money(cd.total)}`);
+  const who = S.meProfile?.name || ROLES[S.role] || 'Equipo Brasas';
+  await run(() => put('cierres', d, { ...cierreDoc(d, cd, S.me), resumen: nightSummary(d, who) }), `Noche certificada · ${money(cd.total)} · resumen listo en Correos`);
 }
 function setPath(obj, path, v) { const ks = path.split('.'); let o = obj; for (let i = 0; i < ks.length - 1; i++) o = o[/^\d+$/.test(ks[i]) ? +ks[i] : ks[i]]; o[ks[ks.length - 1]] = v; }
 function getPath(obj, path) { return path.split('.').reduce((o, k) => o?.[/^\d+$/.test(k) ? +k : k], obj); }
@@ -5335,7 +5812,7 @@ const A = {
   'ask-confirm': el => { S.ui.confirm = el.dataset.c; render(); },
   'cancel-confirm': () => { S.ui.confirm = null; render(); },
   merge: el => { const { keep, drop } = el.dataset; S.ui.confirm = null; run(() => mergeGuests(keep, drop), `Perfiles unidos · ${drop} ahora es parte de ${keep}`).then(() => { S.ui.drawer = { t: 'guest', id: keep }; render(); }); },
-  mesa: el => { const r = S.res.get(el.dataset.id); if (!r) return; const v = $('#mesa-' + CSS.escape(r.codigo)).value.trim(); if (v === (r.mesa || '')) return toast('Sin cambios en la mesa'); run(() => patch('reservas', r.codigo, withHist(r, { mesa: v }, v ? `Mesa asignada: ${v}` + (r.mesa ? ` (antes ${r.mesa})` : '') : 'Mesa borrada')), v ? 'Mesa asignada: ' + v : 'Mesa borrada'); },
+  mesa: el => { const r = S.res.get(el.dataset.id); if (!r || !canOperate(r)) return; const v = $('#mesa-' + CSS.escape(r.codigo)).value.trim(); if (v === (r.mesa || '')) return toast('Sin cambios en la mesa'); run(() => patch('reservas', r.codigo, withHist(r, { mesa: v }, v ? `Mesa asignada: ${v}` + (r.mesa ? ` (antes ${r.mesa})` : '') : 'Mesa borrada')), v ? 'Mesa asignada: ' + v : 'Mesa borrada'); },
   rf: el => { S.ui.rf[el.dataset.k] = el.dataset.v; S.ui.rfMore = 0; render(); },
   gf: el => { S.ui.gf.f = el.dataset.v; S.ui.gfMore = 0; render(); },
   'rf-more': () => { S.ui.rfMore = (S.ui.rfMore || PAGE) + PAGE; render(); },
@@ -5346,12 +5823,36 @@ const A = {
   rpt: el => { S.ui.rpt = { from: addDays(TODAY, -(+el.dataset.n - 1)), to: TODAY }; render(); },
   csv: () => exportCsv(),
   'csv-sales': () => exportSales(),
+  'xls-report': () => exportExcel(),
+  'print-report': () => printReport(),
   'print-sheet': () => printSheet(),
   'print-close': () => printClose(),
+  'close-pms': () => exportPms(),
+  'cierre-open': () => { S.ui.cierreOpen = !S.ui.cierreOpen; render(); },
   certify: () => certify(),
-  exonerate: el => { const r = S.res.get(el.dataset.id); if (r) run(() => patch('reservas', r.codigo, withHist(r, { cargoExonerado: !r.cargoExonerado, exoneradoBy: S.me }, r.cargoExonerado ? 'Cargo restablecido' : 'Cargo exonerado')), r.cargoExonerado ? 'Cargo restablecido' : 'Cargo exonerado'); },
-  'mail-copy': el => { const m = S.mail.get(el.dataset.id); if (m) copyText(`Para: ${m.to}\nAsunto: ${m.subject}\n\n${m.body}`); },
-  'mail-sent': el => { const m = S.mail.get(el.dataset.id); if (m) run(() => patch('mail', m.id, { status: m.status === 'enviado' ? 'pendiente' : 'enviado', sentAt: m.status === 'enviado' ? null : new Date().toISOString(), sentBy: S.me }), m.status === 'enviado' ? 'Marcado como pendiente' : 'Marcado como enviado'); },
+  'demo-reset': () => resetDemo(),
+  exonerate: el => {
+    const r = S.res.get(el.dataset.id); if (!r || !canExonerate()) return;
+    if (r.cargoExonerado) return run(() => patch('reservas', r.codigo, withHist(r, { cargoExonerado: false, exoneradoMotivo: '', exoneradoBy: S.me }, 'Cargo restablecido' + (r.exoneradoMotivo ? ` (se había exonerado por: ${r.exoneradoMotivo})` : ''))), 'Cargo restablecido');
+    S.ui.confirm = 'exo:' + r.codigo; render(); setTimeout(() => document.getElementById('exo-' + r.codigo)?.focus(), 0);
+  },
+  'exo-ok': el => {
+    const r = S.res.get(el.dataset.id), inp = document.getElementById('exo-' + el.dataset.id), why = (inp?.value || '').trim();
+    if (!r || !canExonerate()) return;
+    if (why.length < 3) { toast('Escribe el motivo de la exoneración', true); inp?.focus(); return; }
+    const amt = chargeOf(r).amount; S.ui.confirm = null;
+    run(() => patch('reservas', r.codigo, withHist(r, { cargoExonerado: true, exoneradoMotivo: why, exoneradoBy: S.me, exoneradoAt: new Date().toISOString() }, `Cargo exonerado (${money(amt)}): ${why}`)), `Cargo exonerado · ${money(amt)}`);
+  },
+  'mail-copy': el => { const m = mailById(el.dataset.id); if (m) copyMail(m); },
+  'mail-sent': el => {
+    const m = mailById(el.dataset.id); if (!m) return;
+    const to = m.status === 'enviado' ? 'pendiente' : 'enviado', stamp = { status: to, sentAt: to === 'enviado' ? new Date().toISOString() : null, sentBy: S.me };
+    const c = m.kind === 'resumen' ? S.cierres.get(m.fecha) : null;
+    run(() => c ? patch('cierres', m.fecha, { resumen: { ...c.resumen, ...stamp } }) : patch('mail', m.id, stamp), to === 'enviado' ? 'Marcado como enviado' : 'Marcado como pendiente');
+  },
+  'mail-view': el => { S.ui.mailView = el.dataset.v; render(); },
+  'mail-open': el => { const id = el.dataset.id, cur = S.ui.mailOpen || mailList().filter(m => S.ui.mf === 'todos' || m.status === S.ui.mf)[0]?.id; S.ui.mailOpen = cur === id ? '-' : id; render(); },
+  'mail-cierre': el => { S.ui.date = el.dataset.v; go('cierre'); },
   'note-add': el => postNote(el.dataset.key),
   'note-resolve': el => { const n = S.notes.get(el.dataset.id); if (n) run(() => patch('notes', n.id, { resolved: !n.resolved, resolvedBy: S.me, resolvedAt: new Date().toISOString() }), n.resolved ? 'Nota reabierta' : 'Marcada como resuelta'); },
   'note-pin': el => { const n = S.notes.get(el.dataset.id); if (n) run(() => patch('notes', n.id, { pinned: !n.pinned }), n.pinned ? 'Nota desfijada' : 'Nota fijada'); },
@@ -5366,9 +5867,9 @@ const A = {
   'nr-new': () => { const nr = S.ui.nr, q = nr.q.trim(); Object.assign(nr, { newG: true, name: /@/.test(q) || /^\+?[\d\s()-]{6,}$/.test(q) ? '' : q, email: /@/.test(q) ? q : '', phone: /^\+?[\d\s()-]{6,}$/.test(q) ? q : '' }); render(); },
   'nr-clear': () => { Object.assign(S.ui.nr, { gid: null, newG: false }); render(); },
   'nr-pax': el => { const nr = S.ui.nr; nr.pax = Math.max(1, Math.min(25, (+nr.pax || 1) + +el.dataset.d)); fixSlot(); render(); },
-  'nr-slot': el => { S.ui.nr.horario = el.dataset.s; render(); },
+  'nr-slot': el => { S.ui.nr.horario = el.dataset.s; S.ui.nr.slotBad = ''; render(); },
   'nr-tipo': el => { if (!canBook(el.dataset.v)) return; S.ui.nr.tipo = el.dataset.v; fixSlot(); render(); },
-  'nr-exp': el => { S.ui.nr.exp = el.dataset.v; S.ui.nr.horario = ''; render(); },
+  'nr-exp': el => { S.ui.nr.exp = el.dataset.v; S.ui.nr.horario = ''; S.ui.nr.slotBad = ''; render(); },
   'nr-espera': el => { S.ui.nr.espera = el.checked; fixSlot(); render(); },
   'nr-cortes': el => { S.ui.nr.cortes = el.checked; render(); },
   'nr-save': () => saveNR(),
@@ -5414,7 +5915,7 @@ const A = {
   'gp-al': el => { const c = S.gp.d.alChips = S.gp.d.alChips || [], v = el.dataset.v, i = c.indexOf(v); if (i >= 0) c.splice(i, 1); else c.push(v); render(); },
   'gp-cortes-t': () => { S.gp.d.cortes = !S.gp.d.cortes; render(); },
   'gp-ics': el => gpIcs(el.dataset.id),
-  'gp-copy': async el => { try { await navigator.clipboard.writeText(el.dataset.v); toast('Código copiado'); } catch { toast('Tu código: ' + el.dataset.v); } },
+  'gp-copy': async el => { try { await navigator.clipboard.writeText(el.dataset.v); toast(ui('Código copiado', 'Code copied')); } catch { toast(ui('Tu código: ', 'Your code: ') + el.dataset.v); } },
   'gp-exp': el => { Object.assign(S.gp, { tab: 'reservar', step: 0, done: null, err: '' }); Object.assign(S.gp.d, { exp: el.dataset.v, fecha: el.dataset.d, horario: '' }); render(); },
   'gp-menu': el => { S.gp.menu = S.gp.menu === el.dataset.v ? '' : el.dataset.v; S.gp.menuAnim = !!S.gp.menu; render(); if (S.gp.menu) setTimeout(() => $('#mopen')?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }), 60); },
   'gp-zoom': el => { if (galDragged) return; if (!S.gp.zoom) gpPush({ lb: 1 }); S.gp.zoom = { src: el.dataset.src, alt: el.dataset.alt || '' }; render(); },
@@ -5459,7 +5960,15 @@ async function saveConfig() {
   const ok = await run(() => saveCfg(c), 'Configuración guardada');
   if (ok) { S.ui.cfgDraft = null; S.ui.cfgBase = null; render(); }
 }
-function fixSlot() { const nr = S.ui.nr; if (!nr.horario) return; const e = expById(nr.exp); const st = slotState(e, nr.fecha, nr.horario, nr.tipo === 'amana' ? 'amana' : 'regular', +nr.pax || 1, S.role); if (!st.ok && !(nr.espera && st.full)) nr.horario = ''; }
+function fixSlot() {
+  const nr = S.ui.nr; nr.slotBad = ''; if (!nr.horario) return;
+  const e = expById(nr.exp), ed = nr.editId ? S.res.get(nr.editId) : null, others = ed ? allRes().filter(x => x.codigo !== ed.codigo) : undefined;
+  const pax = +nr.pax || 1, st = slotState(e, nr.fecha, nr.horario, nr.tipo === 'amana' ? 'amana' : 'regular', pax, S.role, others);
+  if (st.ok || (nr.espera && st.full)) return;
+  // N-03 (personal): al editar no se quita en silencio la hora de la reserva; se conserva marcada y se explica qué hacer
+  if (ed) { nr.slotBad = st.full && st.av > 0 ? `A las ${nr.horario} solo caben ${st.av}. Baja a ${st.av} o elige otro horario.` : `A las ${nr.horario} ya no se puede (${String(st.why).toLowerCase()}). Elige otro horario.`; return; }
+  nr.horario = '';
+}
 
 /* ================= Events ================= */
 document.addEventListener('click', e => {
@@ -5554,10 +6063,23 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden && ro
 /* ================= Boot ================= */
 function startDemo() {
   S.mode = 'demo';
+  Object.assign(S.cfg, clone(DEMO_CFG)); Object.assign(nameCache, DEMO_STAFF);
   const d = buildDemo(TODAY);
-  d.guests.forEach(g => S.guests.set(g.id, g)); d.res.forEach(r => S.res.set(r.codigo, normRes(r))); d.notes.forEach(n => S.notes.set(n.id, n)); d.mail.forEach(m => S.mail.set(m.id, m));
-  S.me = 'demo'; nameCache.demo = 'Tú'; S.cfgReady = true;
+  d.guests.forEach(g => S.guests.set(g.id, g)); d.res.forEach(r => S.res.set(r.codigo, normRes(r))); d.notes.forEach(n => S.notes.set(n.id, n)); d.mail.forEach(m => S.mail.set(m.id, m)); d.cierres.forEach(c => S.cierres.set(c.fecha, c));
+  S.me = 'demo'; nameCache.demo = 'Tú'; S.cfgReady = true; bumpData();
+  const last = [...S.cierres.keys()].sort().pop();   // the manager's summary of the last certified night (NG-16)
+  if (last) { const c = S.cierres.get(last); S.cierres.set(last, { ...c, resumen: nightSummary(last, DEMO_STAFF[c.by] || 'Gerencia', c.at) }); }
   render();
+}
+function resetDemo() {
+  if (S.mode !== 'demo') return;
+  [S.res, S.guests, S.notes, S.mail, S.cierres].forEach(m => m.clear());
+  S.demoSeq = {}; S.cfg = mergeCfg(null);
+  Object.assign(S.ui, { drawer: null, modal: null, nr: null, nrErr: '', confirm: null, cfgDraft: null, cfgErr: '', dataOp: null, date: svcDay() });
+  S.gp.sheet = null; S.gp.done = null;
+  QR_SEEN.clear(); qrInit = false;   // N-01: los códigos nuevos de la demo no son reservas nuevas por QR
+  startDemo(); window.scrollTo(0, 0);
+  toast('Demo reiniciada con los datos de ejemplo de hoy');
 }
 async function boot() {
   let saved = null; try { saved = localStorage.getItem(THEME_KEY); } catch {}
@@ -5602,34 +6124,117 @@ function subscribeAll(db) {
   const subCfg = () => db.doc('config/settings').onSnapshot(snap => { S.cfg = mergeCfg(snap.exists ? snap.data() : null); S.cfgReady = true; tries.cfg = 0; setErr('cfg', null); render(); }, onErr('cfg', () => subCfg(), () => { S.cfgReady = true; }));
   subCfg();
 }
-/* ===== Solo demo: cambiar de usuario sin recargar (los datos de prueba se conservan) ===== */
+/* ===== Solo demo pública: "Viendo como", recorrido de 4 pasos, pistas de prueba y llamado a la acción =====
+   Va dentro del IIFE de la app (antes de boot()); usa sus funciones. Nada de esto existe en la app real. */
+const DEMO_CONTACT = "";   // build_demo.py pone aquí el enlace del dueño (wa.me o mailto); vacío = sin llamado a la acción
 const DSW = [
-  ['guest', 'Huésped', 'Guest', 'Reserva una mesa desde el QR', 'Book a table from the QR'],
-  ['host', 'Recepción', 'Front desk', 'Recibe y gestiona las reservas', 'Manages the bookings'],
-  ['mayordomo', 'Amaná (mayordomo)', 'Amaná (butler)', 'Reserva para clientes Amaná', 'Books for Amaná guests'],
-  ['admin', 'Administrador', 'Administrator', 'Reportes y configuración', 'Reports and settings'],
+  ['guest', 'Huésped', 'Guest', 'Reserva desde el QR, como tu huésped', 'Book from the QR, like your guest'],
+  ['host', 'Recepción', 'Front desk', 'Llegadas, alertas y cierre de la noche', 'Arrivals, alerts and night close'],
+  ['mayordomo', 'Amaná (mayordomo)', 'Amaná (butler)', 'Cupo exclusivo de 15 por horario', 'Exclusive quota of 15 per time slot'],
+  ['admin', 'Administrador', 'Manager', 'Dinero recuperado, reportes y ajustes', 'Recovered revenue, reports and settings'],
 ];
-function demoSw() {
-  const box = $('#demo-sw'); if (!box) return;
-  const portal = S.ui.view === 'portal', cur = portal ? 'guest' : S.role;
-  box.dataset.v = portal ? 'portal' : 'staff';
-  const row = DSW.find(r => r[0] === cur);
-  box.querySelector('.dsw-pill').innerHTML = `<span class="dsw-long">${tt('Versión de prueba · Viendo como', 'Test version · Viewing as')}: </span>${tt(row[1], row[2])} ▴`;
-  box.querySelector('.dsw-menu').innerHTML = DSW.map(r => `<button type="button" class="dsw-opt" data-u="${r[0]}" aria-pressed="${r[0] === cur}">${tt(r[1], r[2])}<small>${tt(r[3], r[4])}</small></button>`).join('')
-    + `<div class="dsw-note">${tt('Versión de prueba: no hace reservas reales. Los datos se borran al recargar.', 'Test version: no real bookings. Data is cleared on reload.')}</div>`;
-}
-function demoSwOpen(open) { const b = $('#demo-sw'); b.querySelector('.dsw-menu').hidden = !open; b.querySelector('.dsw-pill').setAttribute('aria-expanded', String(open)); }
-document.addEventListener('click', e => {
-  if (!e.target.closest('#demo-sw')) return demoSwOpen(false);
-  e.stopPropagation();
-  const opt = e.target.closest('.dsw-opt');
-  if (!opt) { if (e.target.closest('.dsw-pill')) demoSwOpen($('#demo-sw .dsw-menu').hidden); return; }
-  demoSwOpen(false);
-  const u = opt.dataset.u;
+const TOUR = [
+  { u: 'guest', t: ['Reserva como huésped', 'Book as a guest'], p: ['Elige experiencia, hora y personas. Usa cualquier habitación, por ejemplo 3120. Así reserva tu huésped desde el QR de la mesa.', 'Pick an experience, time and party size. Any room works, e.g. 3120. This is what your guest sees from the table QR.'], go: ['Abrir la reserva', 'Start booking'] },
+  { u: 'host', t: ['Mírala llegar a Recepción', 'See it reach the front desk'], p: ['La reserva entra sola en la agenda del día, con alergias y ocasión. Toca la fila para ver la ficha y el historial.', 'The booking lands on today’s agenda with allergies and occasion. Tap the row for the guest card and history.'], go: ['Ver en Recepción', 'Open front desk'] },
+  { u: 'admin', t: ['Cierra la noche', 'Close the night'], p: ['Anoche quedó lista: el no-show y la cancelación tardía se cobran solos. Revisa y toca “Certificar ingresos”.', 'Last night is ready: no-shows and late cancellations are charged automatically. Review and tap “Certificar ingresos”.'], go: ['Ir al cierre de anoche', 'Go to last night’s close'] },
+  { u: 'admin', t: ['Mira tu dinero', 'See your money'], p: ['“Recuperado por política” es lo que antes se perdía. Exporta a Excel o PDF para el comité.', '“Recuperado por política” is revenue you used to lose. Export to Excel or PDF for your team.'], go: ['Ver reportes', 'Open reports'] },
+];
+const DT = { open: false, step: -1, since: 0, seen: new Set() };
+const dsw = () => $('#demo-sw');
+function demoUnlock(r) { if (pinOf(r) && !roleUnlocked(r)) { const m = unlockedMap(); m[r] = pinOf(r).slice(0, 16); saveUnlocked(m); } }
+function demoAs(u) {
+  const fromSheet = S.ui.view === 'portal' && (S.gp.sheet || S.gp.zoom);
   S.gp.sheet = null; S.gp.zoom = null;
-  if (u === 'guest') { S.ui.drawer = null; S.ui.modal = null; S.ui.nr = null; return A.portal(); }
-  setRole(u); go(u === 'mayordomo' ? 'amana' : 'servicio');
+  if (fromSheet && u !== 'guest') {   // al pasar al personal, el portal ya no se pinta: cerrar aquí la hoja y soltar el scroll del body (bk-lock)
+    const bk = $('#bk'); if (bk) { bk.classList.remove('on'); bk.hidden = true; } lastGpKey = '';
+    const lb = $('#s-lb'); if (lb) lb.innerHTML = '';
+    lockScroll(false);
+  } S.ui.drawer = null; S.ui.modal = null; S.ui.nr = null;
+  if (u === 'guest') return A.portal();
+  demoUnlock(u); if (S.role !== u) setRole(u, { silent: true });   // la píldora ya dice el rol: sin aviso extra
+  go(u === 'mayordomo' ? 'amana' : 'servicio');
+}
+const newQr = () => allRes().filter(r => r.source === 'huesped' && new Date(r.createdAt).getTime() >= DT.since).sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] || null;
+function tourGo(i) {
+  const st = TOUR[i]; if (!st) return;
+  DT.step = i; DT.open = true;
+  if (i === 0) { demoAs('guest'); setTimeout(() => openSheet('book'), 120); return; }
+  if (i === 1) {
+    const q = newQr(); if (q) QR_SEEN.add(q.codigo);   // un solo aviso para este evento: el del recorrido (no el de NG-19)
+    demoAs('host'); S.ui.date = svcDay(); S.ui.exp = 'todas'; render();
+    const r = newQr();
+    if (r) {
+      if (r.fecha !== S.ui.date) { S.ui.date = r.fecha; render(); }
+      setTimeout(() => { document.querySelectorAll(`[data-id="${CSS.escape(r.codigo)}"]`).forEach(el => { if (el.matches('.row, .sx-row, tr, .card, [data-act="open-res"]')) { el.classList.add('dsw-flash'); if (!el.closest('#layer')) el.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } }); toast(`Reserva entrante por QR · Hab. ${r.hab} · ${r.horario} · ${plural(r.pax, 'persona', 'personas')}`); if (matchMedia('(max-width: 640px)').matches) { DT.open = false; demoSw(); } }, 160);   // en el celular, la tarjeta se pliega para no tapar la fila
+    }
+    return;
+  }
+  demoAs('admin');
+  if (i === 2) { S.ui.date = addDays(svcDay(), -1); go('cierre'); }
+  else go('reportes');
+}
+function demoSw() {
+  const box = dsw(); if (!box) return;
+  const portal = S.ui.view === 'portal', cur = portal ? 'guest' : S.role, en = portal && S.lang === 'en', T = (es, e) => en ? e : es;
+  // never over a dialog, the booking sheet or the lightbox: they own the bottom of the screen
+  box.hidden = !!(S.gp.sheet || S.gp.zoom || (!portal && (S.ui.drawer || S.ui.modal)));
+  box.dataset.v = portal ? 'portal' : 'staff';
+  if (DT.step === 0 && newQr()) DT.step = 1;   // the guest just booked: next stop, the front desk
+  const row = DSW.find(r => r[0] === cur) || DSW[0], card = box.querySelector('.dsw-card'), pill = box.querySelector('.dsw-pill');
+  const tourOn = DT.step >= 0;
+  pill.innerHTML = tourOn ? `<i>${T('Paso', 'Step')} ${DT.step + 1}/4<\/i>${esc(T(TOUR[DT.step].t[0], TOUR[DT.step].t[1]))} <span class="dsw-car">${DT.open ? '▾' : '▴'}<\/span>` : `<i>Demo<\/i><span class="dsw-long">${T('Viendo como', 'Viewing as')}: <\/span>${esc(T(row[1], row[2]))} <span class="dsw-car">${DT.open ? '▾' : '▴'}<\/span>`;
+  pill.setAttribute('aria-expanded', String(DT.open));
+  card.hidden = !DT.open;
+  if (!DT.open) return;
+  const cta = DEMO_CONTACT ? `<a class="dsw-cta" href="${esc(DEMO_CONTACT)}" target="_blank" rel="noopener" data-dsw="cta">${T('¿Lo quieres en tu hotel? Escríbenos', 'Want it for your hotel? Contact us')}<\/a>` : '';
+  if (tourOn) {
+    const st = TOUR[DT.step], last = DT.step === TOUR.length - 1;
+    card.innerHTML = `<div class="dsw-step">${T('Recorrido', 'Tour')} · ${DT.step + 1} ${T('de', 'of')} 4 <span class="dsw-dots">${TOUR.map((_, i) => `<b class="${i <= DT.step ? 'on' : ''}"><\/b>`).join('')}<\/span><button type="button" class="dsw-x" data-dsw="end" aria-label="${T('Salir del recorrido', 'Leave the tour')}">×<\/button><\/div>
+      <div class="dsw-t">${esc(T(st.t[0], st.t[1]))}<\/div><p class="dsw-p">${esc(T(st.p[0], st.p[1]))}<\/p>
+      <div class="dsw-acts"><button type="button" class="dsw-go" data-dsw="go">${esc(T(st.go[0], st.go[1]))}<\/button>${last ? `<button type="button" class="dsw-sec" data-dsw="end">${T('Terminar', 'Finish')}<\/button>` : `<button type="button" class="dsw-sec" data-dsw="next">${T('Siguiente', 'Next')} →<\/button>`}<\/div>${last ? cta : ''}`;
+    return;
+  }
+  card.innerHTML = `<div class="dsw-h">${T('Viendo como', 'Viewing as')}<\/div>${DSW.map(r => `<button type="button" class="dsw-opt" data-u="${r[0]}" aria-pressed="${r[0] === cur}">${esc(T(r[1], r[2]))}<small>${esc(T(r[3], r[4]))}<\/small><\/button>`).join('')}
+    <button type="button" class="dsw-tour" data-dsw="tour"><span>${T('Recorrido guiado de 3 minutos', '3-minute guided tour')}<small>${T('Reserva, recepción, cierre y dinero', 'Booking, front desk, close and money')}<\/small><\/span><span aria-hidden="true">→<\/span><\/button>${cta}
+    <div class="dsw-note">${T('Versión de prueba con datos ficticios: no hace reservas reales. Se reinicia al recargar.', 'Test version with fictitious data: no real bookings. It resets on reload.')}<\/div>`;
+}
+/* Pistas (NG-20) y "así llega al restaurante": se añaden a lo que pinta el portal, sin tocar su código */
+function demoHints() {
+  if (S.ui.view !== 'portal' || !S.gp.sheet) return;
+  const body = $('#bk-body'); if (!body) return;
+  const en = S.lang === 'en', T = (es, e) => en ? e : es;
+  const done = S.gp.done?.r;
+  if (done && !body.querySelector('.dsw-inline')) {
+    const el = document.createElement('div'); el.className = 'dsw-inline';
+    el.innerHTML = `<span><b>${T('Así llega al restaurante', 'This is how the restaurant gets it')}<\/b>${T('Mírala en la agenda de Recepción, con alergias y ocasión.', 'See it on the front desk agenda, with allergies and occasion.')}<\/span><button type="button" data-dsw="to-host">${T('Ver en Recepción', 'Open front desk')} →<\/button>`;
+    body.prepend(el);
+  }
+  const pickRes = () => allRes().filter(r => ['confirmada', 'pendiente'].includes(r.estado) && r.fecha >= TODAY && r.source === 'huesped' && guestOf(r)?.email).sort((a, b) => a.fecha.localeCompare(b.fecha) || sortByTime(a, b))[0];
+  const hint = (anchor, html, fill) => { if (!anchor || anchor.parentElement.querySelector('.dsw-hint')) return; const b = document.createElement('button'); b.type = 'button'; b.className = 'dsw-hint'; b.innerHTML = html; b.dataset.dswFill = JSON.stringify(fill); anchor.after(b); };
+  const code = $('#gp-code'), lroom = $('#gp-lroom'), contact = $('#gp-contact'), hroom = $('#gp-hroom');
+  const r = pickRes(); if (!r) return;
+  if (code && lroom && !code.value) hint(lroom.closest('form') ? lroom.closest('form') : lroom, `${T('Prueba con', 'Try')} <b>${esc(r.codigo)}<\/b> · ${T('Hab.', 'Room')} <b>${esc(r.hab)}<\/b>`, { '#gp-code': r.codigo, '#gp-lroom': r.hab });
+  if (contact && hroom && !contact.value) hint(hroom.closest('form') ? hroom.closest('form') : hroom, `${T('Prueba con', 'Try')} <b>${esc(guestOf(r).email)}<\/b> · ${T('Hab.', 'Room')} <b>${esc(r.hab)}<\/b>`, { '#gp-contact': guestOf(r).email, '#gp-hroom': r.hab });
+}
+paint = (orig => function () { orig(); try { demoSw(); demoHints(); } catch (e) { console.warn('demo layer', e); } })(paint);
+document.addEventListener('click', e => {
+  const fill = e.target.closest('[data-dsw-fill]');
+  if (fill) { e.preventDefault(); const v = JSON.parse(fill.dataset.dswFill); for (const [sel, val] of Object.entries(v)) { const el = $(sel); if (!el) continue; el.value = val; el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); } fill.remove(); $(Object.keys(v).pop())?.focus(); return; }
+  if (e.target.closest('[data-dsw="to-host"]')) { e.preventDefault(); e.stopPropagation(); tourGo(1); return; }
+  const box = dsw();
+  if (!box || !e.target.closest('#demo-sw')) { if (DT.open) { DT.open = false; demoSw(); } return; }   // any click on the page folds the card back into the pill
+  e.stopPropagation();
+  const a = e.target.closest('[data-dsw]')?.dataset.dsw, opt = e.target.closest('.dsw-opt');
+  if (a === 'cta') return;
+  e.preventDefault();
+  if (e.target.closest('.dsw-pill')) { DT.open = !DT.open; demoSw(); return; }
+  if (opt) { DT.open = false; demoAs(opt.dataset.u); return; }
+  if (a === 'tour') { DT.since = Date.now(); DT.step = 0; DT.open = true; demoAs('guest'); demoSw(); return; }
+  if (a === 'go') { tourGo(DT.step); if (DT.step === 0) { DT.open = false; demoSw(); } return; }
+  if (a === 'next') { tourGo(DT.step + 1); return; }
+  if (a === 'end') { DT.step = -1; DT.open = false; demoSw(); }
 }, true);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && DT.open && !S.ui.drawer && !S.ui.modal && !S.gp.sheet) { DT.open = false; demoSw(); dsw()?.querySelector('.dsw-pill')?.focus(); } });
 
 boot();
 })();
