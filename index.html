@@ -832,9 +832,7 @@ mark { background: color-mix(in srgb, var(--gold) 28%, transparent); color: inhe
 .gp-body { position: relative; z-index: 1; }
 .gp-hero { position: relative; overflow: hidden; isolation: isolate; }
 .hero-slides { position: absolute; inset: 0; z-index: -3; background: #1f1e1c; }
-.hero-slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; transform: scale(1.12); }
-.hero-slides img.on { opacity: 1; animation: kbs 9s ease-out both; }
-@keyframes kbs { from { transform: scale(1.14) translate3d(1%, 1%, 0); } to { transform: scale(1.02) translate3d(0, 0, 0); } }
+.hero-slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-shade { position: absolute; inset: 0; z-index: -2; background: radial-gradient(120% 90% at 20% 100%, rgba(150,60,20,.35), transparent 60%), linear-gradient(180deg, rgba(12,10,8,.5), rgba(12,10,8,.86)); }
 .embers { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 .gp-live { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); color: #f4ede6 !important; font-size: 13px !important; font-weight: 500; }
@@ -1019,7 +1017,7 @@ mark { background: color-mix(in srgb, var(--gold) 28%, transparent); color: inhe
   .gp-tab span { font-size: 12.5px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-slides img.on, .cf-hero > img, .xp, .tslot, .plan li, .cf-seal, .burst i, .gp-pane.anim > * { animation: none !important; }
+  .cf-hero > img, .xp, .tslot, .plan li, .cf-seal, .burst i, .gp-pane.anim > * { animation: none !important; }
   .xp, .xp > img, .pax-b, .tslot, .day { transition: none; }
 }
 
@@ -1430,6 +1428,27 @@ body.bk-lock { overflow: hidden; }
 <div id="layer"></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
+<style>
+/* ===== Solo demo: selector de usuario ===== */
+#demo-sw { position: fixed; z-index: 56; left: 50%; transform: translateX(-50%); bottom: calc(10px + env(safe-area-inset-bottom, 0px)); font: 600 12.5px/1.3 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+#demo-sw[data-v="portal"] { left: 16px; transform: none; align-items: flex-start; }
+#demo-sw button { font: inherit; cursor: pointer; border: 0; }
+#demo-sw .dsw-pill { background: #8a2a12; color: #fff; border-radius: 999px; padding: 10px 16px; box-shadow: 0 6px 20px rgba(0,0,0,.35); white-space: nowrap; }
+#demo-sw .dsw-menu { background: #fff; color: #231c17; border-radius: 14px; padding: 8px; width: min(270px, calc(100vw - 32px)); box-shadow: 0 14px 40px rgba(0,0,0,.4); }
+#demo-sw .dsw-menu[hidden] { display: none; }
+#demo-sw .dsw-opt { display: block; width: 100%; text-align: left; background: none; color: inherit; padding: 9px 10px; border-radius: 9px; }
+#demo-sw .dsw-opt:hover { background: #f4ece5; }
+#demo-sw .dsw-opt small { display: block; font-weight: 400; color: #6d625a; }
+#demo-sw .dsw-opt[aria-pressed="true"] { background: #8a2a12; color: #fff; }
+#demo-sw .dsw-opt[aria-pressed="true"] small { color: #f6ddd3; }
+#demo-sw .dsw-note { font-weight: 400; font-size: 11.5px; color: #6d625a; padding: 8px 10px 2px; border-top: 1px solid #eadfd6; margin-top: 6px; }
+@media (max-width: 860px) {
+  #demo-sw:not([data-v="portal"]) { bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
+  #demo-sw .dsw-long { display: none; }
+}
+@media print { #demo-sw { display: none; } }
+</style>
+<div id="demo-sw" data-v="portal"><div class="dsw-menu" hidden></div><button type="button" class="dsw-pill" aria-expanded="false">Versión de prueba</button></div>
 <script>
 (() => {
 'use strict';
@@ -2014,6 +2033,7 @@ function paint() {
   paintLayer();
   syncLogo();
   hydrateNames();
+  demoSw();
 }
 async function hydrateNames() {
   if (!S.user) return;
@@ -3523,7 +3543,7 @@ function sheetExp(id) {
 }
 
 /* ---------- paint ---------- */
-let siteKey = '', lastGpKey = '', slideTimer = 0, galDragged = false;
+let siteKey = '', lastGpKey = '', galDragged = false;
 function paintSite() {
   document.documentElement.lang = S.lang;
   const key = [S.lang, allReady(), currentTheme(), logoSrc().length, JSON.stringify([S.cfg.experiences, S.cfg.photos || null, S.cfg.menus, S.cfg.calendar || null, S.cfg.toleranceMin, S.cfg.cancelHours, S.cfg.maxAdvanceHours, S.cfg.cortesPP])].join('|');
@@ -3565,14 +3585,9 @@ function siteLive() {
 let rvObs = null, siteScrollOn = false;
 function siteInit() {
   fillFinder();
-  // hero slideshow
-  clearInterval(slideTimer);
+  // hero: una sola foto fija
   const box = $('#hero-slides');
-  if (box) {
-    const srcs = [...new Set([photoOf('hero'), ...activeExps().map(e => photoOf(e.id)), photoOf('bar'), photoOf('mixologia')])];
-    box.innerHTML = srcs.map((s, k) => `<img src="${esc(s)}" alt="" class="${k ? '' : 'on'}" decoding="async">`).join('');
-    if (srcs.length > 1 && !reduced()) { let i = 0; slideTimer = setInterval(() => { if (document.hidden || $('#portal').hidden) return; const im = box.children; if (!im.length) return; im[i].classList.remove('on'); i = (i + 1) % im.length; im[i].classList.add('on'); }, 6500); }
-  }
+  if (box) box.innerHTML = `<img src="${esc(photoOf('hero'))}" alt="" decoding="async">`;
   const cv = $('#embers'); if (cv) embers(cv);
   setTimeout(() => $('.s-h1')?.classList.add('go'), 60);
   // reveal on scroll
@@ -4154,9 +4169,37 @@ async function boot() {
   db.doc('config/settings').onSnapshot(snap => { S.cfg = mergeCfg(snap.exists ? snap.data() : null); S.cfgReady = true; render(); }, () => { S.cfgReady = true; render(); });
   render();
 }
+/* ===== Solo demo: cambiar de usuario sin recargar (los datos de prueba se conservan) ===== */
+const DSW = [
+  ['guest', 'Huésped', 'Guest', 'Reserva una mesa desde el QR', 'Book a table from the QR'],
+  ['host', 'Recepción', 'Front desk', 'Recibe y gestiona las reservas', 'Manages the bookings'],
+  ['mayordomo', 'Amaná (mayordomo)', 'Amaná (butler)', 'Reserva para clientes Amaná', 'Books for Amaná guests'],
+  ['admin', 'Administrador', 'Administrator', 'Reportes y configuración', 'Reports and settings'],
+];
+function demoSw() {
+  const box = $('#demo-sw'); if (!box) return;
+  const portal = S.ui.view === 'portal', cur = portal ? 'guest' : S.role;
+  box.dataset.v = portal ? 'portal' : 'staff';
+  const row = DSW.find(r => r[0] === cur);
+  box.querySelector('.dsw-pill').innerHTML = `<span class="dsw-long">${tt('Versión de prueba · Viendo como', 'Test version · Viewing as')}: </span>${tt(row[1], row[2])} ▴`;
+  box.querySelector('.dsw-menu').innerHTML = DSW.map(r => `<button type="button" class="dsw-opt" data-u="${r[0]}" aria-pressed="${r[0] === cur}">${tt(r[1], r[2])}<small>${tt(r[3], r[4])}</small></button>`).join('')
+    + `<div class="dsw-note">${tt('Versión de prueba: no hace reservas reales. Los datos se borran al recargar.', 'Test version: no real bookings. Data is cleared on reload.')}</div>`;
+}
+function demoSwOpen(open) { const b = $('#demo-sw'); b.querySelector('.dsw-menu').hidden = !open; b.querySelector('.dsw-pill').setAttribute('aria-expanded', String(open)); }
+document.addEventListener('click', e => {
+  if (!e.target.closest('#demo-sw')) return demoSwOpen(false);
+  e.stopPropagation();
+  const opt = e.target.closest('.dsw-opt');
+  if (!opt) { if (e.target.closest('.dsw-pill')) demoSwOpen($('#demo-sw .dsw-menu').hidden); return; }
+  demoSwOpen(false);
+  const u = opt.dataset.u;
+  S.gp.sheet = null; S.gp.zoom = null;
+  if (u === 'guest') { S.ui.drawer = null; S.ui.modal = null; S.ui.nr = null; return A.portal(); }
+  setRole(u); go(u === 'mayordomo' ? 'amana' : 'servicio');
+}, true);
+
 boot();
 })();
 </script>
-<div role="note" style="position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:2147483647;pointer-events:none;background:#8a2a12;color:#fff;font:600 11px/1.35 system-ui,sans-serif;padding:4px 12px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.3);text-align:center;width:max-content;max-width:94vw;opacity:.94">Versión de prueba · No hace reservas reales / Test version · No real bookings</div>
 </body>
 </html>
